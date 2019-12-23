@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from '../service/http-client.service';
+import { Employee } from '../class/Entities';
+
 
 @Component({
   selector: 'app-employees',
@@ -8,7 +10,9 @@ import { HttpClientService } from '../service/http-client.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  entities:string[];
+  entities:Employee[];
+
+  
  
 
   constructor(private httpClientService: HttpClientService) { }

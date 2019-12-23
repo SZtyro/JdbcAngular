@@ -1,6 +1,21 @@
 <p>employees works!</p>
-<ol>
-    <li *ngFor="let entity of entities">
-        <button>{{entity}}</button>
-    </li>
-</ol>
+
+<table >
+
+    
+    <tr *ngFor="let entity of entities">
+        <td >{{entity.id}}</td>
+        <td>{{entity.name}}</td>
+        <td>{{entity.lastName}}</td>
+        <td>{{entity.email}}</td>
+        <td>{{entity.phoneNumber}}</td>
+        <td>{{entity.hireDate}}</td>
+        <td>{{entity.jobId}}</td>
+        <td>{{entity.salary}}</td>
+        <td>{{entity.commisionPCT}}</td>
+        <td>{{entity.managerId}}</td>
+        <td>{{entity.departmentId}}</td>
+    </tr>
+    
+
+</table>
