@@ -1,35 +1,25 @@
 <p>employees works!</p>
 
-<table>
-    <thead>
-        <th>id</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>E-mail</th>
-        <th>Phone number</th>
-        <th>Hire date</th>
-        <th>Job id</th>
-        <th>Salary</th>
-        <th>CommisionPCT</th>
-        <th>Manager id</th>
-        <th>Department id</th>
-
-    <tbody>
-        <tr *ngFor="let entity of entities">
-            <td>{{entity.id}}</td>
-            <td>{{entity.name}}</td>
-            <td>{{entity.lastName}}</td>
-            <td>{{entity.email}}</td>
-            <td>{{entity.phoneNumber}}</td>
-            <td>{{entity.hireDate}}</td>
-            <td>{{entity.jobId}}</td>
-            <td>{{entity.salary}}</td>
-            <td>{{entity.commisionPCT}}</td>
-            <td>{{entity.managerId}}</td>
-            <td>{{entity.departmentId}}</td>
-        </tr>
-    </tbody>
+<table mat-table [dataSource]="entities" class="mat-elevation-z8">
 
 
+    <ng-container *ngFor="let col of displayedColumns, let i = index" [matColumnDef]="col">
 
+        <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+        <td mat-cell *matCellDef="let element"> {{ element[col] }}
+            
+            <ng-container *ngIf="i == col.lastIndexOf">
+                <button>s</button>
+            </ng-container>
+
+
+        </td>
+
+    </ng-container>
+
+    <tr><button>asdasd</button></tr>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"> </tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (mouseover)="test(row)"
+></tr>
 </table>

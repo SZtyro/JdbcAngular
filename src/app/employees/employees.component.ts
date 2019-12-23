@@ -13,7 +13,8 @@ export class EmployeesComponent implements OnInit {
   entities:Employee[];
 
   
- 
+  displayedColumns: string[] = ['id', 'name', 'lastName', 'email','phoneNumber','hireDate','jobId','salary','commisionPCT','managerId','departmentId'];
+  
 
   constructor(private httpClientService: HttpClientService) { }
 
@@ -24,6 +25,11 @@ export class EmployeesComponent implements OnInit {
 
   handleSuccessfulResponse(response) {
     this.entities = response;
+    
+  }
+
+  test(x){
+    console.log(x);
     
   }
 }
