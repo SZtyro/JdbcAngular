@@ -1,25 +1,74 @@
-<p>employees works!</p>
+<div class="a">
 
-<table mat-table [dataSource]="entities" class="mat-elevation-z8">
+    <div style="display: block; float: left; margin-bottom: 20px;">
+        Employees
+    </div>
+
+    <div class="btn-group btn-group-toggle lightSwitch" data-toggle="buttons">
+        <label class="btn btn-secondary active" style="background-color: #f8f9fa; color:#343a40 ;">
+            <input type="radio" name="Light" id="option1"> Light
+        </label>
+        <label class="btn btn-secondary" style="background-color: #343a40;">
+            <input type="radio" name="Dark" id="option2" (click)="changeTheme('table-dark')"> Dark
+        </label>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+<!-- <table mat-table [dataSource]="entities" class="mat-elevation-z8">
+
+
+
 
 
     <ng-container *ngFor="let col of displayedColumns, let i = index" [matColumnDef]="col">
 
         <th mat-header-cell *matHeaderCellDef> {{col}} </th>
-        <td mat-cell *matCellDef="let element"> {{ element[col] }}
-            
-            <ng-container *ngIf="i == col.lastIndexOf">
-                <button>s</button>
+        <td mat-cell *matCellDef="let element"(mouseover)="test(i)" > {{ element[col] }}
+
+            <ng-container *ngIf="i == displayedColumns.length - 1 ">
+
+                <div class="aaa" >
+                    <button mat-button style="background-color: brown;" (click)="test(this)">Click me!</button>
+                </div>
             </ng-container>
-
-
         </td>
-
     </ng-container>
 
-    <tr><button>asdasd</button></tr>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"> </tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (mouseover)="test(row)"
-></tr>
+    <tr mat-header-row style="background-color: royalblue ;" *matHeaderRowDef="displayedColumns">
+    </tr>
+    <--Belka->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
+
+<table [class]="class">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" *ngFor="let head of displayedColumns">{{head}}</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let emp of employees; let i = index" class="rows">
+            <th scope="row" style="vertical-align: middle;">{{i+1}}</th>
+            <td *ngFor="let key of keys" style="vertical-align: middle;">{{emp[key]}}</td>
+
+            <td> <button type="button" class="btn btn-outline-danger" (click)="test(i)">Delete</button>
+                <button type="button" class="btn btn-outline-info" (click)="test(i)">Edit</button>
+            </td>
+
+
+        </tr>
+
+    </tbody>
 </table>

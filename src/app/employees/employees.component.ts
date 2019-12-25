@@ -10,26 +10,45 @@ import { Employee } from '../class/Entities';
 })
 export class EmployeesComponent implements OnInit {
 
-  entities:Employee[];
-
+  employees:Employee[];
+  keys;
+  theme:String = "table-light";
+  class = "table table-striped table-hover " + this.theme;
   
-  displayedColumns: string[] = ['id', 'name', 'lastName', 'email','phoneNumber','hireDate','jobId','salary','commisionPCT','managerId','departmentId'];
-  
+  displayedColumns: string[] = ['No','id', 'name', 'lastName', 'email','phoneNumber','hireDate','jobId','salary','commisionPCT','managerId','departmentId','Action'];
+  hiddenActions = false;
+  private isButtonVisible = true;
+  liczba;
 
   constructor(private httpClientService: HttpClientService) { }
 
   ngOnInit() {
     this.httpClientService.getEntities().subscribe(
       response => this.handleSuccessfulResponse(response))
+      
   }
 
   handleSuccessfulResponse(response) {
-    this.entities = response;
+    this.employees = response;
+    this.keys = Object.keys(response[0]);
+
     
   }
 
-  test(x){
-    console.log(x);
+  actionVisibility(isVisible, row){
+    console.log(row);
+
+    
+    
+  }
+
+  test(index){
+    console.log(index)
+    
+  }
+
+  changeTheme(theme:String){
+    this.theme = theme;
     
   }
 }
