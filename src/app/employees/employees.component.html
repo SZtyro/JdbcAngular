@@ -1,70 +1,36 @@
 <div class="a">
 
     <div style="display: block; float: left; margin-bottom: 20px;">
-        Employees
+        <p style="margin: 0px;">Employees</p>
     </div>
 
     <div class="btn-group btn-group-toggle lightSwitch" data-toggle="buttons">
-        <label class="btn btn-secondary active" style="background-color: #f8f9fa; color:#343a40 ;">
-            <input type="radio" name="Light" id="option1"> Light
+        <label class="btn btn-secondary " style="background-color: #f8f9fa; color:#343a40 ;">
+            <input type="radio" name="Light" id="option1" (click)="changeTheme()" [disabled]=!darkMode> Light
         </label>
-        <label class="btn btn-secondary" style="background-color: #343a40;">
-            <input type="radio" name="Dark" id="option2" (click)="changeTheme('table-dark')"> Dark
+        <label class="btn btn-secondary " style="background-color: #343a40;">
+            <input type="radio" name="Dark" id="option2" (click)="changeTheme()" [disabled]=darkMode> Dark
         </label>
 
     </div>
 
-
-
-
-
-
-
 </div>
 
-
-
-<!-- <table mat-table [dataSource]="entities" class="mat-elevation-z8">
-
-
-
-
-
-    <ng-container *ngFor="let col of displayedColumns, let i = index" [matColumnDef]="col">
-
-        <th mat-header-cell *matHeaderCellDef> {{col}} </th>
-        <td mat-cell *matCellDef="let element"(mouseover)="test(i)" > {{ element[col] }}
-
-            <ng-container *ngIf="i == displayedColumns.length - 1 ">
-
-                <div class="aaa" >
-                    <button mat-button style="background-color: brown;" (click)="test(this)">Click me!</button>
-                </div>
-            </ng-container>
-        </td>
-    </ng-container>
-
-
-    <tr mat-header-row style="background-color: royalblue ;" *matHeaderRowDef="displayedColumns">
-    </tr>
-    <--Belka->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
-
-<table [class]="class">
+<table id="table" class="table table-striped table-hover table-light text-nowrap table-responsive-xl">
     <thead class="thead-dark">
         <tr>
-            <th scope="col" *ngFor="let head of displayedColumns">{{head}}</th>
+            <th scope="col" *ngFor="let head of displayedColumns ">{{head}}</th>
         </tr>
     </thead>
     <tbody>
 
-        <tr *ngFor="let emp of employees; let i = index" class="rows">
-            <th scope="row" style="vertical-align: middle;">{{i+1}}</th>
+        <tr *ngFor="let emp of employees | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index"
+            class="rows">
+            <th scope="row" style="vertical-align: middle;">{{i+1+(page-1)*pageSize}}</th>
             <td *ngFor="let key of keys" style="vertical-align: middle;">{{emp[key]}}</td>
-
-            <td> <button type="button" class="btn btn-outline-danger" (click)="test(i)">Delete</button>
-                <button type="button" class="btn btn-outline-info" (click)="test(i)">Edit</button>
+            <td style="display: table-cell; vertical-align: inherit; ">
+                <button type="button" class="btn btn-outline-danger">Delete</button>
+                <button type="button" class="btn btn-outline-info">Edit</button>
             </td>
 
 
@@ -72,3 +38,54 @@
 
     </tbody>
 </table>
+
+<div style="width: 90%;margin: auto;margin-top: 30px;">
+    <button type="button" class="btn btn-success" style="margin: 0px;">Add</button>
+
+
+
+
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right;">
+        <label class="btn btn-secondary ">
+            <input type="radio" (click)="changePage(-1)"> Prev
+        </label>
+
+        <label class="btn btn-secondary " *ngIf="page-2 > 0" (click)="changePage(-2)">
+            <input type="radio" > {{page-2}}
+        </label>
+        <label class="btn btn-secondary " *ngIf="page-1 > 0" (click)="changePage(-1)">
+            <input type="radio" > {{page-1}}
+        </label>
+
+        <label class="btn btn-dark ">
+            <input type="radio" style="border: solid; border-color: blue;"> {{page}}
+        </label>
+
+        <label class="btn btn-secondary " *ngIf="page+1 < lastPage || page+1 == lastPage" (click)="changePage(1)">
+            <input type="radio" > {{page+1}}
+        </label>
+        <label class="btn btn-secondary " *ngIf="page+2 < lastPage || page+2 == lastPage" (click)="changePage(2)">
+            <input type="radio" > {{page+2}}
+        </label>
+
+        <label class="btn btn-secondary ">
+            <input type="radio" (click)="changePage(1)"> Next
+        </label>
+
+    </div>
+
+    
+    <div class="dropup" style="float: right;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{pageSize}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">10</a>
+            <a class="dropdown-item" href="#">30</a>
+            <a class="dropdown-item" href="#">50</a>
+            <a class="dropdown-item" href="#">100</a>
+        </div>
+    </div>
+</div>

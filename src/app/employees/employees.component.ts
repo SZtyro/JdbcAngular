@@ -10,45 +10,64 @@ import { Employee } from '../class/Entities';
 })
 export class EmployeesComponent implements OnInit {
 
-  employees:Employee[];
+  employees: Employee[];
   keys;
-  theme:String = "table-light";
-  class = "table table-striped table-hover " + this.theme;
-  
-  displayedColumns: string[] = ['No','id', 'name', 'lastName', 'email','phoneNumber','hireDate','jobId','salary','commisionPCT','managerId','departmentId','Action'];
-  hiddenActions = false;
-  private isButtonVisible = true;
-  liczba;
+  darkMode: boolean = false;
+
+  displayedColumns: string[] = ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
+  page = 1;
+  pageSize = 10;
+  collectionSize;
+  lastPage;
+
+
 
   constructor(private httpClientService: HttpClientService) { }
 
   ngOnInit() {
     this.httpClientService.getEntities().subscribe(
       response => this.handleSuccessfulResponse(response))
-      
+
   }
 
   handleSuccessfulResponse(response) {
     this.employees = response;
     this.keys = Object.keys(response[0]);
-
-    
+    this.collectionSize = this.employees.length;
+    this.lastPage = Math.ceil(this.collectionSize / this.pageSize);
   }
 
-  actionVisibility(isVisible, row){
+  actionVisibility(isVisible, row) {
     console.log(row);
 
-    
-    
+
+
   }
 
-  test(index){
+  test(index) {
     console.log(index)
-    
+
   }
 
-  changeTheme(theme:String){
-    this.theme = theme;
-    
+  changeTheme() {
+
+    let table = document.getElementById("table");
+
+    if (table.classList.contains("table-light")) {
+      table.classList.add("table-dark");
+      table.classList.remove("table-light");
+    } else if (table.classList.contains("table-dark")) {
+      table.classList.add("table-light");
+      table.classList.remove("table-dark");
+
+    }
+
+    this.darkMode = !this.darkMode;
+
+  }
+
+  changePage(num) {
+    if (this.page + num > 0 && this.page + num <= this.lastPage)
+      this.page = this.page + num;
   }
 }

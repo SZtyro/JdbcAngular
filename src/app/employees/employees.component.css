@@ -13,25 +13,19 @@ table{
 }
 
 .a{
-    font-size: 100px;
+    font-size: 8vw;
     margin: auto;
     width: 90%;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 
-.rows button { 
-    
+.rows button {    
     visibility: hidden;
-
 }
 .rows:hover button  { 
-    
-    
-    visibility: visible;
-    
+    visibility: visible;   
 } 
-
 .lightSwitch{
     display: block;
     float: right;
@@ -39,12 +33,12 @@ table{
     
    
 }
-
-
-
-
-
 button{
    
    
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    
+    
 }
