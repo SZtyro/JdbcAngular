@@ -1,14 +1,15 @@
 <div class="a">
 
-    <div style="display: block; float: left; margin-bottom: 20px;">
+    <div style="display: flex; float: left; ">
         <p style="margin: 0px;">Employees</p>
     </div>
 
     <div class="btn-group btn-group-toggle lightSwitch" data-toggle="buttons">
-        <label class="btn btn-secondary " style="background-color: #f8f9fa; color:#343a40 ;">
+        <label class="btn btn-secondary "
+            style="background-color: #f8f9fa; color:#343a40 ; display: flex; justify-content: flex-end;">
             <input type="radio" name="Light" id="option1" (click)="changeTheme()" [disabled]=!darkMode> Light
         </label>
-        <label class="btn btn-secondary " style="background-color: #343a40;">
+        <label class="btn btn-secondary " style="background-color: #343a40; display: flex; justify-content: flex-end;">
             <input type="radio" name="Dark" id="option2" (click)="changeTheme()" [disabled]=darkMode> Dark
         </label>
 
@@ -36,12 +37,57 @@
 
         </tr>
 
+
     </tbody>
 </table>
 
 <div style="width: 90%;margin: auto;margin-top: 30px;">
-    <button type="button" class="btn btn-success" style="margin: 0px;">Add</button>
+    <button type="button" class="btn btn-success" style="margin: 0px;" data-toggle="modal" data-target="#addModal"
+        (click)="open(addModal)">Add</button>
 
+    <ng-template #addModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add new row</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+
+            <form>
+                <div class="form-group" *ngFor="let item of keys let i = index">
+                    <label>{{item}}</label>
+
+
+                    <div *ngIf="this.foreignKeyColumns.includes(item); else elseBlock">
+
+                        <div ngbDropdown >
+                            <button class="btn btn-outline-primary" type="button" style="width: 100%;" ngbDropdownToggle (click)='getAvaiableRows("EMPLOYEES","DEPARTMENT_ID")'>
+                                Select
+                            </button>
+                            <div ngbDropdownMenu *ngFor="let foreignKey of foreignKeyColumns">
+                                <button ngbDropdownItem type="button"></button>
+                                
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <ng-template #elseBlock>
+                        <input class="form-control" (keyup)="addElem(i,$event)">
+                    </ng-template>
+
+
+
+                </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="sendNewElem()">Add</button>
+        </div>
+    </ng-template>
 
 
 
@@ -52,10 +98,10 @@
         </label>
 
         <label class="btn btn-secondary " *ngIf="page-2 > 0" (click)="changePage(-2)">
-            <input type="radio" > {{page-2}}
+            <input type="radio"> {{page-2}}
         </label>
         <label class="btn btn-secondary " *ngIf="page-1 > 0" (click)="changePage(-1)">
-            <input type="radio" > {{page-1}}
+            <input type="radio"> {{page-1}}
         </label>
 
         <label class="btn btn-dark ">
@@ -63,10 +109,10 @@
         </label>
 
         <label class="btn btn-secondary " *ngIf="page+1 < lastPage || page+1 == lastPage" (click)="changePage(1)">
-            <input type="radio" > {{page+1}}
+            <input type="radio"> {{page+1}}
         </label>
         <label class="btn btn-secondary " *ngIf="page+2 < lastPage || page+2 == lastPage" (click)="changePage(2)">
-            <input type="radio" > {{page+2}}
+            <input type="radio"> {{page+2}}
         </label>
 
         <label class="btn btn-secondary ">
@@ -75,7 +121,7 @@
 
     </div>
 
-    
+
     <div class="dropup" style="float: right;">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -88,4 +134,8 @@
             <a class="dropdown-item" href="#">100</a>
         </div>
     </div>
+
+
+
+
 </div>
