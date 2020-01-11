@@ -1,7 +1,7 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { HttpClientService } from '../service/http-client.service';
 import { Employee } from '../class/Entities';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-employees',
@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng
 })
 export class EmployeesComponent implements OnInit {
 
-  tableName = 'EMPLOYEES';
+  tableName = 'JOB_HISTORY';
 
 
   employees: String[];
@@ -18,8 +18,16 @@ export class EmployeesComponent implements OnInit {
   darkMode: boolean = false;
   entityName = "Employees";
 
-  foreignKeyColumns: String;
-  
+  //Wszystkie klucze w obiekcie
+  foreignKeyColumns;
+  //Wszystkie mozliwosci klucza
+  foreignKeyElems;
+  //Typy kolumn
+  type;
+
+
+
+  newRowContainer: String[] = [];
 
   displayedColumns: string[]; //= ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
   page = 1;
@@ -28,7 +36,7 @@ export class EmployeesComponent implements OnInit {
   lastPage;
 
   wartosci: String[] = [];
-  
+
 
   closeResult: string;
   modalOptions: NgbModalOptions;
@@ -42,7 +50,9 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
-
+  test(x) {
+    console.log(x);
+  }
   addElem(i, event) {
     this.wartosci[i] = "'" + event.target.value + "'";
     console.log(this.wartosci)
@@ -52,8 +62,8 @@ export class EmployeesComponent implements OnInit {
   sendNewElem() {
 
     //sprawdzic ktore sa nullable
-    for(let i = 0;i < this.keys.length; i++){
-      if(this.wartosci[i] == null)
+    for (let i = 0; i < this.keys.length; i++) {
+      if (this.wartosci[i] == null)
         this.wartosci[i] = "null";
     }
 
@@ -76,6 +86,33 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
+  saveToContainer(index, elem) {
+
+    //let type: String = "VARCHAR2";
+
+
+
+    console.log(this.type[index]);
+
+    if (this.type[index] == "NUMBER")
+      this.newRowContainer[index] = elem;
+    else if (this.type[index] == "VARCHAR2")
+      this.newRowContainer[index] = "'" + elem + "'";
+
+
+
+    //this.newRowContainer[index] = elem;
+
+    console.log(this.newRowContainer);
+  }
+
+  prepareNewContainer() {
+    this.keys.forEach(element => {
+      this.newRowContainer.push("null");
+    });
+
+    console.log(this.newRowContainer);
+  }
 
   open(content) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
@@ -96,11 +133,11 @@ export class EmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClientService.getEntities().subscribe(
+    this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
-    
-     
-    
+
+
+
 
     this.displayedColumns = ["No"];
   }
@@ -112,10 +149,28 @@ export class EmployeesComponent implements OnInit {
     this.collectionSize = this.employees.length;
     this.lastPage = Math.ceil(this.collectionSize / this.pageSize);
 
-    this.httpClientService.getForeignKeyColumns("'"+ this.tableName +"'").subscribe(
+    this.httpClientService.getType(this.tableName).subscribe(
 
       data => {
-    
+
+        this.type = data;
+        console.log("PUT Request is successful ", data);
+
+
+      },
+
+      error => {
+
+        console.log("Error", error);
+
+      }
+
+    );
+
+    this.httpClientService.getForeignKeyColumns("'" + this.tableName + "'").subscribe(
+
+      data => {
+
         this.foreignKeyColumns = data;
         console.log("PUT Request is successful ", data);
 
@@ -131,25 +186,27 @@ export class EmployeesComponent implements OnInit {
 
     //Pobieranie kolumn zawierajacych klucze obce
     //Fetching columns containing foreign keys
-    
+
     // this.httpClientService.gt().subscribe(
     //   response => this.foreignKeyColumns)
-    
+
     //   console.log(this.foreignKeyColumns);
-      
+
     this.displayedColumns = this.displayedColumns.concat(this.keys);
     this.displayedColumns.push("Actions");
   }
 
   //Pobieranie istniejacych kluczy 
   //Fetching already exhisting keys
-  getAvaiableRows(table,column){
-    this.httpClientService.getIds(table,column).subscribe(
+  getAvaiableRows(table) {
+    this.foreignKeyElems = null;
+    this.httpClientService.getIds(table).subscribe(
+
 
       data => {
-    
+        this.foreignKeyElems = data;
         console.log("PUT Request is successful ", data);
-        
+
       },
 
       error => {

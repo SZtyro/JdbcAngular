@@ -1,7 +1,7 @@
 <div class="a">
 
     <div style="display: flex; float: left; ">
-        <p style="margin: 0px;">Employees</p>
+        <p style="margin: 0px;">{{tableName}}</p>
     </div>
 
     <div class="btn-group btn-group-toggle lightSwitch" data-toggle="buttons">
@@ -43,7 +43,7 @@
 
 <div style="width: 90%;margin: auto;margin-top: 30px;">
     <button type="button" class="btn btn-success" style="margin: 0px;" data-toggle="modal" data-target="#addModal"
-        (click)="open(addModal)">Add</button>
+        (click)="open(addModal)" (click)="prepareNewContainer()">Add</button>
 
     <ng-template #addModal let-modal>
         <div class="modal-header">
@@ -60,22 +60,41 @@
                     <label>{{item}}</label>
 
 
-                    <div *ngIf="this.foreignKeyColumns.includes(item); else elseBlock">
-
-                        <div ngbDropdown >
-                            <button class="btn btn-outline-primary" type="button" style="width: 100%;" ngbDropdownToggle (click)='getAvaiableRows("EMPLOYEES","DEPARTMENT_ID")'>
-                                Select
+                    <div *ngIf="this.foreignKeyColumns.includes(item); else notDropdownBlock">
+                        <div ngbDropdown>
+                            <button class="btn btn-outline-dark" type="button" style="width: 100%;" ngbDropdownToggle
+                                (click)='getAvaiableRows([tableName,keys[i]])'>
+                                {{newRowContainer[i]}}
                             </button>
-                            <div ngbDropdownMenu *ngFor="let foreignKey of foreignKeyColumns">
-                                <button ngbDropdownItem type="button"></button>
-                                
+                            <div ngbDropdownMenu>
+                                <button ngbDropdownItem type="button" *ngFor="let foreignKey of foreignKeyElems"
+                                    (click)="saveToContainer(i,foreignKey)">{{foreignKey}}</button>
                             </div>
                         </div>
-
-
                     </div>
-                    <ng-template #elseBlock>
-                        <input class="form-control" (keyup)="addElem(i,$event)">
+                    <ng-template #notDropdownBlock>
+                        <div *ngIf="type[i]=='DATE';else notDateBlock" style="margin: 5px; text-align: center;">
+
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker
+                                            #d="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary " (click)="d.toggle()"
+                                                type="button" style="margin: 0px;"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <ng-template #notDateBlock>
+                            <input class="form-control" (keyup)="addElem(i,$event)">
+                        </ng-template>
+
+
+
                     </ng-template>
 
 

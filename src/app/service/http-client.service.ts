@@ -11,8 +11,8 @@ export class HttpClientService {
   constructor( private httpClient:HttpClient ) { }
 
 
-  getEntities(){
-    return this.httpClient.get<Map<String,Object>[]>('http://localhost:8080/entities');
+  getTable(tableName){
+    return this.httpClient.post<Map<String,Object>[]>('http://localhost:8080/getTable',tableName);
     //return this.httpClient.get<Employee[]>('http://localhost:8080/entities');
   }
 
@@ -22,14 +22,13 @@ export class HttpClientService {
      
   }
 
-  getIds(table,column){
-    return this.httpClient.post<String>('http://localhost:8080/idList',table,column);
+  getIds(table){
+    return this.httpClient.post<String>('http://localhost:8080/idList',table);
   }
 
-  gt(){
-    return this.httpClient.get<String[]>('http://localhost:8080/fkc');
+  getType(table){
+    return this.httpClient.post<String>('http://localhost:8080/getDataType',table);
   }
-
   postRow(elem:String){
     return this.httpClient.post<String>("http://localhost:8080/a",elem)
   }
