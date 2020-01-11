@@ -10,13 +10,13 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@
 })
 export class EmployeesComponent implements OnInit {
 
-  tableName = 'JOB_HISTORY';
+  tableName = 'EMPLOYEES';
   
 
   employees: String[];
   keys: string[];
   darkMode: boolean = false;
-  entityName = "Employees";
+  
 
   //Wszystkie klucze w obiekcie
   foreignKeyColumns;
@@ -24,9 +24,7 @@ export class EmployeesComponent implements OnInit {
   foreignKeyElems;
   //Typy kolumn
   type;
-
-
-
+  //Wartosci nowego obiektu
   newRowContainer: String[] = [];
 
   displayedColumns: string[]; //= ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
@@ -35,7 +33,6 @@ export class EmployeesComponent implements OnInit {
   collectionSize;
   lastPage;
 
-  wartosci: String[] = [];
 
 
   closeResult: string;
@@ -53,21 +50,16 @@ export class EmployeesComponent implements OnInit {
   test(x) {
     console.log(x);
   }
-  addElem(i, event) {
-    this.wartosci[i] = "'" + event.target.value + "'";
-    console.log(this.wartosci)
+  inputToContainer(i, event) {
+    this.newRowContainer[i] = "'" + event.target.value + "'";
 
   }
 
   sendNewElem() {
 
-    //sprawdzic ktore sa nullable
-    for (let i = 0; i < this.keys.length; i++) {
-      if (this.wartosci[i] == null)
-        this.wartosci[i] = "null";
-    }
+    
 
-    let querry: String = "Insert into " + this.entityName + " values(" + this.wartosci + ")";
+    let querry: String = "Insert into " + this.tableName + " values(" + this.newRowContainer + ")";
     console.log(querry);
     this.httpClientService.postRow(querry).subscribe(
 
@@ -96,7 +88,7 @@ export class EmployeesComponent implements OnInit {
 
     if (this.type[index] == "NUMBER")
       this.newRowContainer[index] = elem;
-    else if (this.type[index] == "VARCHAR2")
+    else if (this.type[index] == "VARCHAR2" || this.type[index] == "DATE")
       this.newRowContainer[index] = "'" + elem + "'";
 
 
