@@ -11,7 +11,7 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@
 export class EmployeesComponent implements OnInit {
 
   tableName = 'JOB_HISTORY';
-
+  
 
   employees: String[];
   keys: string[];
