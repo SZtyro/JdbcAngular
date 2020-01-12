@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@
 })
 export class EmployeesComponent implements OnInit {
 
-  tableName = 'EMPLOYEES';
+  tableName = 'JOB_HISTORY';
   
 
   employees: String[];
@@ -21,11 +21,21 @@ export class EmployeesComponent implements OnInit {
   //Wszystkie klucze w obiekcie
   foreignKeyColumns;
   //Wszystkie mozliwosci klucza
-  foreignKeyElems;
+  foreignKeyElems:String[] = [];
   //Typy kolumn
   type;
   //Wartosci nowego obiektu
   newRowContainer: String[] = [];
+  //Akumulator usuwania
+  deleteAcc:number;
+  //Wiadomosc
+  messageToUser:String;
+  //Flaga alertu
+  allertHidden:boolean = true;
+  //Kolor allertu
+  allertColor;
+  //Kolumna z kluczem glownym
+  primaryKeyColumn;
 
   displayedColumns: string[]; //= ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
   page = 1;
@@ -64,18 +74,25 @@ export class EmployeesComponent implements OnInit {
     this.httpClientService.postRow(querry).subscribe(
 
       data => {
-
+        this.messageToUser = "New row successfully inserted!";
         console.log("PUT Request is successful ", data);
-
+        this.allertColor = 'success';
       },
 
-      error => {
-
-        console.log("Error", error);
+      fail => {
+        
+        this.messageToUser = fail.error.message;
+        let failMsg:String[] = [];
+        failMsg = this.messageToUser.split("Exception:");
+        this.messageToUser =  failMsg[failMsg.length - 1];
+        console.log("Error",fail);
+        this.allertColor = 'danger';
 
       }
 
+      
     );
+    this.allertHidden = false;
   }
 
   saveToContainer(index, elem) {
@@ -114,6 +131,11 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
+  closeAllert(){
+    this.allertHidden = true;
+  }
+ 
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -127,9 +149,6 @@ export class EmployeesComponent implements OnInit {
   ngOnInit() {
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
-
-
-
 
     this.displayedColumns = ["No"];
   }
@@ -176,6 +195,22 @@ export class EmployeesComponent implements OnInit {
 
     );
 
+    this.httpClientService.getPrimaryKey(this.tableName).subscribe(
+
+      data => {
+
+        this.primaryKeyColumn = data;
+        console.log("Primary key: ", data);
+
+      },
+
+      error => {
+
+        console.log("Error", error);
+
+      }
+
+    );
     //Pobieranie kolumn zawierajacych klucze obce
     //Fetching columns containing foreign keys
 
@@ -191,12 +226,17 @@ export class EmployeesComponent implements OnInit {
   //Pobieranie istniejacych kluczy 
   //Fetching already exhisting keys
   getAvaiableRows(table) {
-    this.foreignKeyElems = null;
+    this.foreignKeyElems = [];
+    //Wyswietl ladowanie przed przyjeciem danych
+    //Show loading befor fetching data
+    this.foreignKeyElems[0] = "Loading";
     this.httpClientService.getIds(table).subscribe(
 
 
       data => {
-        this.foreignKeyElems = data;
+        
+        for(let i = 0; i< data.length; i++)
+          this.foreignKeyElems[i] = data[i];
         console.log("PUT Request is successful ", data);
 
       },

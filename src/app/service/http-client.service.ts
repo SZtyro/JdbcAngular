@@ -29,6 +29,10 @@ export class HttpClientService {
   getType(table){
     return this.httpClient.post<String>('http://localhost:8080/getDataType',table);
   }
+
+  getPrimaryKey(tableName){
+    return this.httpClient.post<String>('http://localhost:8080/getPrimaryKey',tableName);
+  }
   postRow(elem:String){
     return this.httpClient.post<String>("http://localhost:8080/a",elem)
   }

@@ -7,10 +7,12 @@
     <div class="btn-group btn-group-toggle lightSwitch" data-toggle="buttons">
         <label class="btn btn-secondary "
             style="background-color: #f8f9fa; color:#343a40 ; display: flex; justify-content: flex-end;">
-            <input type="radio" name="Light" id="option1" (click)="changeTheme()" [disabled]=!darkMode> <i class="far fa-sun"></i>
+            <input type="radio" name="Light" id="option1" (click)="changeTheme()" [disabled]=!darkMode> <i
+                class="far fa-sun"></i>
         </label>
         <label class="btn btn-secondary " style="background-color: #343a40; display: flex; justify-content: flex-end;">
-            <input type="radio" name="Dark" id="option2" (click)="changeTheme()" [disabled]=darkMode><i class="far fa-moon"></i>
+            <input type="radio" name="Dark" id="option2" (click)="changeTheme()" [disabled]=darkMode><i
+                class="far fa-moon"></i>
         </label>
 
     </div>
@@ -30,7 +32,8 @@
             <th scope="row" style="vertical-align: middle;">{{i+1+(page-1)*pageSize}}</th>
             <td *ngFor="let key of keys" style="vertical-align: middle;">{{emp[key]}}</td>
             <td style="display: table-cell; vertical-align: inherit; ">
-                <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-outline-danger" (click)="open(deleteModal)"
+                    (click)="deleteAcc=emp"><i class="fas fa-trash-alt"></i></button>
                 <button type="button" class="btn btn-outline-info"><i class="far fa-edit"></i></button>
             </td>
 
@@ -40,6 +43,31 @@
 
     </tbody>
 </table>
+
+<div>
+    <ng-template #deleteModal let-modal>
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Are you sure?</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+
+            <form>
+                <button type="button" class="btn btn-outline-danger" style="float: right;"
+                    (click)="test(deleteAcc)">Yes, delete</button>
+
+            </form>
+        </div>
+
+
+    </ng-template>
+</div>
+
+
 
 <div style="width: 90%;margin: auto;margin-top: 30px;">
     <button type="button" class="btn btn-success" style="margin: 0px;" data-toggle="modal" data-target="#addModal"
@@ -57,56 +85,63 @@
 
             <form>
                 <div class="form-group" *ngFor="let item of keys let i = index">
-                    <label>{{item}}</label>
+                    <div *ngIf="item != primaryKeyColumn || this.foreignKeyColumns.includes(item)">
+                        <label>{{item}}</label>
 
-                    <!--DROPDOWN SECTION-->
-                    <div *ngIf="this.foreignKeyColumns.includes(item); else notDropdownBlock">
-                        <div ngbDropdown>
-                            <button class="btn btn-outline-dark" type="button" style="width: 100%;" ngbDropdownToggle
-                                (click)='getAvaiableRows([tableName,keys[i]])'>
-                                {{newRowContainer[i]}}
-                            </button>
-                            <div ngbDropdownMenu>
-                                <button ngbDropdownItem type="button" *ngFor="let foreignKey of foreignKeyElems"
-                                    (click)="saveToContainer(i,foreignKey)">{{foreignKey}}</button>
+                        <!--DROPDOWN SECTION-->
+                        <div *ngIf="this.foreignKeyColumns.includes(item); else notDropdownBlock">
+                            <div ngbDropdown>
+
+                                <button class="btn btn-outline-dark" type="button" style="width: 100%;"
+                                    ngbDropdownToggle (click)='getAvaiableRows([tableName,keys[i]])'>
+                                    {{newRowContainer[i]}}
+                                </button>
+                                <div ngbDropdownMenu>
+                                    <button ngbDropdownItem type="button" *ngFor="let foreignKey of foreignKeyElems"
+                                        (click)="saveToContainer(i,foreignKey)">{{foreignKey}}</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--DATE SECTION-->
-                    <ng-template #notDropdownBlock>
-                        <div *ngIf="type[i]=='DATE';else notDateBlock" style="margin: 5px; text-align: center;">
+                        <!--DATE SECTION-->
+                        <ng-template #notDropdownBlock>
+                            <div *ngIf="type[i]=='DATE';else notDateBlock" style="margin: 5px; text-align: center;">
 
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker
-                                            #d="ngbDatepicker" (keyup)="addElem(i,$event)" (dateSelect)="saveToContainer(i,($event.year +'-'+ $event.month +'-'+ $event.day).toString())">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary " (click)="d.toggle()"
-                                                type="button" style="margin: 0px;" ><i class="far fa-calendar-alt"></i></button>
-                                                
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker
+                                                #d="ngbDatepicker" (keyup)="addElem(i,$event)"
+                                                (dateSelect)="saveToContainer(i,($event.year +'-'+ $event.month +'-'+ $event.day).toString())">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary " (click)="d.toggle()"
+                                                    type="button" style="margin: 0px;"><i
+                                                        class="far fa-calendar-alt"></i></button>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
 
-                        </div>
-                        <!--DEFAULT SECTION-->
-                        <ng-template #notDateBlock>
-                            <input class="form-control" (keyup)="inputToContainer(i,$event)">
+                            </div>
+                            <!--DEFAULT SECTION-->
+                            <ng-template #notDateBlock>
+                                <input class="form-control" (keyup)="inputToContainer(i,$event)">
+                            </ng-template>
+
+
+
                         </ng-template>
-
-
-
-                    </ng-template>
-
+                    </div>
 
                 </div>
 
             </form>
         </div>
         <div class="modal-footer">
+            <ngb-alert [hidden]="allertHidden" [type]="allertColor" (close)="closeAllert()"
+                style="margin-bottom: 12px;">{{ messageToUser }}</ngb-alert>
             <button type="button" class="btn btn-outline-dark" (click)="sendNewElem()">Add</button>
+
         </div>
     </ng-template>
 
