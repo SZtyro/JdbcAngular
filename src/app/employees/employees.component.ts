@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@
 })
 export class EmployeesComponent implements OnInit {
 
-  tableName = 'JOB_HISTORY';
+  tableName = 'EMPLOYEES';
   
 
   employees: String[];
@@ -37,7 +37,7 @@ export class EmployeesComponent implements OnInit {
   //Kolumna z kluczem glownym
   primaryKeyColumn;
 
-  displayedColumns: string[]; //= ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
+  displayedColumns: string[] = []; //= ['No', 'id', 'name', 'lastName', 'email', 'phoneNumber', 'hireDate', 'jobId', 'salary', 'commisionPCT', 'managerId', 'departmentId', 'Action'];
   page = 1;
   pageSize = 10;
   collectionSize;
@@ -150,7 +150,7 @@ export class EmployeesComponent implements OnInit {
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
 
-    this.displayedColumns = ["No"];
+    
   }
 
   handleSuccessfulResponse(response) {
@@ -159,6 +159,7 @@ export class EmployeesComponent implements OnInit {
     this.keys = Object.keys(response[0]);
     this.collectionSize = this.employees.length;
     this.lastPage = Math.ceil(this.collectionSize / this.pageSize);
+
 
     this.httpClientService.getType(this.tableName).subscribe(
 
@@ -220,7 +221,6 @@ export class EmployeesComponent implements OnInit {
     //   console.log(this.foreignKeyColumns);
 
     this.displayedColumns = this.displayedColumns.concat(this.keys);
-    this.displayedColumns.push("Actions");
   }
 
   //Pobieranie istniejacych kluczy 
@@ -267,8 +267,5 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  changePage(num) {
-    if (this.page + num > 0 && this.page + num <= this.lastPage)
-      this.page = this.page + num;
-  }
+  
 }

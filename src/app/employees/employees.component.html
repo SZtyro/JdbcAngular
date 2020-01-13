@@ -19,15 +19,19 @@
 
 </div>
 
+<!--TABLE-->
+
 <table id="table" class="table table-striped table-hover table-light text-nowrap table-responsive-xl">
     <thead class="thead-dark">
         <tr>
+            <th scope="col">#</th>
             <th scope="col" *ngFor="let head of displayedColumns ">{{head}}</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
 
-        <tr *ngFor="let emp of employees | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index"
+        <tr *ngFor="let emp of employees | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index"
             class="rows">
             <th scope="row" style="vertical-align: middle;">{{i+1+(page-1)*pageSize}}</th>
             <td *ngFor="let key of keys" style="vertical-align: middle;">{{emp[key]}}</td>
@@ -145,51 +149,24 @@
         </div>
     </ng-template>
 
-
-
-
-    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right;">
-        <label class="btn btn-secondary ">
-            <input type="radio" (click)="changePage(-1)"> Prev
-        </label>
-
-        <label class="btn btn-secondary " *ngIf="page-2 > 0" (click)="changePage(-2)">
-            <input type="radio"> {{page-2}}
-        </label>
-        <label class="btn btn-secondary " *ngIf="page-1 > 0" (click)="changePage(-1)">
-            <input type="radio"> {{page-1}}
-        </label>
-
-        <label class="btn btn-dark ">
-            <input type="radio" style="border: solid; border-color: blue;"> {{page}}
-        </label>
-
-        <label class="btn btn-secondary " *ngIf="page+1 < lastPage || page+1 == lastPage" (click)="changePage(1)">
-            <input type="radio"> {{page+1}}
-        </label>
-        <label class="btn btn-secondary " *ngIf="page+2 < lastPage || page+2 == lastPage" (click)="changePage(2)">
-            <input type="radio"> {{page+2}}
-        </label>
-
-        <label class="btn btn-secondary ">
-            <input type="radio" (click)="changePage(1)"> Next
-        </label>
-
-    </div>
-
-
-    <div class="dropup" style="float: right;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+    <div ngbDropdown class="dropup " style="float: right;">
+        <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle">
             {{pageSize}}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">10</a>
-            <a class="dropdown-item" href="#">30</a>
-            <a class="dropdown-item" href="#">50</a>
-            <a class="dropdown-item" href="#">100</a>
+        <div ngbDropdownMenu>
+            <button ngbDropdownItem (click)="pageSize=10">10</button>
+            <button ngbDropdownItem (click)="pageSize=30">30</button>
+            <button ngbDropdownItem (click)="pageSize=50">50</button>
+            <button ngbDropdownItem (click)="pageSize=100">100</button>
         </div>
     </div>
+
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [rotate]="true" [pageSize]="pageSize"
+        [maxSize]="5" [boundaryLinks]="true" class="d-flex justify-content-end ">
+    </ngb-pagination>
+
+
+    
 
 
 
