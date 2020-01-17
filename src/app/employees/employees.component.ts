@@ -1,37 +1,52 @@
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClientService } from '../service/http-client.service';
-import { Employee } from '../class/Entities';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material';
 import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { MatSort } from '@angular/material/sort';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css']
+  styleUrls: ['./employees.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class EmployeesComponent implements OnInit {
 
   tableName = 'EMPLOYEES';
+
   
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   employees: String[];
   keys: string[];
   darkMode: boolean = false;
+
+  expandedElement: String | null;
   
 
   //Wszystkie klucze w obiekcie
   foreignKeyColumns;
   //Wszystkie mozliwosci klucza
-  foreignKeyElems:String[] = [];
+  foreignKeyElems: String[] = [];
   //Typy kolumn
   type;
   //Wartosci nowego obiektu
   newRowContainer: String[] = [];
   //Akumulator usuwania
-  deleteAcc:number;
+  deleteAcc: number;
   //Wiadomosc
-  messageToUser:String;
+  messageToUser: String;
   //Flaga alertu
-  allertHidden:boolean = true;
+  allertHidden: boolean = true;
   //Kolor allertu
   allertColor;
   //Kolumna z kluczem glownym
@@ -43,7 +58,7 @@ export class EmployeesComponent implements OnInit {
   collectionSize;
   lastPage;
 
-
+  dataSource;
 
   closeResult: string;
   modalOptions: NgbModalOptions;
@@ -65,9 +80,18 @@ export class EmployeesComponent implements OnInit {
 
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+
+
+
+
   sendNewElem() {
 
-    
+
 
     let querry: String = "Insert into " + this.tableName + " values(" + this.newRowContainer + ")";
     console.log(querry);
@@ -80,17 +104,17 @@ export class EmployeesComponent implements OnInit {
       },
 
       fail => {
-        
+
         this.messageToUser = fail.error.message;
-        let failMsg:String[] = [];
+        let failMsg: String[] = [];
         failMsg = this.messageToUser.split("Exception:");
-        this.messageToUser =  failMsg[failMsg.length - 1];
-        console.log("Error",fail);
+        this.messageToUser = failMsg[failMsg.length - 1];
+        console.log("Error", fail);
         this.allertColor = 'danger';
 
       }
 
-      
+
     );
     this.allertHidden = false;
   }
@@ -131,10 +155,10 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  closeAllert(){
+  closeAllert() {
     this.allertHidden = true;
   }
- 
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -145,12 +169,14 @@ export class EmployeesComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit() {
+    
+
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
 
-    
+
   }
 
   handleSuccessfulResponse(response) {
@@ -160,7 +186,9 @@ export class EmployeesComponent implements OnInit {
     this.collectionSize = this.employees.length;
     this.lastPage = Math.ceil(this.collectionSize / this.pageSize);
 
-
+    this.dataSource = new MatTableDataSource(this.employees);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.httpClientService.getType(this.tableName).subscribe(
 
       data => {
@@ -234,8 +262,8 @@ export class EmployeesComponent implements OnInit {
 
 
       data => {
-        
-        for(let i = 0; i< data.length; i++)
+
+        for (let i = 0; i < data.length; i++)
           this.foreignKeyElems[i] = data[i];
         console.log("PUT Request is successful ", data);
 
@@ -267,5 +295,5 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  
+
 }
