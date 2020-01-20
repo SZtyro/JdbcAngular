@@ -1,5 +1,7 @@
+**Ocena Projektu**
+
 -------------------------------------------------------------------------------
--- POZIOM_1 (dst, dst+)
+ POZIOM_1 (dst, dst+)
 -------------------------------------------------------------------------------
 - [ ] co najmniej 3 komponenty
 - [ ] poprawne rozdzielenie widoku i logiki
@@ -8,7 +10,7 @@
 - [ ] aktywne (!) korzystanie z VCS
 
 -------------------------------------------------------------------------------
--- POZIOM_2 (db, db+)
+ POZIOM_2 (db, db+)
 -------------------------------------------------------------------------------
 (...POZIOM_1)
 - [ ] więcej komponentów i (sensowny) podział na co najmniej 2 moduły
@@ -21,7 +23,7 @@
 - [ ] wprowadzenie okienka typu modal do potwierdzenia operacji (np. usunięcia)
 
 -------------------------------------------------------------------------------
--- POZIOM_3 (db+, bdb)
+ POZIOM_3 (db+, bdb)
 -------------------------------------------------------------------------------
 (...POZIOM_2)
 - [ ] wprowadzenie jakiejś formy wizualizacji danych (wykresy, grafy, mapy itp.)
