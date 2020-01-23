@@ -57,9 +57,9 @@
                 <td mat-cell *matCellDef="let element" [attr.colspan]="keys.length" >
                     <div class="example-element-detail" style="float: right;"
                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
-                        <button mat-button style="background-color:rgb(212, 67, 67); color: white;margin: 10px; "><i
-                                class="fas fa-trash-alt" (click)="openDeleteDialog(element[primaryKeyColumn])"></i></button>
-                        <button mat-button style="background-color:rgb(67, 212, 127); color: white;margin: 10px; "><i
+                        <button mat-button style="background-color:rgb(212, 67, 67); color: white;margin: 10px; " (click)="openDeleteDialog(element[primaryKeyColumn])"><i
+                                class="fas fa-trash-alt" ></i></button>
+                        <button mat-button style="background-color:rgb(67, 212, 127); color: white;margin: 10px; " (click)="openEditDialog(element)"><i
                                 class="far fa-edit"></i></button>
                     </div>
                 </td>

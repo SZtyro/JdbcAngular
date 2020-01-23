@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClientService } from '../service/http-client.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatPaginatorModule } from '@angular/material';
 import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { MatSort } from '@angular/material/sort';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-employees',
@@ -91,6 +91,17 @@ export class EmployeesComponent implements OnInit {
       
     });
     
+  }
+
+  openEditDialog(element){
+    const dialogRef = this.dialog.open(EditModalComponent, {
+      //width: '250px'
+      data: { details: element,
+              keys: this.keys },
+      
+    });
+
+    console.log(element)
   }
 
 

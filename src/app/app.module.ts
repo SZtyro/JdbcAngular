@@ -15,13 +15,15 @@ import { MatInputModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    EditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     NgbModule
   ],
   entryComponents: [
-    DeleteModalComponent
+    DeleteModalComponent,
+    EditModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

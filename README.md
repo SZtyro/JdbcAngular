@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
  POZIOM_1 (dst, dst+)
 -------------------------------------------------------------------------------
-- [ ] co najmniej 3 komponenty
+- [x] co najmniej 3 komponenty
 - [ ] poprawne rozdzielenie widoku i logiki
 - [ ] zastosowanie języka stylów innego niż CSS (np. SCSS)
 - [x] zastosowanie biblioteki "CSS" (Bootstrap, Material itp.)
