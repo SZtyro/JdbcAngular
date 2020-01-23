@@ -6,6 +6,8 @@ import { MatPaginatorModule } from '@angular/material';
 import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { MatSort } from '@angular/material/sort';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-employees',
@@ -65,7 +67,8 @@ export class EmployeesComponent implements OnInit {
 
   constructor(
     private httpClientService: HttpClientService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    public dialog: MatDialog) {
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
@@ -75,6 +78,22 @@ export class EmployeesComponent implements OnInit {
   test(x) {
     console.log(x);
   }
+
+
+  openDeleteDialog(id): void {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      //width: '250px'
+      data: { id: id , 
+              service: this.httpClientService, 
+              tableName: this.tableName,
+              primaryKeyColumn: this.primaryKeyColumn,
+              fatherRef: this},
+      
+    });
+    
+  }
+
+
   inputToContainer(i, event) {
     this.newRowContainer[i] = "'" + event.target.value + "'";
 

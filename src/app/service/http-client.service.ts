@@ -34,7 +34,12 @@ export class HttpClientService {
     return this.httpClient.post<String>('http://localhost:8080/getPrimaryKey',tableName);
   }
   postRow(elem:String){
-    return this.httpClient.post<String>("http://localhost:8080/a",elem)
+    return this.httpClient.post<String>("http://localhost:8080/a",elem);
+  }
+
+  deleteRow(id:String[]){
+    console.log(id);
+    return this.httpClient.post("http://localhost:8080/delete",id);
   }
 }
 
