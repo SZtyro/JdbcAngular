@@ -1,1 +1,49 @@
-<p *ngFor="let item of data.keys"> {{data.details[item]}}</p>
+<div *ngFor="let item of father.keys let i = index">
+    <div *ngIf="item != father.primaryKeyColumn || father.foreignKeyColumns.includes(item)">
+        <!--<label>{{item}}</label>-->
+
+        <!--DROPDOWN SECTION-->
+        <div *ngIf="father.foreignKeyColumns.includes(item); else notDropdownBlock">
+            <mat-select (click)='father.getAvaiableRows([father.tableName,father.keys[i]])'
+                [(value)]="father.newRowContainer[i]">
+                {{father.newRowContainer[i]}}
+                <mat-option *ngFor="let foreignKey of father.foreignKeyElems"
+                    (click)="father.saveToContainer(i,foreignKey)">{{foreignKey}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <!--DATE SECTION-->
+        <ng-template #notDropdownBlock>
+            <div *ngIf="father.type[i]=='DATE';else notDateBlock" >
+
+
+
+                <!-- <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker"
+                    (keyup)="father.addElem(i,$event)"
+                    (dateSelect)="father.saveToContainer(i,($event.year +'-'+ $event.month +'-'+ $event.day).toString())"> -->
+                <!-- <div class="input-group-append">
+                        <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button"
+                            style="margin: 0px;"><i class="far fa-calendar-alt"></i></button>
+
+                    </div> -->
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="{{item}}" (keyup)="father.addElem(i,$event)" [(value)]="this.father.newRowContainer[5].split('T')[0]">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+
+
+            </div>
+            <!--DEFAULT SECTION-->
+            <ng-template #notDateBlock>
+                <mat-form-field>
+                    <input matInput (keyup)="father.inputToContainer(i,$event)" placeholder="{{item}}" [(value)]="father.newRowContainer[i]">
+                </mat-form-field>
+            </ng-template>
+
+
+
+        </ng-template>
+    </div>
+</div>

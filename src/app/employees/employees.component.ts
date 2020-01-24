@@ -21,14 +21,16 @@ import { EditModalComponent } from '../edit-modal/edit-modal.component';
     ]),
   ],
 })
+
 export class EmployeesComponent implements OnInit {
+  
 
   tableName = 'EMPLOYEES';
 
   
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  employees: String[];
+  employees: String[][];
   keys: string[];
   darkMode: boolean = false;
 
@@ -40,7 +42,7 @@ export class EmployeesComponent implements OnInit {
   //Wszystkie mozliwosci klucza
   foreignKeyElems: String[] = [];
   //Typy kolumn
-  type;
+  type:String[] = [];
   //Wartosci nowego obiektu
   newRowContainer: String[] = [];
   //Akumulator usuwania
@@ -76,7 +78,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   test(x) {
-    console.log(x);
+    console.log("Test: " +x);
   }
 
 
@@ -94,14 +96,21 @@ export class EmployeesComponent implements OnInit {
   }
 
   openEditDialog(element){
+    
+    console.log("newRowContainer przed :" + this.newRowContainer)
+    let i =0;
+    this.keys.forEach(key => {
+      this.newRowContainer[i] = element[key];
+      i++;
+    });
     const dialogRef = this.dialog.open(EditModalComponent, {
       //width: '250px'
-      data: { details: element,
-              keys: this.keys },
+      data: { details: this.newRowContainer,
+              father: this},
       
     });
 
-    console.log(element)
+    //console.log("do przekazania: " +element)
   }
 
 
@@ -150,23 +159,10 @@ export class EmployeesComponent implements OnInit {
   }
 
   saveToContainer(index, elem) {
-
-    //let type: String = "VARCHAR2";
-
-
-
-    console.log(this.type[index]);
-
     if (this.type[index] == "NUMBER")
       this.newRowContainer[index] = elem;
     else if (this.type[index] == "VARCHAR2" || this.type[index] == "DATE")
       this.newRowContainer[index] = "'" + elem + "'";
-
-
-
-    //this.newRowContainer[index] = elem;
-
-    console.log(this.newRowContainer);
   }
 
   prepareNewContainer() {
@@ -209,12 +205,23 @@ export class EmployeesComponent implements OnInit {
 
   }
 
+  saveDataToType(data){
+    this.type = data;
+    this.type.forEach((element,index) => {
+      if(element == "DATE"){
+        
+      
+      } 
+        
+    });
+  }
+
+
   handleSuccessfulResponse(response) {
     console.log(response);
     this.employees = response;
     this.keys = Object.keys(response[0]);
-    this.collectionSize = this.employees.length;
-    this.lastPage = Math.ceil(this.collectionSize / this.pageSize);
+    
 
     this.dataSource = new MatTableDataSource(this.employees);
     this.dataSource.paginator = this.paginator;
@@ -223,8 +230,8 @@ export class EmployeesComponent implements OnInit {
 
       data => {
 
-        this.type = data;
-        console.log("PUT Request is successful ", data);
+        this.saveDataToType(data);
+        console.log("Column types fetched! ", this.type);
 
 
       },
@@ -236,6 +243,10 @@ export class EmployeesComponent implements OnInit {
       }
 
     );
+
+    
+    
+    
 
     this.httpClientService.getForeignKeyColumns("'" + this.tableName + "'").subscribe(
 
@@ -279,6 +290,8 @@ export class EmployeesComponent implements OnInit {
     //   console.log(this.foreignKeyColumns);
 
     this.displayedColumns = this.displayedColumns.concat(this.keys);
+
+    
   }
 
   //Pobieranie istniejacych kluczy 
@@ -306,23 +319,6 @@ export class EmployeesComponent implements OnInit {
       }
 
     );
-  }
-
-  changeTheme() {
-
-    let table = document.getElementById("table");
-
-    if (table.classList.contains("table-light")) {
-      table.classList.add("table-dark");
-      table.classList.remove("table-light");
-    } else if (table.classList.contains("table-dark")) {
-      table.classList.add("table-light");
-      table.classList.remove("table-dark");
-
-    }
-
-    this.darkMode = !this.darkMode;
-
   }
 
 

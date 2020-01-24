@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EmployeesComponent } from '../employees/employees.component';
+
+
 
 @Component({
   selector: 'app-edit-modal',
@@ -8,12 +11,20 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditModalComponent implements OnInit {
 
+  father:EmployeesComponent ;
+
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    console.log("do edycji: " + this.data.element)
+    this.father = this.data.father;
+    this.father.newRowContainer = this.data.details;
+    console.log("details: " + this.data.details)
+    console.log("istniejacy: " + this.father.newRowContainer);
+
+    console.log("data: " +this.father.newRowContainer[5].split("T")[0])
   }
 
 }
