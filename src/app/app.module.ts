@@ -18,6 +18,7 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   entryComponents: [

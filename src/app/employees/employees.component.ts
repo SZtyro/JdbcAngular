@@ -4,10 +4,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgbModal, ModalDismissReasons, NgbModalOptions, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { MatSort } from '@angular/material/sort';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
+
 
 @Component({
   selector: 'app-employees',
@@ -15,36 +16,36 @@ import { EditModalComponent } from '../edit-modal/edit-modal.component';
   styleUrls: ['./employees.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 
 export class EmployeesComponent implements OnInit {
-  
+
 
   tableName = 'EMPLOYEES';
 
-  
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   employees: String[][];
   keys: string[];
   darkMode: boolean = false;
 
   expandedElement: String | null;
-  
+
 
   //Wszystkie klucze w obiekcie
   foreignKeyColumns;
   //Wszystkie mozliwosci klucza
-  foreignKeyElems: String[] = [];
+  public foreignKeyElems: String[] = [];
   //Typy kolumn
-  type:String[] = [];
+  type: String[] = [];
   //Wartosci nowego obiektu
-  newRowContainer: String[] = [];
+  public newRowContainer: String[] = [];
   //Akumulator usuwania
   deleteAcc: number;
   //Wiadomosc
@@ -78,36 +79,46 @@ export class EmployeesComponent implements OnInit {
   }
 
   test(x) {
-    console.log("Test: " +x);
+    console.log("Test: " + x);
   }
 
 
   openDeleteDialog(id): void {
     const dialogRef = this.dialog.open(DeleteModalComponent, {
       //width: '250px'
-      data: { id: id , 
-              service: this.httpClientService, 
-              tableName: this.tableName,
-              primaryKeyColumn: this.primaryKeyColumn,
-              fatherRef: this},
-      
+      data: {
+        id: id,
+        service: this.httpClientService,
+        tableName: this.tableName,
+        primaryKeyColumn: this.primaryKeyColumn,
+        fatherRef: this
+      },
+
     });
-    
+
   }
 
-  openEditDialog(element){
-    
+  openEditDialog(element,ind) {
+
     console.log("newRowContainer przed :" + this.newRowContainer)
-    let i =0;
+    
+    let i = 0;
+  
     this.keys.forEach(key => {
       this.newRowContainer[i] = element[key];
+
+
       i++;
     });
+    console.log(this.newRowContainer)
     const dialogRef = this.dialog.open(EditModalComponent, {
       //width: '250px'
-      data: { details: this.newRowContainer,
-              father: this},
-      
+      data: {
+        details: this.newRowContainer,
+        father: this,
+        index: ind
+      },
+
     });
 
     //console.log("do przekazania: " +element)
@@ -115,7 +126,7 @@ export class EmployeesComponent implements OnInit {
 
 
   inputToContainer(i, event) {
-    this.newRowContainer[i] = "'" + event.target.value + "'";
+    this.newRowContainer[i] =event.target.value ;
 
   }
 
@@ -138,7 +149,7 @@ export class EmployeesComponent implements OnInit {
 
       data => {
         this.messageToUser = "New row successfully inserted!";
-        console.log("PUT Request is successful ", data);
+        console.log("New row successfully inserted! ", data);
         this.allertColor = 'success';
       },
 
@@ -158,11 +169,68 @@ export class EmployeesComponent implements OnInit {
     this.allertHidden = false;
   }
 
+  
+
+  updateElem(entityIndex) {
+    console.log("przed");
+    console.log(this.newRowContainer);
+
+    this.newRowContainer.forEach((element,index) => {
+      this.saveToContainer(index,element);
+    });
+    console.log("po");
+    console.log(this.newRowContainer);
+
+    let querry: String = "Update " + this.tableName + " set ";
+    let last = this.keys.length;
+    this.keys.forEach((key, index) => {
+      if (key != this.primaryKeyColumn)
+        if (index != last - 1)
+          querry += key + " = " + this.newRowContainer[index] + ", ";
+        else
+          querry += key + " = " + this.newRowContainer[index];
+    });
+    querry += " where " + this.primaryKeyColumn + " = " + entityIndex;
+
+    console.log(querry);
+
+
+
+    this.httpClientService.postRow(querry).subscribe(
+
+      data => {
+        this.messageToUser = "Row successfully updated!";
+        console.log("Row successfully updated!", data);
+        this.allertColor = 'success';
+      },
+
+      fail => {
+
+        this.messageToUser = fail.error.message;
+        let failMsg: String[] = [];
+        failMsg = this.messageToUser.split("Exception:");
+        this.messageToUser = failMsg[failMsg.length - 1];
+        console.log("Error", fail);
+        this.allertColor = 'danger';
+
+      }
+
+
+    );
+    this.allertHidden = false;
+  }
+
+  testContainer() {
+    console.log(this.newRowContainer);
+  }
   saveToContainer(index, elem) {
     if (this.type[index] == "NUMBER")
       this.newRowContainer[index] = elem;
-    else if (this.type[index] == "VARCHAR2" || this.type[index] == "DATE")
+    else if (this.type[index] == "VARCHAR2" )
       this.newRowContainer[index] = "'" + elem + "'";
+    else if(this.type[index] == "DATE")
+      this.newRowContainer[index] = "'" + elem.split("T")[0] + "'";
+
   }
 
   prepareNewContainer() {
@@ -197,7 +265,7 @@ export class EmployeesComponent implements OnInit {
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit() {
-    
+
 
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
@@ -205,23 +273,22 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  saveDataToType(data){
+  saveDataToType(data) {
     this.type = data;
-    this.type.forEach((element,index) => {
-      if(element == "DATE"){
-        
-      
-      } 
-        
+    this.type.forEach((element, index) => {
+      if (element == "DATE") {
+
+
+      }
+
     });
   }
 
 
   handleSuccessfulResponse(response) {
-    console.log(response);
     this.employees = response;
     this.keys = Object.keys(response[0]);
-    
+
 
     this.dataSource = new MatTableDataSource(this.employees);
     this.dataSource.paginator = this.paginator;
@@ -244,16 +311,16 @@ export class EmployeesComponent implements OnInit {
 
     );
 
-    
-    
-    
+
+
+
 
     this.httpClientService.getForeignKeyColumns("'" + this.tableName + "'").subscribe(
 
       data => {
 
         this.foreignKeyColumns = data;
-        console.log("PUT Request is successful ", data);
+        console.log("Foreign key columns fetched!: ", data);
 
       },
 
@@ -290,8 +357,8 @@ export class EmployeesComponent implements OnInit {
     //   console.log(this.foreignKeyColumns);
 
     this.displayedColumns = this.displayedColumns.concat(this.keys);
+    // this.getAvaiableRows(this.tableName);
 
-    
   }
 
   //Pobieranie istniejacych kluczy 
@@ -308,7 +375,7 @@ export class EmployeesComponent implements OnInit {
 
         for (let i = 0; i < data.length; i++)
           this.foreignKeyElems[i] = data[i];
-        console.log("PUT Request is successful ", data);
+        console.log("Avaiable rows: ", data);
 
       },
 

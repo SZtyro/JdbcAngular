@@ -1,5 +1,3 @@
-
-
 <!--TABLE-->
 <!-- 
 <table id="table" class="table table-striped table-hover table-light text-nowrap table-responsive-xl">
@@ -54,23 +52,26 @@
             </ng-container>
 
             <ng-container matColumnDef="expandedDetail">
-                <td mat-cell *matCellDef="let element" [attr.colspan]="keys.length" >
+                <td mat-cell *matCellDef="let element" [attr.colspan]="keys.length">
                     <div class="example-element-detail" style="float: right;"
-                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
-                        <button mat-button style="background-color:rgb(212, 67, 67); color: white;margin: 10px; " (click)="openDeleteDialog(element[primaryKeyColumn])"><i
-                                class="fas fa-trash-alt" ></i></button>
-                        <button mat-button style="background-color:rgb(67, 212, 127); color: white;margin: 10px; " (click)="openEditDialog(element)" (click)="test(element[primaryKeyColumn])"><i
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <button mat-button style="background-color:rgb(212, 67, 67); color: white;margin: 10px; "
+                            (click)="openDeleteDialog(element[primaryKeyColumn])"><i
+                                class="fas fa-trash-alt"></i></button>
+                        <button mat-button style="background-color:rgb(67, 212, 127); color: white;margin: 10px; "
+                            (click)="openEditDialog(element,element[primaryKeyColumn])" (click)="test(element[primaryKeyColumn])"><i
                                 class="far fa-edit"></i></button>
                     </div>
                 </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="keys" ></tr>
+            <tr mat-header-row *matHeaderRowDef="keys"></tr>
             <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
             <tr mat-row *matRowDef="let element; columns: keys;" class="example-element-row"
-                [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = element" (click)="$event.preventDefault()" >
+                [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = element"
+                (click)="$event.preventDefault()">
             </tr>
-            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" ></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
         </table>
         <div>
@@ -129,7 +130,7 @@
 
                         <!--DROPDOWN SECTION-->
                         <div *ngIf="this.foreignKeyColumns.includes(item); else notDropdownBlock">
-                            <div ngbDropdown>
+                            <!-- <div ngbDropdown>
 
                                 <button class="btn btn-outline-dark" type="button" style="width: 100%;"
                                     ngbDropdownToggle (click)='getAvaiableRows([tableName,keys[i]])'>
@@ -139,7 +140,20 @@
                                     <button ngbDropdownItem type="button" *ngFor="let foreignKey of foreignKeyElems"
                                         (click)="saveToContainer(i,foreignKey)">{{foreignKey}}</button>
                                 </div>
-                            </div>
+                            </div> -->
+
+                            <form>
+                                <mat-form-field>
+                                    <mat-select [(ngModel)]="newRowContainer[i]"
+                                        (click)='getAvaiableRows([tableName,keys[i]])' name="newRowContainer[i]">
+
+                                        <mat-option *ngFor="let foreignKey of foreignKeyElems"
+                                            (click)="saveToContainer(i,foreignKey)" [value]="foreignKey">{{foreignKey}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </form>
+
                         </div>
                         <!--DATE SECTION-->
                         <ng-template #notDropdownBlock>
@@ -193,4 +207,3 @@
 
 
 </div>
-

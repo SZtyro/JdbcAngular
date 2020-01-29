@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmployeesComponent } from '../employees/employees.component';
-
+import { FormBuilder, FormGroup,FormControl,Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,19 +12,26 @@ import { EmployeesComponent } from '../employees/employees.component';
 export class EditModalComponent implements OnInit {
 
   father:EmployeesComponent ;
-
+  public a:String = 'AC_MGR';
+  index;
+  
+ 
+  
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<EditModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    
     this.father = this.data.father;
-    this.father.newRowContainer = this.data.details;
-    console.log("details: " + this.data.details)
-    console.log("istniejacy: " + this.father.newRowContainer);
-
-    console.log("data: " +this.father.newRowContainer[5].split("T")[0])
+    this.index = this.data.index;
+    console.log("index: " + this.index)
   }
 
-}
+  closeDialog(){
+    this.dialogRef.close();
+  }
+} 
