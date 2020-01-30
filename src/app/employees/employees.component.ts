@@ -277,7 +277,13 @@ export class EmployeesComponent implements OnInit {
     this.type = data;
     this.type.forEach((element, index) => {
       if (element == "DATE") {
-
+        this.employees.forEach(el => {
+          let dateToEdit = new Date(el[this.keys[index]]);
+          
+          let x:Number = dateToEdit.getMonth() + 1;
+          el[this.keys[index]]= dateToEdit.getFullYear()+"-"+x.toString()+"-"+dateToEdit.getDate();
+        });
+        
 
       }
 
@@ -290,9 +296,7 @@ export class EmployeesComponent implements OnInit {
     this.keys = Object.keys(response[0]);
 
 
-    this.dataSource = new MatTableDataSource(this.employees);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    
     this.httpClientService.getType(this.tableName).subscribe(
 
       data => {
@@ -310,9 +314,11 @@ export class EmployeesComponent implements OnInit {
       }
 
     );
+      
 
-
-
+    this.dataSource = new MatTableDataSource(this.employees);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
 
     this.httpClientService.getForeignKeyColumns("'" + this.tableName + "'").subscribe(

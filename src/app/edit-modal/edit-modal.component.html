@@ -31,9 +31,9 @@
 
                 <mat-form-field >
                     <input matInput [matDatepicker]="picker" placeholder="{{item}}"
-                        [value]="father.newRowContainer[i]" disabled>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                        [(ngModel)]="date.value" disabled (dateInput)="saveDate(i, $event)" >
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false" ></mat-datepicker>
                 </mat-form-field>
 
 
