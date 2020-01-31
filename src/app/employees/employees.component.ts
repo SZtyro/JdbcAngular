@@ -69,7 +69,7 @@ export class EmployeesComponent implements OnInit {
   modalOptions: NgbModalOptions;
 
   constructor(
-    private httpClientService: HttpClientService,
+    public httpClientService: HttpClientService,
     private modalService: NgbModal,
     public dialog: MatDialog) {
     this.modalOptions = {
@@ -116,7 +116,8 @@ export class EmployeesComponent implements OnInit {
       data: {
         details: this.newRowContainer,
         father: this,
-        index: ind
+        index: ind,
+        element: element
       },
 
     });
@@ -171,54 +172,7 @@ export class EmployeesComponent implements OnInit {
 
   
 
-  updateElem(entityIndex) {
-    console.log("przed");
-    console.log(this.newRowContainer);
-
-    this.newRowContainer.forEach((element,index) => {
-      this.saveToContainer(index,element);
-    });
-    console.log("po");
-    console.log(this.newRowContainer);
-
-    let querry: String = "Update " + this.tableName + " set ";
-    let last = this.keys.length;
-    this.keys.forEach((key, index) => {
-      if (key != this.primaryKeyColumn)
-        if (index != last - 1)
-          querry += key + " = " + this.newRowContainer[index] + ", ";
-        else
-          querry += key + " = " + this.newRowContainer[index];
-    });
-    querry += " where " + this.primaryKeyColumn + " = " + entityIndex;
-
-    console.log(querry);
-
-
-
-    this.httpClientService.postRow(querry).subscribe(
-
-      data => {
-        this.messageToUser = "Row successfully updated!";
-        console.log("Row successfully updated!", data);
-        this.allertColor = 'success';
-      },
-
-      fail => {
-
-        this.messageToUser = fail.error.message;
-        let failMsg: String[] = [];
-        failMsg = this.messageToUser.split("Exception:");
-        this.messageToUser = failMsg[failMsg.length - 1];
-        console.log("Error", fail);
-        this.allertColor = 'danger';
-
-      }
-
-
-    );
-    this.allertHidden = false;
-  }
+ 
 
   testContainer() {
     console.log(this.newRowContainer);

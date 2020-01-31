@@ -52,7 +52,10 @@
         </ng-template>
     </div>
 </div>
+<div [hidden]="father.allertHidden" style="background-color: rgb(212, 67, 67); border-radius: 3px;padding:5px;">
+    {{messageToUser}}
+</div>
 <div mat-dialog-actions style="float: right;">
     <button mat-button style="background-color:rgb(212, 67, 67);" (click)="closeDialog()">Cancel</button>
-    <button mat-button style="background-color:rgb(67, 212, 127);" (click)="father.updateElem(index)">Update!</button>
+    <button mat-button style="background-color:rgb(67, 212, 127);" (click)="updateElem(index)">Update!</button>
 </div>
