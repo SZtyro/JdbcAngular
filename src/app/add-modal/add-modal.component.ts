@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatDatepickerInputEvent } from '@angular/material';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { EmployeesComponent } from '../employees/employees.component';
+import {  TableComponent } from '../table/table.component';
 
 @Component({
   selector: 'app-add-modal',
@@ -10,7 +10,7 @@ import { EmployeesComponent } from '../employees/employees.component';
 })
 export class AddModalComponent implements OnInit {
 
-  father: EmployeesComponent;
+  father:  TableComponent;
   date = [];
   messageToUser: String;
 

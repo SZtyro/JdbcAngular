@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EmployeesComponent } from '../employees/employees.component';
+import {  TableComponent } from '../table/table.component';
 import { FormBuilder, FormGroup,FormControl,Validators } from '@angular/forms';
 import { MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
 
@@ -12,7 +12,7 @@ import { MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
 })
 export class EditModalComponent implements OnInit {
 
-  father:EmployeesComponent ;
+  father: TableComponent ;
   //public a:String = 'AC_MGR';
   index;
   

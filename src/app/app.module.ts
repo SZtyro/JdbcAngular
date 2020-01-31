@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeesComponent } from './employees/employees.component';
+import {  TableComponent } from './table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +25,7 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeesComponent,
+    TableComponent,
     DeleteModalComponent,
     EditModalComponent,
     AddModalComponent

@@ -12,9 +12,9 @@ import { AddModalComponent } from '../add-modal/add-modal.component';
 
 
 @Component({
-  selector: 'app-employees',
-  templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css'],
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -24,7 +24,7 @@ import { AddModalComponent } from '../add-modal/add-modal.component';
   ],
 })
 
-export class EmployeesComponent implements OnInit {
+export class TableComponent implements OnInit {
 
 
   tableName = 'EMPLOYEES';

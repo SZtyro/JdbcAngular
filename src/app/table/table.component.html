@@ -55,6 +55,7 @@
 
 
 <div style="width: 90%;margin: auto;margin-top: 30px;">
+ <!--    
     <button type="button" class="btn btn-success" style="margin: 0px;" data-toggle="modal" data-target="#addModal"
         (click)="open(addModal)" (click)="prepareNewContainer()">Add</button>
 
@@ -73,7 +74,7 @@
                     <div *ngIf="item != primaryKeyColumn || this.foreignKeyColumns.includes(item)">
                         <label>{{item}}</label>
 
-                        <!--DROPDOWN SECTION-->
+                        <--DROPDOWN SECTION->
                         <div *ngIf="this.foreignKeyColumns.includes(item); else notDropdownBlock">
                             <!-- <div ngbDropdown>
 
@@ -85,7 +86,7 @@
                                     <button ngbDropdownItem type="button" *ngFor="let foreignKey of foreignKeyElems"
                                         (click)="saveToContainer(i,foreignKey)">{{foreignKey}}</button>
                                 </div>
-                            </div> -->
+                            </div> ->
 
                             <form>
                                 <mat-form-field>
@@ -100,7 +101,7 @@
                             </form>
 
                         </div>
-                        <!--DATE SECTION-->
+                        <!-DATE SECTION->
                         <ng-template #notDropdownBlock>
                             <div *ngIf="type[i]=='DATE';else notDateBlock" style="margin: 5px; text-align: center;">
 
@@ -121,7 +122,7 @@
                                 </form>
 
                             </div>
-                            <!--DEFAULT SECTION-->
+                            <!-DEFAULT SECTION->
                             <ng-template #notDateBlock>
                                 <input class="form-control" (keyup)="inputToContainer(i,$event)">
                             </ng-template>
@@ -138,16 +139,16 @@
         <div class="modal-footer">
             <ngb-alert [hidden]="allertHidden" [type]="allertColor" (close)="closeAllert()"
                 style="margin-bottom: 12px;">{{ messageToUser }}</ngb-alert>
-            <button type="button" class="btn btn-outline-dark" (click)="sendNewElem()">Add</button>
+            <button type="button" class="btn btn-outline-dark" (click)="sendNewElem()">Add new element</button>
 
         </div>
-    </ng-template>
+    </ng-template> -->
 
 
 
 
 
-    <button mat-button (click)="openAddDialog()"> Add</button>
+    <button mat-button (click)="openAddDialog()">Add new element</button>
 
 
 
