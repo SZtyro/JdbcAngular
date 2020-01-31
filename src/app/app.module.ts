@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {  TableComponent } from './table/table.component';
+import {  TableComponent } from './data-base/table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -14,13 +14,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component';
-import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { DeleteModalComponent } from './data-base/delete-modal/delete-modal.component';
+import { EditModalComponent } from './data-base/edit-modal/edit-modal.component';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { AddModalComponent } from './add-modal/add-modal.component';
+import { AddModalComponent } from './data-base/add-modal/add-modal.component';
+import { MainAppModule } from './main-app/main-app.module';
+import { DataBaseModule } from './data-base/data-base.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { AddModalComponent } from './add-modal/add-modal.component';
     DeleteModalComponent,
     EditModalComponent,
     AddModalComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,9 @@ import { AddModalComponent } from './add-modal/add-modal.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    NgbModule
+    NgbModule,
+    MainAppModule,
+    DataBaseModule
   ],
   entryComponents: [
     DeleteModalComponent,
