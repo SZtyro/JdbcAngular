@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { AddModalComponent } from '../add-modal/add-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class TableComponent implements OnInit {
   modalOptions: NgbModalOptions;
 
   constructor(
+    private route: ActivatedRoute,
     public httpClientService: HttpClientService,
     private modalService: NgbModal,
     public dialog: MatDialog) {
@@ -192,7 +194,7 @@ export class TableComponent implements OnInit {
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit() {
-
+    this.tableName = this.route.snapshot.paramMap.get('tableName');
 
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))

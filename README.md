@@ -15,7 +15,7 @@
 
 - [ ] więcej komponentów i (sensowny) podział na co najmniej 2 moduły
 - [x] zastosowanie ikon (np. FontAwesome)
-- [ ] zastosowanie routera i nawigacji
+- [x] zastosowanie routera i nawigacji
 - [ ] połączenie z zewnętrznym API dostarczającym dane za pomocą serwisów
 - [ ] zaimplementowanie i wykorzystanie tzw. pipes do formatowania danych w widoku
 - [x] wykorzystanie gotowych modułów do wyświetlenia danych w postaci interaktywnej
