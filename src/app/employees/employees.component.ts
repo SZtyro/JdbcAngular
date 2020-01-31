@@ -8,6 +8,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
+import { AddModalComponent } from '../add-modal/add-modal.component';
 
 
 @Component({
@@ -98,12 +99,25 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  openEditDialog(element,ind) {
+  openAddDialog(): void {
+    this.prepareNewContainer();
+    const dialogRef = this.dialog.open(AddModalComponent, {
+      //width: '250px'
+      data: {
+
+        father: this
+      },
+
+    });
+
+  }
+
+  openEditDialog(element, ind) {
 
     console.log("newRowContainer przed :" + this.newRowContainer)
-    
+
     let i = 0;
-  
+
     this.keys.forEach(key => {
       this.newRowContainer[i] = element[key];
 
@@ -112,7 +126,7 @@ export class EmployeesComponent implements OnInit {
     });
     console.log(this.newRowContainer)
     const dialogRef = this.dialog.open(EditModalComponent, {
-      //width: '250px'
+      //width: '450px',
       data: {
         details: this.newRowContainer,
         father: this,
@@ -127,7 +141,7 @@ export class EmployeesComponent implements OnInit {
 
 
   inputToContainer(i, event) {
-    this.newRowContainer[i] =event.target.value ;
+    this.newRowContainer[i] = event.target.value;
 
   }
 
@@ -135,61 +149,20 @@ export class EmployeesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
-
-
-
-
-  sendNewElem() {
-
-
-
-    let querry: String = "Insert into " + this.tableName + " values(" + this.newRowContainer + ")";
-    console.log(querry);
-    this.httpClientService.postRow(querry).subscribe(
-
-      data => {
-        this.messageToUser = "New row successfully inserted!";
-        console.log("New row successfully inserted! ", data);
-        this.allertColor = 'success';
-      },
-
-      fail => {
-
-        this.messageToUser = fail.error.message;
-        let failMsg: String[] = [];
-        failMsg = this.messageToUser.split("Exception:");
-        this.messageToUser = failMsg[failMsg.length - 1];
-        console.log("Error", fail);
-        this.allertColor = 'danger';
-
-      }
-
-
-    );
-    this.allertHidden = false;
-  }
-
-  
-
- 
-
-  testContainer() {
-    console.log(this.newRowContainer);
-  }
   saveToContainer(index, elem) {
     if (this.type[index] == "NUMBER")
       this.newRowContainer[index] = elem;
-    else if (this.type[index] == "VARCHAR2" )
+    else if (this.type[index] == "VARCHAR2")
       this.newRowContainer[index] = "'" + elem + "'";
-    else if(this.type[index] == "DATE")
+    else if (this.type[index] == "DATE")
       this.newRowContainer[index] = "'" + elem.split("T")[0] + "'";
 
   }
 
   prepareNewContainer() {
+    this.newRowContainer = [];
     this.keys.forEach(element => {
-      this.newRowContainer.push("null");
+      this.newRowContainer.push(" ");
     });
 
     console.log(this.newRowContainer);
@@ -233,11 +206,11 @@ export class EmployeesComponent implements OnInit {
       if (element == "DATE") {
         this.employees.forEach(el => {
           let dateToEdit = new Date(el[this.keys[index]]);
-          
-          let x:Number = dateToEdit.getMonth() + 1;
-          el[this.keys[index]]= dateToEdit.getFullYear()+"-"+x.toString()+"-"+dateToEdit.getDate();
+
+          let x: Number = dateToEdit.getMonth() + 1;
+          el[this.keys[index]] = dateToEdit.getFullYear() + "-" + x.toString() + "-" + dateToEdit.getDate();
         });
-        
+
 
       }
 
@@ -250,7 +223,7 @@ export class EmployeesComponent implements OnInit {
     this.keys = Object.keys(response[0]);
 
 
-    
+
     this.httpClientService.getType(this.tableName).subscribe(
 
       data => {
@@ -268,7 +241,7 @@ export class EmployeesComponent implements OnInit {
       }
 
     );
-      
+
 
     this.dataSource = new MatTableDataSource(this.employees);
     this.dataSource.paginator = this.paginator;

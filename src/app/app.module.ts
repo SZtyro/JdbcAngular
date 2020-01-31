@@ -20,13 +20,15 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AddModalComponent } from './add-modal/add-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
     DeleteModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    AddModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   ],
   entryComponents: [
     DeleteModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    AddModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
