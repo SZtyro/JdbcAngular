@@ -13,10 +13,10 @@ import { MatDatepickerInputEvent } from '@angular/material';
 export class EditModalComponent implements OnInit {
 
   father:EmployeesComponent ;
-  public a:String = 'AC_MGR';
+  //public a:String = 'AC_MGR';
   index;
   
-  date;
+  date = [];
  
   
 
@@ -30,19 +30,20 @@ export class EditModalComponent implements OnInit {
     
     this.father = this.data.father;
     this.index = this.data.index;
-    console.log("index: " + this.index)
-    this.date = new FormControl(new Date());
+    this.father.type.forEach((element,ind) => {
+      
+        if(element == "DATE")
+          this.date[ind]= new FormControl(new Date(this.father.newRowContainer[ind].toString()));
+    });
+    
   }
 
 
   saveDate(i,event: MatDatepickerInputEvent<Date>){
     
-    console.log(i);
     event.value.getMonth()
     let x:Number = event.value.getMonth() + 1;
-    console.log(event.value.getFullYear()+"-"+x.toString()+"-"+event.value.getDate());
     this.father.newRowContainer[i] = event.value.getFullYear()+"-"+x.toString()+"-"+event.value.getDate();
-    console.log(this.father.newRowContainer);
     
   }
 
