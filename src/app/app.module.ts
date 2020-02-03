@@ -24,6 +24,7 @@ import { AddModalComponent } from './data-base/add-modal/add-modal.component';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
 import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
+import { LoginWindowComponent } from './main-app/login-window/login-window.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TableMenuComponent } from './data-base/table-menu/table-menu.component'
     DeleteModalComponent,
     EditModalComponent,
     AddModalComponent,
-    TableMenuComponent
+    TableMenuComponent,
+    LoginWindowComponent
     
   ],
   imports: [

@@ -10,8 +10,8 @@ export class HttpClientService {
 
   constructor( private httpClient:HttpClient ) { }
 
-  loginUser(){
-    return this.httpClient.post('http://localhost:8080/login',"ziibd5",{responseType: 'text'});
+  loginUser(data){
+    return this.httpClient.post('http://localhost:8080/login',data,{responseType: 'text'});
   }
 
   getTable(tableName){
@@ -46,7 +46,6 @@ export class HttpClientService {
   }
 
   deleteRow(id:String[]){
-    console.log(id);
     return this.httpClient.post("http://localhost:8080/delete",id);
   }
 }

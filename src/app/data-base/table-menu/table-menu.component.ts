@@ -17,7 +17,7 @@ export class TableMenuComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.httpClientService.loginUser().subscribe(data => {console.log(data)});
+    
 
     this.httpClientService.getTableNames().subscribe(
       data => {
@@ -43,5 +43,6 @@ export class TableMenuComponent implements OnInit {
 
   openTable(name){
     this.router.navigate(['/table',name]);
+    
   }
 }

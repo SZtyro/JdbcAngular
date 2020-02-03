@@ -28,7 +28,7 @@
 
 - [ ] wprowadzenie jakiejś formy wizualizacji danych (wykresy, grafy, mapy itp.)
 - [ ] wprowadzenie formularza z walidacją pól
-- [ ] zastosowanie mechanizmu lokalnego składowania danych (LocalStorage lub 
+- [x] zastosowanie mechanizmu lokalnego składowania danych (LocalStorage lub 
   SessionStorage)
 - [ ] zaimplementowanie co najmniej jednej dyrektywy
 - [ ] samodzielne zastosowanie Promise lub Observable
