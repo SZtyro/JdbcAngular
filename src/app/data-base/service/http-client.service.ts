@@ -10,10 +10,18 @@ export class HttpClientService {
 
   constructor( private httpClient:HttpClient ) { }
 
+  loginUser(){
+    return this.httpClient.post('http://localhost:8080/login',"ziibd5",{responseType: 'text'});
+  }
 
   getTable(tableName){
     return this.httpClient.post<Map<String,Object>[]>('http://localhost:8080/getTable',tableName);
     //return this.httpClient.get<Employee[]>('http://localhost:8080/entities');
+  }
+
+  getTableNames(){
+    return this.httpClient.get<String>('http://localhost:8080/getTableNames');
+    
   }
 
   getForeignKeyColumns(table){

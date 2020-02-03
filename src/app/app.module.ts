@@ -23,6 +23,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddModalComponent } from './data-base/add-modal/add-modal.component';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
+import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { DataBaseModule } from './data-base/data-base.module';
     TableComponent,
     DeleteModalComponent,
     EditModalComponent,
-    AddModalComponent
+    AddModalComponent,
+    TableMenuComponent
     
   ],
   imports: [

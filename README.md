@@ -4,7 +4,7 @@
  POZIOM_1 (dst, dst+)
 -------------------------------------------------------------------------------
 - [x] co najmniej 3 komponenty
-- [ ] poprawne rozdzielenie widoku i logiki
+- [x] poprawne rozdzielenie widoku i logiki
 - [ ] zastosowanie języka stylów innego niż CSS (np. SCSS)
 - [x] zastosowanie biblioteki "CSS" (Bootstrap, Material itp.)
 - [x] aktywne (!) korzystanie z VCS
@@ -13,7 +13,7 @@
  POZIOM_2 (db, db+)
 -------------------------------------------------------------------------------
 
-- [ ] więcej komponentów i (sensowny) podział na co najmniej 2 moduły
+- [x] więcej komponentów i (sensowny) podział na co najmniej 2 moduły
 - [x] zastosowanie ikon (np. FontAwesome)
 - [x] zastosowanie routera i nawigacji
 - [ ] połączenie z zewnętrznym API dostarczającym dane za pomocą serwisów
