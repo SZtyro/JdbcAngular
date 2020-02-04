@@ -24,20 +24,38 @@ export class DeleteModalComponent implements OnInit {
   }
 
   deleteRow(id){
-    this.data.service.deleteRow([this.data.tableName,this.data.primaryKeyColumn.toString(),id.toString()]).subscribe(
-      data => {  
-        console.log("PUT Request is successful ", data);
-        this.data.fatherRef.ngOnInit();
-        this.closeDialog();
-      },
-
-      error => {
-        console.log("Error", error);
-      }
-
-    );;
-    console.log("sasda");
-  }
+    console.log(id);
+    console.log(typeof(id)=='string');
+    if(typeof(id)=='string'){
+      this.data.service.deleteRow([this.data.tableName,this.data.primaryKeyColumn.toString(),"'"+id.toString()+"'"]).subscribe(
+        data => {  
+          console.log("PUT Request is successful ", data);
+          this.data.fatherRef.ngOnInit();
+          this.closeDialog();
+        },
+  
+        error => {
+          console.log("Error", error);
+        }
+  
+      );
+    }else{
+      this.data.service.deleteRow([this.data.tableName,this.data.primaryKeyColumn.toString(),id.toString()]).subscribe(
+        data => {  
+          console.log("PUT Request is successful ", data);
+          this.data.fatherRef.ngOnInit();
+          this.closeDialog();
+        },
+  
+        error => {
+          console.log("Error", error);
+        }
+  
+      );;
+    }
+    
+    
+   }
 
   closeDialog(){
     this.dialogRef.close();

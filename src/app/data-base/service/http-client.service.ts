@@ -26,12 +26,12 @@ export class HttpClientService {
 
   getForeignKeyColumns(table){
     
-    return this.httpClient.post<String>('http://localhost:8080/fkc',table);
+    return this.httpClient.post<String>('http://localhost:8080/getForeignKeyColumns',table);
      
   }
 
   getIds(table){
-    return this.httpClient.post<String>('http://localhost:8080/idList',table);
+    return this.httpClient.post<String>('http://localhost:8080/getIdList',table);
   }
 
   getType(table){
@@ -42,7 +42,7 @@ export class HttpClientService {
     return this.httpClient.post<String>('http://localhost:8080/getPrimaryKey',tableName);
   }
   postRow(elem:String){
-    return this.httpClient.post<String>("http://localhost:8080/a",elem);
+    return this.httpClient.post<String>("http://localhost:8080/execute",elem);
   }
 
   deleteRow(id:String[]){

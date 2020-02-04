@@ -30,6 +30,8 @@ export class AddModalComponent implements OnInit {
         this.date[ind] = new FormControl(new Date(this.father.newRowContainer[ind].toString()));
     });
     this.father.allertHidden = true;
+
+    this.father.prepareNewContainer();
   }
 
   saveDate(i, event: MatDatepickerInputEvent<Date>) {
@@ -51,9 +53,10 @@ export class AddModalComponent implements OnInit {
   }
 
   sendNewElem() {
-
+    console.log(this.father.newRowContainer);
+    console.log(this.father.newRowContainer[0])
     this.father.newRowContainer.forEach((element, index) => {
-      if (this.father.newRowContainer[index] == " ")
+      if (this.father.newRowContainer[index] == "")
         this.father.newRowContainer[index] = "null";
       else
         this.father.saveToContainer(index, element);
@@ -81,7 +84,7 @@ export class AddModalComponent implements OnInit {
         console.log("Error", fail);
         this.father.newRowContainer.forEach((element, index) => {
           if (this.father.newRowContainer[index] == "null")
-            this.father.newRowContainer[index] = " ";
+            this.father.newRowContainer[index] = "";
           else if (this.father.type[index] == "DATE" || this.father.type[index] == "VARCHAR2") {
             this.father.newRowContainer[index] = this.father.newRowContainer[index].slice(1, this.father.newRowContainer[index].length - 1);
           }

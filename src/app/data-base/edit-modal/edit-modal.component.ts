@@ -68,6 +68,9 @@ export class EditModalComponent implements OnInit {
         else
           querry += key + " = " + this.father.newRowContainer[index];
     });
+    if(typeof(entityIndex)=='string'){
+      querry += " where " + this.father.primaryKeyColumn + " = " + "'" +entityIndex + "'";
+    }else
     querry += " where " + this.father.primaryKeyColumn + " = " + entityIndex;
 
     this.father.httpClientService.postRow(querry).subscribe(

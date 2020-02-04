@@ -1,54 +1,73 @@
-<div class="row" style="margin-top: 10%;">
-        <div class="col-lg-2 " style="text-align: center; ">
+<div>
+        <div class="container fluid">
+                <div class="row">
+                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6" [matMenuTriggerFor]="menu"><i
+                                        class="fas fa-database fa-3x"></i>
+                        </button>
 
-                <button mat-button class="col-lg-12 col-sm-6" style="font-size: 30px; text-align: center;"><i
-                                class="menuButton fas fa-database fa-1x" style="text-align: center;" routerLink="/table"> Database</i>
-                </button>
-                <button mat-button class="menuButton container-fluid col-lg-12 col-sm-6"><i
-                                class="fas fa-address-book fa-2x">
-                                Contacts</i>Contacts</button>
-                <button mat-button class="menuButton container-fluid col-lg-12 col-sm-6"><i
-                                class="fas fa-cogs fa-2x"></i></button>
-                <button mat-button class="menuButton container-fluid col-lg-12 col-sm-6"><i
-                                class="fas fa-bell fa-2x"></i></button>
+
+
+                        <mat-menu #menu="matMenu">
+                                <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
+                        </mat-menu>
+
+
+
+
+                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6"><i
+                                        class="fas fa-cogs fa-3x"></i></button>
+                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6"><i
+                                        class="fas fa-bell fa-3x"></i></button>
+
+                        <a mat-button class="menuButton col-lg-1 col-sm-3 col-6" href="https://github.com/SZtyro"><i
+                                        class="fas fa-info fa-3x"></i></a>
+                </div>
+
         </div>
-        <div class="col-lg-10">
-                
-                <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >
-                        <mat-card class="col-5" cdkDrag
-                                style="background-color:  rgb(48, 48, 48); margin: 10px; padding-right: 0px; padding-left: 0px;">
-                                <mat-card-header>
+        <div class="col-lg-12">
 
-                                        <mat-card-title style="font-size: 30px;"> <i
-                                                        class="fas fa-bell"></i>Notifications</mat-card-title>
+                <div cdkDropList cdkDropListOrientation="horizontal" class=" row">
+                        <div class="col-md-6 col-12">
+                                <mat-card cdkDrag style="background-color:  rgb(48, 48, 48); ">
+                                        <mat-card-header>
 
-                                </mat-card-header>
+                                                <mat-card-title style="font-size: 30px;"> <i class="fas fa-bell"></i>
+                                                        Notifications</mat-card-title>
 
-                                <mat-card-content style="background-color:  rgb(34, 34, 34);">
-                                        asdasd
-                                </mat-card-content>
-                                <mat-card-actions>
-                                        <button mat-button>LIKE</button>
-                                        <button mat-button>SHARE</button>
-                                </mat-card-actions>
-                        </mat-card>
-                        <mat-card class="col-5" cdkDrag
-                                style="background-color:  rgb(48, 48, 48); margin: 10px; padding-right: 0px; padding-left: 0px;">
-                                <mat-card-header>
+                                        </mat-card-header>
 
-                                        <mat-card-title style="font-size: 30px;"> <i
-                                                        class="fas fa-bell"></i>Notifications</mat-card-title>
+                                        <mat-card-content>
 
-                                </mat-card-header>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                                <button mat-mini-fab style="background-color: green;">+</button>
 
-                                <mat-card-content style="background-color:  rgb(34, 34, 34);">
-                                        asdasd
-                                </mat-card-content>
-                                <mat-card-actions>
-                                        <button mat-button>LIKE</button>
-                                        <button mat-button>SHARE</button>
-                                </mat-card-actions>
-                        </mat-card>
+                                        </mat-card-actions>
+                                </mat-card>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                                <mat-card cdkDrag style="background-color:  rgb(48, 48, 48); ">
+                                        <mat-card-header style="display: flex; flex-direction: row;">
+
+                                                <mat-card-title style="font-size: 30px;"> <i class="fas fa-at"></i>
+                                                        Important mails</mat-card-title>
+
+                                        </mat-card-header>
+
+                                        <mat-card-content>
+
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                                <button mat-mini-fab style="background-color: green;">+</button>
+
+                                        </mat-card-actions>
+                                </mat-card>
+                        </div>
+
+
+
+
                 </div>
         </div>
 

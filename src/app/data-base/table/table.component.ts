@@ -164,7 +164,7 @@ export class TableComponent implements OnInit {
   prepareNewContainer() {
     this.newRowContainer = [];
     this.keys.forEach(element => {
-      this.newRowContainer.push(" ");
+      this.newRowContainer.push("");
     });
 
     console.log(this.newRowContainer);
@@ -221,6 +221,7 @@ export class TableComponent implements OnInit {
 
 
   handleSuccessfulResponse(response) {
+    console.log(response);
     this.employees = response;
     this.keys = Object.keys(response[0]);
 

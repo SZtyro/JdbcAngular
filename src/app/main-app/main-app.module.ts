@@ -6,6 +6,7 @@ import {MatCardModule} from '@angular/material/card';
 import { TileComponent } from './tile/tile.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatCardModule,
     DragDropModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule
   ]
 })
 export class MainAppModule { }
