@@ -40,6 +40,10 @@ export class DeleteModalComponent implements OnInit {
         },
   
         error => {
+          this.messageToUser = error.error.message;
+          let failMsg: String[] = [];
+          failMsg = this.messageToUser.split("Exception:");
+          this.messageToUser = failMsg[failMsg.length - 1];
           console.log("Error", error);
         }
   
