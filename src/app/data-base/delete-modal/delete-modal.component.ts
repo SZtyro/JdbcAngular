@@ -1,5 +1,6 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { TableComponent } from '../table/table.component';
 
 
 @Component({
@@ -8,6 +9,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./delete-modal.component.css']
 })
 export class DeleteModalComponent implements OnInit {
+
+  father:  TableComponent;
+  messageToUser:String;
 
   constructor(
     public dialogRef: MatDialogRef<DeleteModalComponent>,
@@ -21,6 +25,7 @@ export class DeleteModalComponent implements OnInit {
   
 
   ngOnInit() {
+    this.father = this.data.fatherRef;
   }
 
   deleteRow(id){
@@ -48,6 +53,10 @@ export class DeleteModalComponent implements OnInit {
         },
   
         error => {
+          this.messageToUser = error.error.message;
+          let failMsg: String[] = [];
+          failMsg = this.messageToUser.split("Exception:");
+          this.messageToUser = failMsg[failMsg.length - 1];
           console.log("Error", error);
         }
   
