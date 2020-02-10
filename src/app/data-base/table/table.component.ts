@@ -27,10 +27,6 @@ import { ActivatedRoute } from '@angular/router';
 
 export class TableComponent implements OnInit {
 
-
-  
-
-
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

@@ -7,18 +7,27 @@ import { TileComponent } from './tile/tile.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
-    TileComponent],
+    TileComponent,
+    ReminderWidgetComponent
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
     MatCardModule,
     DragDropModule,
     RouterModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
+    MatExpansionModule
   ]
 })
 export class MainAppModule { }

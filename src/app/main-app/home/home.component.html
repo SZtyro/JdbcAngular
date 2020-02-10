@@ -1,74 +1,48 @@
-<div>
-        <div class="container fluid">
-                <div class="row">
-                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6" [matMenuTriggerFor]="menu"><i
-                                        class="fas fa-database fa-3x"></i>
-                        </button>
+<mat-sidenav-container class="example-container" style="height: 100%;">
+        <mat-sidenav #sidenav mode="push" [(opened)]="opened" style="width: 20%;">
+
+                <mat-accordion >
+                        <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                        <mat-panel-title class="menuButton">
+                                                <i class="fas fa-database fa-2x"></i> Database
+                                        </mat-panel-title>
+
+                                </mat-expansion-panel-header>
+                                <mat-nav-list>
+                                        <mat-list-item role="listitem" *ngFor="let item of tableNames"
+                                                (click)="openTable(item)" color="primary">
+                                                {{item}}</mat-list-item>
+                                </mat-nav-list>
+
+                        </mat-expansion-panel>
+
+                </mat-accordion>
+
+                <button mat-button class="menuButton "><i class="fas fa-cogs fa-2x"></i> Settings</button>
+                <button mat-button class="menuButton "><i class="fas fa-bell fa-2x"></i></button>
+
+                <a mat-button class="menuButton " href="https://github.com/SZtyro"><i
+                                class="fas fa-info fa-2x"></i> Info</a>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+
+                <button mat-button (click)="sidenav.toggle()" class="menuButton" color="primary"><i class="fas fa-th-large fa-2x"></i></button>
+
+                
+                <div class="col-lg-12 mat-app-background">
+
+                        <div cdkDropList cdkDropListOrientation="horizontal" class=" row">
+                                <app-reminder-widget></app-reminder-widget>
+
+                                
 
 
 
-                        <mat-menu #menu="matMenu">
-                                <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
-                        </mat-menu>
 
-
-
-
-                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6"><i
-                                        class="fas fa-cogs fa-3x"></i></button>
-                        <button mat-button class="menuButton col-lg-1 col-sm-3 col-6"><i
-                                        class="fas fa-bell fa-3x"></i></button>
-
-                        <a mat-button class="menuButton col-lg-1 col-sm-3 col-6" href="https://github.com/SZtyro"><i
-                                        class="fas fa-info fa-3x"></i></a>
-                </div>
-
-        </div>
-        <div class="col-lg-12">
-
-                <div cdkDropList cdkDropListOrientation="horizontal" class=" row">
-                        <div class="col-md-6 col-12">
-                                <mat-card cdkDrag style="background-color:  rgb(48, 48, 48); ">
-                                        <mat-card-header>
-
-                                                <mat-card-title style="font-size: 30px;"> <i class="fas fa-bell"></i>
-                                                        Notifications</mat-card-title>
-
-                                        </mat-card-header>
-
-                                        <mat-card-content>
-
-                                        </mat-card-content>
-                                        <mat-card-actions>
-                                                <button mat-mini-fab style="background-color: green;">+</button>
-
-                                        </mat-card-actions>
-                                </mat-card>
                         </div>
-
-                        <div class="col-md-6 col-12">
-                                <mat-card cdkDrag style="background-color:  rgb(48, 48, 48); ">
-                                        <mat-card-header style="display: flex; flex-direction: row;">
-
-                                                <mat-card-title style="font-size: 30px;"> <i class="fas fa-at"></i>
-                                                        Important mails</mat-card-title>
-
-                                        </mat-card-header>
-
-                                        <mat-card-content>
-
-                                        </mat-card-content>
-                                        <mat-card-actions>
-                                                <button mat-mini-fab style="background-color: green;">+</button>
-
-                                        </mat-card-actions>
-                                </mat-card>
-                        </div>
-
-
-
-
                 </div>
-        </div>
-
-</div>
+        </mat-sidenav-content>
+</mat-sidenav-container>

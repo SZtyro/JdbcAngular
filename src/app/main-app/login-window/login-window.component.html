@@ -1,18 +1,20 @@
-<div class=" col-4" style="margin: auto; background-color: whitesmoke;">
-    <h2>Let's find your database!</h2>
-    <mat-form-field style="width: 100%;">
-        <input matInput placeholder="URL" [(ngModel)]="url">
-    </mat-form-field>
-
-    <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Login" [(ngModel)]="userName">
-    </mat-form-field>
-
-
-    <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Password" [(ngModel)]="password" [type]="'password'">
-    </mat-form-field>
-
-    <button mat-button (click)="login()">Login</button>
-
-</div>
+<mat-card color="primary">
+    <div class=" col-4"  style="margin: auto; ">
+        <h2>Let's find your database!</h2>
+        <mat-form-field style="width: 100%;">
+            <input matInput placeholder="URL" [(ngModel)]="url">
+        </mat-form-field>
+    
+        <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Login" [(ngModel)]="userName">
+        </mat-form-field>
+    
+    
+        <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Password" [(ngModel)]="password" [type]="'password'">
+        </mat-form-field>
+    
+        <button mat-raised-button color="primary" (click)="login()">Login</button>
+    
+    </div>
+</mat-card>

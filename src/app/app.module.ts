@@ -25,6 +25,9 @@ import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
 import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
 import { LoginWindowComponent } from './main-app/login-window/login-window.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { LoginWindowComponent } from './main-app/login-window/login-window.compo
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent
+    
     
   ],
   imports: [
@@ -58,7 +62,9 @@ import { LoginWindowComponent } from './main-app/login-window/login-window.compo
     MatSnackBarModule,
     NgbModule,
     MainAppModule,
-    DataBaseModule
+    DataBaseModule,
+    MatSidenavModule,
+    MatCardModule
   ],
   entryComponents: [
     DeleteModalComponent,

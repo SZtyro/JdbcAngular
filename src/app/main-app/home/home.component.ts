@@ -10,6 +10,7 @@ import { HttpClientService } from 'src/app/data-base/service/http-client.service
 export class HomeComponent implements OnInit {
 
   tableNames:String [] = [];
+  opened:boolean = true;
 
   constructor(
     private httpClientService: HttpClientService,
