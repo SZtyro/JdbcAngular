@@ -11,6 +11,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component'
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.compo
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatGridListModule
+    
   ]
 })
 export class MainAppModule { }

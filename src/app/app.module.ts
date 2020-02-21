@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {  TableComponent } from './data-base/table/table.component';
+import { TableComponent } from './data-base/table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -17,16 +17,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { DeleteModalComponent } from './data-base/delete-modal/delete-modal.component';
 import { EditModalComponent } from './data-base/edit-modal/edit-modal.component';
 import { MatSelectModule } from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { ReactiveFormsModule} from '@angular/forms';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddModalComponent } from './data-base/add-modal/add-modal.component';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
 import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
 import { LoginWindowComponent } from './main-app/login-window/login-window.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatCardModule} from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -39,8 +42,8 @@ import {MatCardModule} from '@angular/material/card';
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent
-    
-    
+
+
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,12 @@ import {MatCardModule} from '@angular/material/card';
     MainAppModule,
     DataBaseModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatExpansionModule
+  ],
+  exports: [
+    
   ],
   entryComponents: [
     DeleteModalComponent,
