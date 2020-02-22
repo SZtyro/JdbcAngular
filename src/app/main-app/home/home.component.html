@@ -1,13 +1,13 @@
 <mat-sidenav-container class="example-container" style="height: 100%;">
 
-        <mat-grid-list cols="2" rowHeight="2:1">
-                <mat-grid-tile>1</mat-grid-tile>
-                <mat-grid-tile>2</mat-grid-tile>
-                <mat-grid-tile>3</mat-grid-tile>
-                <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-list cols="4"  cdkDropList (cdkDropListDropped)="drop($event)">
+                <mat-grid-tile *ngFor="let item of test" style="background-color: royalblue;" cdkDrag >{{item}}</mat-grid-tile>
+                
+                
+                
         </mat-grid-list>
 
-        <div class="col-lg-12 mat-app-background">
+        <div class="col-lg-12">
 
                 <div cdkDropList cdkDropListOrientation="horizontal" class=" row">
                         <app-reminder-widget></app-reminder-widget>

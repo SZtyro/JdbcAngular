@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/data-base/service/http-client.service';
+import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'main-app-home',
@@ -11,6 +12,20 @@ export class HomeComponent implements OnInit {
 
   tableNames:String [] = [];
   opened:boolean = true;
+
+
+  test = [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+
+  drop(event) {
+    console.log(event);
+    moveItemInArray(this.test, event.previousIndex, event.currentIndex);
+  }
 
   constructor(
     private httpClientService: HttpClientService,
@@ -40,7 +55,8 @@ export class HomeComponent implements OnInit {
   }
 
   openTable(name){
-    this.router.navigate(['/table',name]);
+    this.router.navigate(['/home']);
+    //this.router.navigate(['/table',name]);
     
   }
 }

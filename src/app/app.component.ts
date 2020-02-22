@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
   }
 
   openTable(name){
+    //this.router.navigate(['/home']);
     this.router.navigate(['/table',name]);
-    
+   
+    this.router.onSameUrlNavigation = 'reload';
   }
 }

@@ -74,14 +74,19 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    
+
     //Pobieranie wartosci z linku
     //Fetching route parameter
-    this.tableName = this.route.snapshot.paramMap.get('tableName');
-
-    //Pobieranie danych
-    //Fetching data
+    this.route.paramMap.subscribe(params => {
+    this.tableName = params.get('tableName');
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
+    })
+    //Pobieranie danych
+    //Fetching data
+    
   }
 
   openDeleteDialog(id): void {
