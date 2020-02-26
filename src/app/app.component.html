@@ -1,17 +1,32 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.toggle()" [(opened)]="opened" style="width: 15%;">
+    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 15%;">
+      
+      <div>
+        <!-- <img src="{{ user.photoUrl }}"> -->
+        <!-- <h4>{{ user.name }}</h4>
+        <p>{{ user.email }}</p> -->
+      </div>
+      <button (click)="signInWithGoogle()">Sign in with Google</button>
+      <button (click)="signOut()">Sign out</button>
+      <button (click)="test()">TEST</button>
+      
+          <button class="mat-expansion-panel-header"  style="width: 100%; border: none;height: 48px;"><i
+              class="fas fa-home"></i>Home</button>
+         
+     
 
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title class="menuParentButton" >
-              <i class="fas fa-database"></i> Database
+            <mat-panel-title class="menuParentButton">
+              <i class="fas fa-database"></i>Database
             </mat-panel-title>
 
           </mat-expansion-panel-header>
           <mat-nav-list>
-            <mat-list-item style="font-size: small;" role="listitem" *ngFor="let item of tableNames" (click)="openTable(item)" >
+            <mat-list-item style="font-size: small;" role="listitem" *ngFor="let item of tableNames"
+              (click)="openTable(item)">
               {{item}}</mat-list-item>
           </mat-nav-list>
 
@@ -22,21 +37,21 @@
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title class="menuParentButton" >
+            <mat-panel-title class="menuParentButton">
               <i class="fas fa-cogs "></i>Settings
             </mat-panel-title>
 
           </mat-expansion-panel-header>
           <mat-nav-list>
-            
+
           </mat-nav-list>
 
         </mat-expansion-panel>
 
       </mat-accordion>
 
-      
-    
+
+
 
       <a mat-button style="width: 100%;" href="https://github.com/SZtyro"><i class="fas fa-info "></i> Info</a>
 
@@ -44,12 +59,14 @@
 
     <mat-sidenav-content>
 
-      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 2%; float: left;">
+      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 3%; float: left; background-color: blue;">
 
       </div>
-      
 
-      <router-outlet></router-outlet>
+      
+        <router-outlet ></router-outlet>
+      
+      
 
     </mat-sidenav-content>
   </mat-sidenav-container>

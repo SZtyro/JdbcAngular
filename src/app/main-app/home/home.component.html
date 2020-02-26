@@ -1,23 +1,16 @@
-<mat-sidenav-container class="example-container" style="height: 100%;">
-
-        <mat-grid-list cols="4"  cdkDropList (cdkDropListDropped)="drop($event)">
-                <mat-grid-tile *ngFor="let item of test" style="background-color: royalblue;" cdkDrag >{{item}}</mat-grid-tile>
-                
-                
-                
-        </mat-grid-list>
-
-        <div class="col-lg-12">
-
-                <div cdkDropList cdkDropListOrientation="horizontal" class=" row">
-                        <app-reminder-widget></app-reminder-widget>
-
-
-
-
-
-
-                </div>
-        </div>
+<mat-sidenav-container >
+        
 
 </mat-sidenav-container>
+<div style="display: flex;height: 100%; " >
+        
+        <gridster [options]="options" style="overflow: initial; height: initial;" >
+                <gridster-item [item]="item" *ngFor="let item of items" class="tile">
+                        <div>
+                                <app-gmail-widget></app-gmail-widget>
+                        </div>
+                                
+                        
+                </gridster-item>
+        </gridster>
+</div>

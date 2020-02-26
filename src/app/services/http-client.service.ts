@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 
 
@@ -48,5 +48,7 @@ export class HttpClientService {
   deleteRow(id:String[]){
     return this.httpClient.post("http://localhost:8080/delete",id);
   }
+
+  
 }
 

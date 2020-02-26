@@ -1,8 +1,14 @@
-.menuParentButton{
+.menuParentButton {
     font-weight: 500;
     display: table;
 }
 
-i{
+i {
     padding: 10px;
+}
+
+.test {
+    font-weight: 500;
+    display: flex;
+    
 }

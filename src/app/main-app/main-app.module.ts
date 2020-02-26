@@ -12,13 +12,16 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component'
 import {MatGridListModule} from '@angular/material/grid-list';
+import { GridsterModule } from 'angular-gridster2';
+import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     TileComponent,
-    ReminderWidgetComponent
+    ReminderWidgetComponent,
+    GmailWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    GridsterModule
     
   ]
 })

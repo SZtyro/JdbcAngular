@@ -29,10 +29,27 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider
+} from 'angularx-social-login';
+import { GridsterModule } from 'angular-gridster2';
+import { GmailWidgetComponent } from './main-app/widgets/gmail-widget/gmail-widget.component';
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("36592518046-vna364b979556f9d5o8g2bav1vnms4pi.apps.googleusercontent.com")
+  }
+  
+]);
 
 
-
-
+export function provideConfig() {
+  
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,17 +86,27 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSidenavModule,
     MatCardModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    SocialLoginModule,
+    GridsterModule
+    
+    
   ],
   exports: [
-    
+
   ],
   entryComponents: [
     DeleteModalComponent,
     EditModalComponent,
     AddModalComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
