@@ -14,7 +14,8 @@ import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.compo
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GridsterModule } from 'angular-gridster2';
 import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.component';
-
+import {MatTableModule} from '@angular/material/table';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.compon
     MatListModule,
     MatExpansionModule,
     MatGridListModule,
-    GridsterModule
+    GridsterModule,
+    MatTableModule,
+    ScrollingModule
     
   ]
 })

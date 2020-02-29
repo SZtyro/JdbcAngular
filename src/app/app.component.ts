@@ -12,7 +12,7 @@ import { GoogleLoginProvider } from "angularx-social-login";
 export class AppComponent implements OnInit {
   title = 'AngularJDBC';
   tableNames: String[] = [];
-  opened: boolean = true;
+  opened: boolean = false;
   private user: SocialUser;
   private loggedIn: boolean = false;
 
@@ -45,62 +45,31 @@ export class AppComponent implements OnInit {
       }
     )
   }
-  test() {
 
-    this.httpClientService.test(this.user.id, this.user.authToken).subscribe(data => {
-      console.log(data);
-      this.httpClientService.test2(this.user.id, this.user.authToken, "").subscribe(da => {
-        console.log(da);
-        this.httpClientService.test3(this.user.id, this.user.authToken, da).subscribe(xa => {
-          console.log(xa);
+  signInWithGoogle(): void {
 
-        },
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    this.authService.authState.subscribe((user) => {
+      console.log(user);
+      this.user = user;
+      this.loggedIn = (user != null);
 
-          error => {
-            console.log(error);
-          }
-        )
-      
-      },
+    });
+  }
 
-      error => {
-        console.log(error);
-      }
-    )
-  },
+  signOut(): void {
+    this.authService.signOut();
+  }
 
-  error => {
-  console.log(error);
-}
-    )
-
+  setTableNames(data) {
+    this.tableNames = data;
 
   }
 
-signInWithGoogle(): void {
-  console.log(GoogleLoginProvider.PROVIDER_ID)
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    this.authService.authState.subscribe((user) => {
-    console.log(user);
-    this.user = user;
-    this.loggedIn = (user != null);
+  openTable(name) {
+    //this.router.navigate(['/home']);
+    this.router.navigate(['/table', name]);
 
-  });
-}
-
-signOut(): void {
-  this.authService.signOut();
-}
-
-setTableNames(data) {
-  this.tableNames = data;
-
-}
-
-openTable(name) {
-  //this.router.navigate(['/home']);
-  this.router.navigate(['/table', name]);
-
-  this.router.onSameUrlNavigation = 'reload';
-}
+    this.router.onSameUrlNavigation = 'reload';
+  }
 }

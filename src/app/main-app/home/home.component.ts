@@ -5,6 +5,7 @@ import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
 import { GmailService } from 'src/app/services/Gmail/gmail.service';
+import { AuthService } from 'angularx-social-login';
 
 export interface Tile {
   color: string;
@@ -23,10 +24,10 @@ export interface Tile {
 
 export class HomeComponent implements OnInit {
 
-  x: GmailWidgetComponent = new GmailWidgetComponent(this.service);
+  x: GmailWidgetComponent = new GmailWidgetComponent(this.service,this.authService);
 
   tableNames: String[] = [];
-  opened: boolean = true;
+  opened: boolean = false;
 
   public options: GridsterConfig = {
     pushItems: true,
@@ -52,7 +53,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private service:GmailService) {
+    private service:GmailService,
+    private authService: AuthService) {
 
     this.items = [
       this.x
