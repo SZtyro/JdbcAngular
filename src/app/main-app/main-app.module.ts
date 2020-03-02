@@ -13,16 +13,28 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component'
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GridsterModule } from 'angular-gridster2';
+
 import { GmailWidgetComponent } from './widgets/gmail-widget/gmail-widget.component';
 import {MatTableModule} from '@angular/material/table';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ChartWidgetComponent } from './widgets/chart-widget/chart-widget.component';
+import { GridElemDirective } from './directives/grid-elem.directive';
+import { Service } from '../test.service'
+
+
 
 @NgModule({
+  entryComponents: [
+    GmailWidgetComponent,
+    ChartWidgetComponent
+  ],
   declarations: [
     HomeComponent,
     TileComponent,
     ReminderWidgetComponent,
-    GmailWidgetComponent
+    GmailWidgetComponent,
+    ChartWidgetComponent,
+    GridElemDirective
   ],
   imports: [
     CommonModule,
@@ -39,6 +51,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatTableModule,
     ScrollingModule
     
-  ]
+  ],
+  providers:[Service]
 })
 export class MainAppModule { }

@@ -1,16 +1,23 @@
-<mat-sidenav-container >
-        
+<mat-sidenav-container>
+
 
 </mat-sidenav-container>
-<div style="display: flex;height: 100%; " >
-        
-        <gridster [options]="options" style="overflow: initial; height: initial;" >
-                <gridster-item [item]="item" *ngFor="let item of items" class="tile mat-elevation-z8">
-                        <div>
+<div style="display: flex;height: 100%; ">
+
+        <gridster [options]="options" style="overflow: initial; height: initial; background-color: unset;">
+                <gridster-item    [item]="item" *ngFor="let item of items" class="tile mat-elevation-z8" >
+                        {{item.cols}}
+                        <div GridElem [x]="item">
+
+                        </div>
+                        <!-- <div>
+                                
                                 <app-gmail-widget></app-gmail-widget>
                         </div>
-                                
-                        
+                        <div>
+                                <app-chart-widget></app-chart-widget>
+                        </div> -->
+
                 </gridster-item>
         </gridster>
 </div>

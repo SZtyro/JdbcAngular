@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../../services/http-client.service';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { GridsterConfig, GridsterItem } from 'angular-gridster2';
+import { GridsterConfig, GridsterItemComponent } from 'angular-gridster2';
 import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
 import { GmailService } from 'src/app/services/Gmail/gmail.service';
 import { AuthService } from 'angularx-social-login';
+import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
+import { Service } from 'src/app/test.service';
+import { GridElemDirective } from '../directives/grid-elem.directive';
 
 export interface Tile {
   color: string;
@@ -23,11 +26,15 @@ export interface Tile {
 
 
 export class HomeComponent implements OnInit {
+ 
 
-  x: GmailWidgetComponent = new GmailWidgetComponent(this.service,this.authService);
+  x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
+  y: ChartWidgetComponent = new ChartWidgetComponent(this.injector);
 
   tableNames: String[] = [];
   opened: boolean = false;
+
+  
 
   public options: GridsterConfig = {
     pushItems: true,
@@ -37,7 +44,7 @@ export class HomeComponent implements OnInit {
     minRows: 7,
     fixedRowHeight: 100,
     fixedColWidth: 100,
-
+    
     setGridSize: true,
     mobileBreakpoint: 0,
     gridType: 'scrollVertical',
@@ -48,23 +55,43 @@ export class HomeComponent implements OnInit {
       enabled: true
     }
   }
-  public items: GridsterItem[];
+  public items;
 
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private service:GmailService,
-    private authService: AuthService) {
+    private service: GmailService,
+    private authService: AuthService,
+    private injector: Injector,
+    
+    @Inject(Service) service2, 
+    @Inject(ViewContainerRef) viewContainerRef
+  ) {
+   
+    
 
-    this.items = [
-      this.x
-    ];
+    service2.setRootViewContainerRef();
+    service2.setRootViewContainerRef(viewContainerRef)
+    service2.addDynamicComponent()
+     this.items = [
+      ChartWidgetComponent,GmailWidgetComponent
+        
+
+     ];
+    // this.items = [
+    //   new GmailWidgetComponent(this.service, this.authService, new ElementRef(this)),
+    //    new ChartWidgetComponent(this.injector),
+    //     new ChartWidgetComponent(this.injector)
+        
+
+    // ];
 
 
   }
 
+  
 
-
+  
 
   ngOnInit() {
     this.httpClientService.getTableNames().subscribe(

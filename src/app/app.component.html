@@ -1,72 +1,44 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 15%;">
-      
+    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px;">
+
       <div>
-        <!-- <img src="{{ user.photoUrl }}"> -->
+        <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
         <!-- <h4>{{ user.name }}</h4>
         <p>{{ user.email }}</p> -->
       </div>
-      <button (click)="signInWithGoogle()">Sign in with Google</button>
-      <button (click)="signOut()">Sign out</button>
-      <button (click)="test()">TEST</button>
+      <button class="sideNavContent" (click)="signInWithGoogle()">Sign in</button>
+      <button class="sideNavContent" (click)="signOut()">Sign out</button>
       
-          <button class="mat-expansion-panel-header"  style="width: 100%; border: none;height: 48px;"><i
-              class="fas fa-home"></i>Home</button>
-         
-     
 
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title class="menuParentButton">
-              <i class="fas fa-database"></i>Database
-            </mat-panel-title>
+      <button mat-raised-button color="primary" class="sideNavContent"><i class="fas fa-home fa-3x x"></i></button>
 
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-            <mat-list-item style="font-size: small;" role="listitem" *ngFor="let item of tableNames"
-              (click)="openTable(item)">
-              {{item}}</mat-list-item>
-          </mat-nav-list>
+      <button mat-raised-button color="accent" [matMenuTriggerFor]="menu"  class="sideNavContent"><i class="fas fa-database fa-3x x"></i></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
+        
+      </mat-menu>
+      
 
-        </mat-expansion-panel>
-
-      </mat-accordion>
-
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title class="menuParentButton">
-              <i class="fas fa-cogs "></i>Settings
-            </mat-panel-title>
-
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-
-          </mat-nav-list>
-
-        </mat-expansion-panel>
-
-      </mat-accordion>
-
-
-
-
-      <a mat-button style="width: 100%;" href="https://github.com/SZtyro"><i class="fas fa-info "></i> Info</a>
+      <a mat-raised-button color="primary" class="sideNavContent" href="https://github.com/SZtyro"><i class="fas fa-info fa-3x x"></i></a>
 
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content style="display: flex;">
 
-      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 3%; float: left; background-color: blue;">
+      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 1%; float: left; ">
 
       </div>
 
-      
-        <router-outlet ></router-outlet>
-      
-      
+      <div style="width: 98%;">
+        <router-outlet></router-outlet>
+      </div>
+
+
+      <div style="height: 100%;width: 1%; float: right; ">
+
+      </div>
+
 
     </mat-sidenav-content>
   </mat-sidenav-container>

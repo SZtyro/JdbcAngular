@@ -35,7 +35,9 @@ import {
   GoogleLoginProvider
 } from 'angularx-social-login';
 import { GridsterModule } from 'angular-gridster2';
-import { GmailWidgetComponent } from './main-app/widgets/gmail-widget/gmail-widget.component';
+import {MatMenuModule} from '@angular/material/menu';
+
+
 
 const config = new AuthServiceConfig([
   {
@@ -59,6 +61,7 @@ export function provideConfig() {
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent
+    
 
 
   ],
@@ -88,7 +91,8 @@ export function provideConfig() {
     MatListModule,
     MatExpansionModule,
     SocialLoginModule,
-    GridsterModule
+    GridsterModule,
+    MatMenuModule
     
     
   ],

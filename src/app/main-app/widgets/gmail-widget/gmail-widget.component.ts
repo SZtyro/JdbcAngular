@@ -1,8 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { GmailService, GMailContent } from 'src/app/services/Gmail/gmail.service';
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { MatTableDataSource } from '@angular/material';
+import { HomeWidget } from '../../interfaces/homeWidget';
 
 
 interface GThread {
@@ -15,7 +16,9 @@ interface GThread {
   templateUrl: './gmail-widget.component.html',
   styleUrls: ['./gmail-widget.component.css']
 })
-export class GmailWidgetComponent implements OnInit, GridsterItem {
+export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
+
+  tagName = "app-gmail-widget";
 
   //GRIDSTER
   x: number = 0;
@@ -37,7 +40,11 @@ export class GmailWidgetComponent implements OnInit, GridsterItem {
 
   constructor(
     private service: GmailService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private elem:ElementRef
+    ) {
+      
+  }
 
   ngOnInit() {
     this.signInWithGoogle();
