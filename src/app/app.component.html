@@ -11,16 +11,16 @@
       <button class="sideNavContent" (click)="signOut()">Sign out</button>
       
 
-      <button mat-raised-button color="primary" class="sideNavContent"><i class="fas fa-home fa-3x x"></i></button>
+      <button mat-raised-button color="primary" class="sideNavContent"><i class="fas fa-home barIcon"></i></button>
 
-      <button mat-raised-button color="accent" [matMenuTriggerFor]="menu"  class="sideNavContent"><i class="fas fa-database fa-3x x"></i></button>
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu"  class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
         
       </mat-menu>
       
 
-      <a mat-raised-button color="primary" class="sideNavContent" href="https://github.com/SZtyro"><i class="fas fa-info fa-3x x"></i></a>
+      <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent" ><i class="fas fa-info  barIcon"></i></button></a>
 
     </mat-sidenav>
 

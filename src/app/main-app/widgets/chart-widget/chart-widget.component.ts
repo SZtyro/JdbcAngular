@@ -6,12 +6,13 @@ import { HomeWidget } from '../../interfaces/homeWidget';
 @Component({
   selector: 'app-chart-widget',
   templateUrl: './chart-widget.component.html',
-  styleUrls: ['./chart-widget.component.css']
+  styleUrls: ['./chart-widget.component.css'],
+  
 })
-export class ChartWidgetComponent implements OnInit, GridsterItem,HomeWidget {
+export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   ngOnInit(): void {
-    
+
   }
 
   //GRIDSTER
@@ -19,18 +20,17 @@ export class ChartWidgetComponent implements OnInit, GridsterItem,HomeWidget {
   y: number = 0;
   cols: number = 4;
   rows: number = 4;
-  
+
   tagName = "app-chart-widget";
- 
 
-  constructor(private injector:Injector){ 
+
+  constructor(private injector: Injector) {
     
 
-    
   }
 
-  
 
-  
+
+
 
 }

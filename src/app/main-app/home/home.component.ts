@@ -70,9 +70,7 @@ export class HomeComponent implements OnInit {
    
     
 
-    service2.setRootViewContainerRef();
-    service2.setRootViewContainerRef(viewContainerRef)
-    service2.addDynamicComponent()
+    
      this.items = [
       ChartWidgetComponent,GmailWidgetComponent
         
