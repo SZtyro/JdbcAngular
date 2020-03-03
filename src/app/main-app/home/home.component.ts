@@ -9,6 +9,7 @@ import { AuthService } from 'angularx-social-login';
 import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
 import { Service } from 'src/app/test.service';
 import { GridElemDirective } from '../directives/grid-elem.directive';
+import { ScriptLoaderService } from 'angular-google-charts';
 
 export interface Tile {
   color: string;
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
  
 
   x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
-  y: ChartWidgetComponent = new ChartWidgetComponent(this.injector);
+  y: ChartWidgetComponent = new ChartWidgetComponent(this.loaderService);
 
   tableNames: String[] = [];
   opened: boolean = false;
@@ -63,6 +64,7 @@ export class HomeComponent implements OnInit {
     private service: GmailService,
     private authService: AuthService,
     private injector: Injector,
+    private loaderService: ScriptLoaderService,
     
     @Inject(Service) service2, 
     @Inject(ViewContainerRef) viewContainerRef

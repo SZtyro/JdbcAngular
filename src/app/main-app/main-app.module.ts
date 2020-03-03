@@ -20,6 +20,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ChartWidgetComponent } from './widgets/chart-widget/chart-widget.component';
 import { GridElemDirective } from './directives/grid-elem.directive';
 import { Service } from '../test.service'
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -49,7 +50,8 @@ import { Service } from '../test.service'
     MatGridListModule,
     GridsterModule,
     MatTableModule,
-    ScrollingModule
+    ScrollingModule,
+    GoogleChartsModule.forRoot()
     
   ],
   providers:[Service]
