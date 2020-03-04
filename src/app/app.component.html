@@ -7,21 +7,39 @@
         <!-- <h4>{{ user.name }}</h4>
         <p>{{ user.email }}</p> -->
       </div>
-      <button class="sideNavContent" (click)="signInWithGoogle()">Sign in</button>
-      <button class="sideNavContent" (click)="signOut()">Sign out</button>
+      <button mat-raised-button class="sideNavContent" style="padding: 0px;" (click)="signInWithGoogle()">
+        <ng-container *ngIf="user == null; else userPhoto">
+          <i class="fab fa-google barIcon"></i>
+        </ng-container>
+        <ng-template #userPhoto >
+          <img src="{{ user.photoUrl }}" class="sideNavContent" style="margin: 0px;">
+        </ng-template>
+        
+        
       
+      </button>
 
-      <button mat-raised-button color="primary" class="sideNavContent"><i class="fas fa-home barIcon"></i></button>
 
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu"  class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
+
+
+
+      <a routerLink="home"><button mat-raised-button color="primary" class="sideNavContent"><i
+            class="fas fa-home barIcon"></i></button></a>
+
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" class="sideNavContent"><i
+          class="fas fa-database barIcon"></i></button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
-        
+
       </mat-menu>
-      
 
-      <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent" ><i class="fas fa-info  barIcon"></i></button></a>
 
+      <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent"><i
+            class="fas fa-info  barIcon"></i></button></a>
+
+
+      <button mat-raised-button color="primary" class="sideNavContent" (click)="signOut()"><i
+          class="fas fa-door-open barIcon"></i></button>
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">
