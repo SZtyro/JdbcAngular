@@ -11,12 +11,7 @@ export class WidgetLoaderComponent implements OnInit {
   @Input()
   type:Type<unknown>;
   
-  @Input()
-  fields:Array<Map<String,any>>;
- 
 
-  
-  
   constructor(public viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver) { }
 
@@ -25,7 +20,7 @@ export class WidgetLoaderComponent implements OnInit {
     
     let ref = this.viewContainerRef.createComponent(childComponent);
     console.log(ref.instance)
-    ref.instance["rows"]= 10;
+    //ref.instance["rows"]= 10;
     //console.log(this.childs)
 
     

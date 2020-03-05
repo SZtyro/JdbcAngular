@@ -1,5 +1,14 @@
-
 <gridster-item GridElem [item]="this">
+    <button mat-button [matMenuTriggerFor]="appMenu"><i class="fas fa-chart-line"></i></button>
+    <mat-menu #appMenu="matMenu">
+        <button mat-menu-item *ngFor="let item of chartTypes" (click)="changeBarType(item)">{{item}}</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="columns">Column</button>
+    <mat-menu #columns="matMenu">
+        <button mat-menu-item *ngFor="let item of baseColumnNames" (click)="addToColumns(item)">{{item}}</button>
+    </mat-menu>
+    {{chartTitle}}
     <google-chart [type]="myType" [data]="myData" [columnNames]="mycolumnNames">
     </google-chart>
 </gridster-item>

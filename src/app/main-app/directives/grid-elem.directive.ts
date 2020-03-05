@@ -16,6 +16,7 @@ export class GridElemDirective implements OnInit {
     
     this.renderer.setStyle(this.element.nativeElement,"border-radius","15px")
     this.renderer.setStyle(this.element.nativeElement,"padding","10px")
+    this.renderer.addClass(this.element.nativeElement,"mat-elevation-z8")
   }
 
   constructor(private element: ElementRef,

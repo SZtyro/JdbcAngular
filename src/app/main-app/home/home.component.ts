@@ -29,8 +29,7 @@ export class HomeComponent implements OnInit {
  
 
   x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
-  y: ChartWidgetComponent = new ChartWidgetComponent(this.loaderService);
-
+  
   tableNames: String[] = [];
   opened: boolean = false;
   
