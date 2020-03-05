@@ -27,7 +27,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem {
     'ComboChart',
     'PieChart'
   ];
-  dataTypes: String[];
+  dataTypes;
   
 
   ngOnInit(): void {
@@ -135,6 +135,6 @@ export class ChartWidgetComponent implements OnInit, GridsterItem {
   }
 
   getDataBaseTypes(){
-    this.dataBaseService.getType("EMPLOYEES").subscribe(data => this.dataTypes = data)
+    this.dataBaseService.getType("EMPLOYEES").subscribe(data => {this.dataTypes = data})
   }
 }

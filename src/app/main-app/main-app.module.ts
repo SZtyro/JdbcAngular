@@ -22,7 +22,7 @@ import { GridElemDirective } from './directives/grid-elem.directive';
 import { Service } from '../test.service'
 import { GoogleChartsModule } from 'angular-google-charts';
 import { WidgetLoaderComponent } from './widget-loader/widget-loader.component';
-
+import { GmailSenderPipe } from '../pipes/gmail-sender.pipe';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { WidgetLoaderComponent } from './widget-loader/widget-loader.component';
     GmailWidgetComponent,
     ChartWidgetComponent,
     GridElemDirective,
-    WidgetLoaderComponent
+    WidgetLoaderComponent,
+    GmailSenderPipe
   ],
   imports: [
     CommonModule,

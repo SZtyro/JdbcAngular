@@ -17,7 +17,7 @@
 - [x] zastosowanie ikon (np. FontAwesome)
 - [x] zastosowanie routera i nawigacji
 - [x] połączenie z zewnętrznym API dostarczającym dane za pomocą serwisów
-- [ ] zaimplementowanie i wykorzystanie tzw. pipes do formatowania danych w widoku
+- [x] zaimplementowanie i wykorzystanie tzw. pipes do formatowania danych w widoku
 - [x] wykorzystanie gotowych modułów do wyświetlenia danych w postaci interaktywnej
   tabeli (możliwość sortowania, filtrowania itp.) 
 - [x] wprowadzenie okienka typu modal do potwierdzenia operacji (np. usunięcia)
@@ -26,12 +26,12 @@
  POZIOM_3 (db+, bdb)
 -------------------------------------------------------------------------------
 
-- [ ] wprowadzenie jakiejś formy wizualizacji danych (wykresy, grafy, mapy itp.)
+- [x] wprowadzenie jakiejś formy wizualizacji danych (wykresy, grafy, mapy itp.)
 - [ ] wprowadzenie formularza z walidacją pól
 - [x] zastosowanie mechanizmu lokalnego składowania danych (LocalStorage lub 
   SessionStorage)
 - [x] zaimplementowanie co najmniej jednej dyrektywy
-- [ ] samodzielne zastosowanie Promise lub Observable
+- [x] samodzielne zastosowanie Promise lub Observable
 - [ ] zrealizowanie uploadu plików z drag&drop i paskiem postępu
 - [ ] wykorzystanie ngx-translate do internacjonalizacji
 - [ ] zaimplementowanie zestawu podstawowych testów komponentów (więcej niż daje 

@@ -40,6 +40,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
 
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -61,7 +62,8 @@ export function provideConfig() {
     EditModalComponent,
     AddModalComponent,
     TableMenuComponent,
-    LoginWindowComponent
+    LoginWindowComponent,
+    
     
 
 
