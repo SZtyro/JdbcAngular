@@ -21,6 +21,7 @@ import { ChartWidgetComponent } from './widgets/chart-widget/chart-widget.compon
 import { GridElemDirective } from './directives/grid-elem.directive';
 import { Service } from '../test.service'
 import { GoogleChartsModule } from 'angular-google-charts';
+import { WidgetLoaderComponent } from './widget-loader/widget-loader.component';
 
 
 
@@ -35,7 +36,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ReminderWidgetComponent,
     GmailWidgetComponent,
     ChartWidgetComponent,
-    GridElemDirective
+    GridElemDirective,
+    WidgetLoaderComponent
   ],
   imports: [
     CommonModule,

@@ -12,10 +12,9 @@ import { GridElemDirective } from '../directives/grid-elem.directive';
 import { ScriptLoaderService } from 'angular-google-charts';
 
 export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
+  type;
+  
+  
 }
 
 @Component({
@@ -34,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   tableNames: String[] = [];
   opened: boolean = false;
-
+  
   
 
   public options: GridsterConfig = {
@@ -63,25 +62,25 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private service: GmailService,
     private authService: AuthService,
-    private injector: Injector,
     private loaderService: ScriptLoaderService,
-    
-    @Inject(Service) service2, 
-    @Inject(ViewContainerRef) viewContainerRef
+  
   ) {
    
-    
+    this.items=[
+      ChartWidgetComponent,GmailWidgetComponent
+  ]
 
     
-     this.items = [
-      ChartWidgetComponent,GmailWidgetComponent
+    //  this.items = [
+    //   ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent
         
 
-     ];
+    //  ];
+     
     // this.items = [
     //   new GmailWidgetComponent(this.service, this.authService, new ElementRef(this)),
-    //    new ChartWidgetComponent(this.injector),
-    //     new ChartWidgetComponent(this.injector)
+    //    new ChartWidgetComponent(this.loaderService),
+    //     new ChartWidgetComponent(this.loaderService)
         
 
     // ];

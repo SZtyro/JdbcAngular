@@ -30,7 +30,7 @@
 - [ ] wprowadzenie formularza z walidacją pól
 - [x] zastosowanie mechanizmu lokalnego składowania danych (LocalStorage lub 
   SessionStorage)
-- [ ] zaimplementowanie co najmniej jednej dyrektywy
+- [x] zaimplementowanie co najmniej jednej dyrektywy
 - [ ] samodzielne zastosowanie Promise lub Observable
 - [ ] zrealizowanie uploadu plików z drag&drop i paskiem postępu
 - [ ] wykorzystanie ngx-translate do internacjonalizacji

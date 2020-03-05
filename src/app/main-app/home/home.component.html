@@ -5,19 +5,24 @@
 <div style="display: flex;height: 100%; ">
 
         <gridster [options]="options" style="overflow: initial; height: initial; background-color: unset;">
-                <gridster-item    [item]="item" *ngFor="let item of items" class="tile mat-elevation-z8" >
+                <app-widget-loader *ngFor="let item of items" [type]="item"></app-widget-loader>
+                <!-- <gridster-item   GridElem [x]="item" [item]="item" *ngFor="let item of items" class="tile mat-elevation-z8" >
                         
-                        <div GridElem [x]="item">
+                        <app-widget-loader [type]="item">
+                                <div>
+                                        
+                                </div>
 
-                        </div>
+                        </app-widget-loader>
+                        
                         <!-- <div>
                                 
                                 <app-gmail-widget></app-gmail-widget>
                         </div>
                         <div>
                                 <app-chart-widget></app-chart-widget>
-                        </div> -->
+                        </div> 
 
-                </gridster-item>
+                </gridster-item> -->
         </gridster>
 </div>

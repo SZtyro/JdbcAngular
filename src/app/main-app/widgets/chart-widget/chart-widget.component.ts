@@ -41,7 +41,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   tagName = "app-chart-widget";
 
-  myType = "BarChart";
+  myType = "PieChart";
   myColumnNames = ['City', 'Inhabitants'];
   
   myData = [[]] ;
