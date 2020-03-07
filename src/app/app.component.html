@@ -1,56 +1,68 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px;">
+    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px; ">
+      <div style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;">
+        <div>
+          <div>
+            <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
+            <!-- <h4>{{ user.name }}</h4>
+            <p>{{ user.email }}</p> -->
+          </div>
+          <button mat-raised-button matTooltip="{{'NAVBAR.GOOGLE_LOGIN' | translate}}" class="sideNavContent"
+            style="padding: 0px;" (click)="signInWithGoogle()">
+            <ng-container *ngIf="user == null; else userPhoto">
+              <i class="fab fa-google barIcon"></i>
+            </ng-container>
+            <ng-template #userPhoto>
+              <img src="{{ user.photoUrl }}" class="sideNavContent" style="margin: 0px;">
+            </ng-template>
+          </button>
+          <mat-divider style="margin: 10px;"></mat-divider>
 
-      <div>
-        <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
-        <!-- <h4>{{ user.name }}</h4>
-        <p>{{ user.email }}</p> -->
+
+
+          <!-- Home -->
+          <a routerLink="home"><button mat-raised-button matTooltip="{{'NAVBAR.HOME' | translate}}" color="primary"
+              class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
+          <!-- Database -->
+          <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE' | translate}}" color="primary"
+            [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
+
+          </mat-menu>
+
+
+        </div>
+
+
+        <!-- <div style="align-self: flex-end; display: flex; justify-content: end; align-items: flex-end; flex-direction: column;"> -->
+        <div style="justify-content: flex-end;">
+          <mat-divider style="margin: 10px;"></mat-divider>
+
+          <!-- Info -->
+          <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent"><i
+                class="fas fa-info  barIcon"></i></button></a>
+
+          <!-- Change language -->
+
+          <button mat-raised-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" color="primary"
+            [matMenuTriggerFor]="langMenu" class="sideNavContent"
+            style="font-size: 30px; font-weight: 800; ">{{translate.currentLang | uppercase }}</button>
+          <mat-menu #langMenu="matMenu">
+            <button mat-menu-item *ngFor="let lang of translate.getLangs()"
+              (click)="translate.use(lang)">{{lang | uppercase}}</button>
+
+          </mat-menu>
+
+
+          <!-- Sing out -->
+          <button mat-raised-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" color="primary"
+            class="sideNavContent" (click)="signOut()"><i class="fas fa-door-open barIcon"></i></button>
+        </div>
       </div>
-      <button mat-raised-button matTooltip="{{'NAVBAR.GOOGLE_LOGIN' | translate}}" class="sideNavContent"
-        style="padding: 0px;" (click)="signInWithGoogle()">
-        <ng-container *ngIf="user == null; else userPhoto">
-          <i class="fab fa-google barIcon"></i>
-        </ng-container>
-        <ng-template #userPhoto>
-          <img src="{{ user.photoUrl }}" class="sideNavContent" style="margin: 0px;">
-        </ng-template>
-      </button>
 
 
-
-
-      <!-- Home -->
-      <a routerLink="home"><button mat-raised-button matTooltip="{{'NAVBAR.HOME' | translate}}" color="primary"
-          class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
-      <!-- Database -->
-      <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE' | translate}}"
-        color="primary" [matMenuTriggerFor]="menu" class="sideNavContent"><i
-          class="fas fa-database barIcon"></i></button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
-
-      </mat-menu>
-
-      <!-- Info -->
-      <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent"><i
-            class="fas fa-info  barIcon"></i></button></a>
-
-      <mat-divider style="margin: 10px;"></mat-divider>
-      <!-- Change language -->
-      <button mat-raised-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" color="primary"
-        [matMenuTriggerFor]="langMenu" class="sideNavContent"
-        style="font-size: 30px; font-weight: 800; ">{{translate.currentLang | uppercase }}</button>
-      <mat-menu #langMenu="matMenu">
-        <button mat-menu-item *ngFor="let lang of translate.getLangs()"
-          (click)="translate.use(lang)">{{lang | uppercase}}</button>
-
-      </mat-menu>
-
-
-      <!-- Sing out -->
-      <button mat-raised-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" color="primary" class="sideNavContent"
-        (click)="signOut()"><i class="fas fa-door-open barIcon"></i></button>
 
 
 
@@ -59,8 +71,9 @@
 
     <mat-sidenav-content style="display: flex;">
 
-      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
-        <i class="fas fa-caret-right fa-2x" ></i>
+      <div (mouseenter)="sidenav.open()"
+        style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
+        <i class="fas fa-caret-right fa-2x"></i>
       </div>
 
       <div style="width: 98%;">
