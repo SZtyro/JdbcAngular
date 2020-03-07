@@ -8,7 +8,7 @@ import { MatDatepickerInputEvent, MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-edit-modal',
   templateUrl: './edit-modal.component.html',
-  styleUrls: ['./edit-modal.component.css']
+  styleUrls: ['./edit-modal.component.scss']
 })
 export class EditModalComponent implements OnInit {
 

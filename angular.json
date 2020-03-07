@@ -126,5 +126,10 @@
       }
     }
   },
-  "defaultProject": "AngularJDBC"
+  "defaultProject": "AngularJDBC",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

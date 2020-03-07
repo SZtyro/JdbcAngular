@@ -15,7 +15,7 @@ interface GThread {
 @Component({
   selector: 'app-gmail-widget',
   templateUrl: './gmail-widget.component.html',
-  styleUrls: ['./gmail-widget.component.css']
+  styleUrls: ['./gmail-widget.component.scss']
 })
 export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 

@@ -5,7 +5,7 @@
 -------------------------------------------------------------------------------
 - [x] co najmniej 3 komponenty
 - [x] poprawne rozdzielenie widoku i logiki
-- [ ] zastosowanie języka stylów innego niż CSS (np. SCSS)
+- [x] zastosowanie języka stylów innego niż CSS (np. SCSS)
 - [x] zastosowanie biblioteki "CSS" (Bootstrap, Material itp.)
 - [x] aktywne (!) korzystanie z VCS
 

@@ -4,7 +4,7 @@ import { GridsterItem } from 'angular-gridster2';
 @Component({
   selector: 'app-widget-loader',
   templateUrl: './widget-loader.component.html',
-  styleUrls: ['./widget-loader.component.css']
+  styleUrls: ['./widget-loader.component.scss']
 })
 export class WidgetLoaderComponent implements OnInit {
 

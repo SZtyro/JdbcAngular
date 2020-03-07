@@ -10,7 +10,7 @@ import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-chart-widget',
   templateUrl: './chart-widget.component.html',
-  styleUrls: ['./chart-widget.component.css'],
+  styleUrls: ['./chart-widget.component.scss'],
 
 })
 export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {

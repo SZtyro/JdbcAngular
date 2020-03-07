@@ -6,7 +6,7 @@ import {  TableComponent } from '../table/table.component';
 @Component({
   selector: 'app-add-modal',
   templateUrl: './add-modal.component.html',
-  styleUrls: ['./add-modal.component.css']
+  styleUrls: ['./add-modal.component.scss']
 })
 export class AddModalComponent implements OnInit {
 

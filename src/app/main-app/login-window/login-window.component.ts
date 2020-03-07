@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-window',
   templateUrl: './login-window.component.html',
-  styleUrls: ['./login-window.component.css']
+  styleUrls: ['./login-window.component.scss']
 })
 export class LoginWindowComponent implements OnInit {
 

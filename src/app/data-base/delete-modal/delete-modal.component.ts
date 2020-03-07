@@ -6,7 +6,7 @@ import { TableComponent } from '../table/table.component';
 @Component({
   selector: 'app-delete-modal',
   templateUrl: './delete-modal.component.html',
-  styleUrls: ['./delete-modal.component.css']
+  styleUrls: ['./delete-modal.component.scss']
 })
 export class DeleteModalComponent implements OnInit {
 

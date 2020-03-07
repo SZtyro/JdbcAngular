@@ -42,6 +42,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -66,7 +67,6 @@ export function provideConfig() {
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent,
-    
     
 
 
