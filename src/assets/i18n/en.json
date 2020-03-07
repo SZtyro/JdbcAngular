@@ -1,0 +1,13 @@
+{
+    "NAVBAR": {
+        "GOOGLE_LOGIN": "Sign in with Google!",
+        "HOME": "Home",
+        "DATABASE": "Database",
+        "LANGUAGE": "Change language",
+        "SIGN_OUT": "Sign out"
+    },
+    "GMAIL_WIDGET": {
+        "SENDER": "Sender",
+        "SNIPPET": "Snippet"
+    }
+}

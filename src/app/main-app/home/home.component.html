@@ -6,23 +6,6 @@
 
         <gridster [options]="options" style="overflow: initial; height: initial; background-color: unset;">
                 <app-widget-loader *ngFor="let item of items" [type]="item"></app-widget-loader>
-                <!-- <gridster-item   GridElem [x]="item" [item]="item" *ngFor="let item of items" class="tile mat-elevation-z8" >
-                        
-                        <app-widget-loader [type]="item">
-                                <div>
-                                        
-                                </div>
-
-                        </app-widget-loader>
-                        
-                        <!-- <div>
-                                
-                                <app-gmail-widget></app-gmail-widget>
-                        </div>
-                        <div>
-                                <app-chart-widget></app-chart-widget>
-                        </div> 
-
-                </gridster-item> -->
+               
         </gridster>
 </div>

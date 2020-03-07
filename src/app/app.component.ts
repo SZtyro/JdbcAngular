@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'AngularJDBC';
@@ -21,8 +22,13 @@ export class AppComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    public translate: TranslateService
+  ) { 
+    translate.addLangs(['en', 'pl']);
+    translate.setDefaultLang('en');
+    translate.use('en')
+  }
 
 
 

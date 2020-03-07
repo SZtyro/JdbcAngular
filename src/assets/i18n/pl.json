@@ -1,0 +1,13 @@
+{
+    "NAVBAR": {
+        "GOOGLE_LOGIN": "Zaloguj się przez Google!",
+        "HOME": "Strona główna",
+        "DATABASE": "Baza danych",
+        "LANGUAGE": "Zmień język",
+        "SIGN_OUT": "Wyloguj"
+    },
+    "GMAIL_WIDGET": {
+        "SENDER": "Nadawca",
+        "SNIPPET": "Wiadomość"
+    }
+}

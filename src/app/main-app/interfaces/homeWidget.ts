@@ -1,3 +1,3 @@
 export interface HomeWidget {
-    tagName: string;
+    onResize();
 }

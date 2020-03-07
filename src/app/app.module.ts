@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './data-base/table/table.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -36,8 +36,9 @@ import {
 } from 'angularx-social-login';
 import { GridsterModule } from 'angular-gridster2';
 import {MatMenuModule} from '@angular/material/menu';
-
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 
@@ -49,7 +50,9 @@ const config = new AuthServiceConfig([
   
 ]);
 
-
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 export function provideConfig() {
   
   return config;
@@ -95,12 +98,20 @@ export function provideConfig() {
     MatExpansionModule,
     SocialLoginModule,
     GridsterModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
     
     
   ],
   exports: [
-
+    
   ],
   entryComponents: [
     DeleteModalComponent,

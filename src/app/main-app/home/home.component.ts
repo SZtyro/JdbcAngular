@@ -7,9 +7,8 @@ import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.compo
 import { GmailService } from 'src/app/services/Gmail/gmail.service';
 import { AuthService } from 'angularx-social-login';
 import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
-import { Service } from 'src/app/test.service';
-import { GridElemDirective } from '../directives/grid-elem.directive';
 import { ScriptLoaderService } from 'angular-google-charts';
+import { HomeWidget } from '../interfaces/homeWidget';
 
 export interface Tile {
   type;
@@ -28,7 +27,7 @@ export interface Tile {
 export class HomeComponent implements OnInit {
  
 
-  x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
+  //x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
   
   tableNames: String[] = [];
   opened: boolean = false;
@@ -43,7 +42,7 @@ export class HomeComponent implements OnInit {
     minRows: 7,
     fixedRowHeight: 100,
     fixedColWidth: 100,
-    
+    itemResizeCallback: this.changed.bind(this),
     setGridSize: true,
     mobileBreakpoint: 0,
     gridType: 'scrollVertical',
@@ -55,6 +54,11 @@ export class HomeComponent implements OnInit {
     }
   }
   public items;
+  
+  changed(x:HomeWidget){
+    console.log("zmieniony");
+    x.onResize();
+  }
 
   constructor(
     private httpClientService: HttpClientService,
@@ -66,7 +70,7 @@ export class HomeComponent implements OnInit {
   ) {
    
     this.items=[
-      ChartWidgetComponent,GmailWidgetComponent
+      ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent
   ]
 
     

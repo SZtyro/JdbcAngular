@@ -7,45 +7,60 @@
         <!-- <h4>{{ user.name }}</h4>
         <p>{{ user.email }}</p> -->
       </div>
-      <button mat-raised-button class="sideNavContent" style="padding: 0px;" (click)="signInWithGoogle()">
+      <button mat-raised-button matTooltip="{{'NAVBAR.GOOGLE_LOGIN' | translate}}" class="sideNavContent"
+        style="padding: 0px;" (click)="signInWithGoogle()">
         <ng-container *ngIf="user == null; else userPhoto">
           <i class="fab fa-google barIcon"></i>
         </ng-container>
-        <ng-template #userPhoto >
+        <ng-template #userPhoto>
           <img src="{{ user.photoUrl }}" class="sideNavContent" style="margin: 0px;">
         </ng-template>
-        
-        
-      
       </button>
 
 
 
 
-
-      <a routerLink="home"><button mat-raised-button color="primary" class="sideNavContent"><i
-            class="fas fa-home barIcon"></i></button></a>
-
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" class="sideNavContent"><i
+      <!-- Home -->
+      <a routerLink="home"><button mat-raised-button matTooltip="{{'NAVBAR.HOME' | translate}}" color="primary"
+          class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
+      <!-- Database -->
+      <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE' | translate}}"
+        color="primary" [matMenuTriggerFor]="menu" class="sideNavContent"><i
           class="fas fa-database barIcon"></i></button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
 
       </mat-menu>
 
-
+      <!-- Info -->
       <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent"><i
             class="fas fa-info  barIcon"></i></button></a>
 
+      <mat-divider style="margin: 10px;"></mat-divider>
+      <!-- Change language -->
+      <button mat-raised-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" color="primary"
+        [matMenuTriggerFor]="langMenu" class="sideNavContent"
+        style="font-size: 30px; font-weight: 800; ">{{translate.currentLang | uppercase }}</button>
+      <mat-menu #langMenu="matMenu">
+        <button mat-menu-item *ngFor="let lang of translate.getLangs()"
+          (click)="translate.use(lang)">{{lang | uppercase}}</button>
 
-      <button mat-raised-button color="primary" class="sideNavContent" (click)="signOut()"><i
-          class="fas fa-door-open barIcon"></i></button>
+      </mat-menu>
+
+
+      <!-- Sing out -->
+      <button mat-raised-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" color="primary" class="sideNavContent"
+        (click)="signOut()"><i class="fas fa-door-open barIcon"></i></button>
+
+
+
+
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">
 
-      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 1%; float: left; ">
-
+      <div (mouseenter)="sidenav.open()" style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
+        <i class="fas fa-caret-right fa-2x" ></i>
       </div>
 
       <div style="width: 98%;">

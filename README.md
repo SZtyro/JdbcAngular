@@ -33,6 +33,6 @@
 - [x] zaimplementowanie co najmniej jednej dyrektywy
 - [x] samodzielne zastosowanie Promise lub Observable
 - [ ] zrealizowanie uploadu plików z drag&drop i paskiem postępu
-- [ ] wykorzystanie ngx-translate do internacjonalizacji
+- [x] wykorzystanie ngx-translate do internacjonalizacji
 - [ ] zaimplementowanie zestawu podstawowych testów komponentów (więcej niż daje 
    generator ;)

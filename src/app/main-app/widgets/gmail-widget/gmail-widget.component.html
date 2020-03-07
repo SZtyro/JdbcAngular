@@ -12,12 +12,12 @@
       <!-- Position Column -->
   
       <ng-container matColumnDef="from">
-        <th mat-header-cell *matHeaderCellDef> From </th>
+        <th mat-header-cell *matHeaderCellDef> {{ "GMAIL_WIDGET.SENDER" | translate}} </th>
         <td mat-cell *matCellDef="let element" style="font-weight: 500;">{{element.from | gmailSender }}  </td>
       </ng-container>
   
       <ng-container matColumnDef="snippet">
-        <th mat-header-cell *matHeaderCellDef> Snippet </th>
+        <th mat-header-cell *matHeaderCellDef>{{ "GMAIL_WIDGET.SNIPPET" | translate}}  </th>
         <td mat-cell *matCellDef="let element"> {{element.snippet}} </td>
       </ng-container>
   

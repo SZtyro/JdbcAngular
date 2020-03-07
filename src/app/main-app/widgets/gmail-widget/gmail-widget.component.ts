@@ -4,6 +4,7 @@ import { GmailService, GMailContent } from 'src/app/services/Gmail/gmail.service
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { MatTableDataSource } from '@angular/material';
 import { HomeWidget } from '../../interfaces/homeWidget';
+import { TranslateService } from '@ngx-translate/core';
 
 
 interface GThread {
@@ -18,6 +19,10 @@ interface GThread {
 })
 export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
+  onResize() {
+    
+  }
+  
   tagName = "app-gmail-widget";
 
   //GRIDSTER
@@ -41,7 +46,8 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   constructor(
     private service: GmailService,
     private authService: AuthService,
-    private elem:ElementRef
+    private elem:ElementRef,
+    public translate: TranslateService
     ) {
       
   }
