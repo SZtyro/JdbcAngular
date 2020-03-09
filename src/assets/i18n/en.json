@@ -2,7 +2,13 @@
     "NAVBAR": {
         "GOOGLE_LOGIN": "Sign in with Google!",
         "HOME": "Home",
-        "DATABASE": "Database",
+        "DATABASE": {
+            "CONNECTION": "Database",
+            "NO_CONNECTION": "You are not connected to database!"
+        },
+        "USERS" : "Users",
+        "WIDGETS": "Widgets",
+        "SETTINGS": "Settings",
         "LANGUAGE": "Change language",
         "SIGN_OUT": "Sign out"
     },

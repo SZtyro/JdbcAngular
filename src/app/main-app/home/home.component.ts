@@ -9,6 +9,7 @@ import { AuthService } from 'angularx-social-login';
 import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
 import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../interfaces/homeWidget';
+import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.component';
 
 export interface Tile {
   type;
@@ -63,14 +64,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private service: GmailService,
-    private authService: AuthService,
-    private loaderService: ScriptLoaderService,
+    
   
   ) {
    
     this.items=[
-      ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent
+      ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent,PhotoWidgetComponent
   ]
 
     

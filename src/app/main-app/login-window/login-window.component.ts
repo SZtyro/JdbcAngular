@@ -26,10 +26,10 @@ export class LoginWindowComponent implements OnInit {
   }
 
   login(){
-    console.log(this.userName +" "+ this.password);
+   
     this.httpClientService.loginUser([this.url,this.userName,this.password]).subscribe(
       data=> {
-        console.log(data);
+        
         if(data === "acces"){
           localStorage.setItem('url', JSON.stringify(this.url));
           localStorage.setItem('userName', JSON.stringify(this.userName));

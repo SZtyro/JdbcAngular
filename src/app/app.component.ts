@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
 import { AuthService, SocialUser } from "angularx-social-login";
@@ -10,7 +10,11 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentInit {
+  ngAfterContentInit(): void {
+    
+
+  }
   title = 'AngularJDBC';
   tableNames: String[] = [];
   opened: boolean = false;
@@ -24,22 +28,21 @@ export class AppComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     public translate: TranslateService
-  ) { 
+  ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
     translate.use('en')
+    
   }
 
 
 
   ngOnInit() {
-
-
     this.httpClientService.getTableNames().subscribe(
       data => {
 
         this.setTableNames(data);
-        console.log("Table names fetched! ", data);
+        console.log("Home Table names fetched! ", data);
 
 
       },
@@ -50,6 +53,8 @@ export class AppComponent implements OnInit {
 
       }
     )
+
+
   }
 
   signInWithGoogle(): void {

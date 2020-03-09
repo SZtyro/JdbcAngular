@@ -2,7 +2,13 @@
     "NAVBAR": {
         "GOOGLE_LOGIN": "Zaloguj się przez Google!",
         "HOME": "Strona główna",
-        "DATABASE": "Baza danych",
+        "DATABASE": {
+            "CONNECTION": "Baza danych",
+            "NO_CONNECTION": "Nie jesteś połączony do bazy danych!"
+        },
+        "USERS" : "Użytkownicy",
+        "WIDGETS": "Widżety",
+        "SETTINGS": "Ustawienia",
         "LANGUAGE": "Zmień język",
         "SIGN_OUT": "Wyloguj"
     },

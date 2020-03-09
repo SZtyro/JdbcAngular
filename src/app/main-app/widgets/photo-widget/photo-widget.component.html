@@ -1,0 +1,28 @@
+<gridster-item GridElem [item]="this">
+    <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appFilesUpload (onFileDropped)="xx($event)">
+        <input style="background-color:red;"  type="file" #fileInput (change)="uploadFile($event.target.files)">
+    </div>
+    <input type='file' (change)="onSelectFile($event)">
+    <div class="files-list" *ngFor="let file of files;let i= index">
+        <p> {{ file }} </p>
+        <img src="{{file}}">
+        <button class="delete-file" (click)="deleteAttachment(i)">
+            <img src="../../assets/Recycle_Bin_Full.png">
+        </button>
+    </div>
+    <img [src]="url" height="200">  -->
+    <div>
+        <input #fileInput type="file" ng2FileSelect [uploader]="uploader" />
+
+        <div class="drop-box" ng2FileDrop [ngClass]="{'dragover': isDropOver}" [uploader]="uploader"
+            (fileOver)="fileOverAnother($event)" (click)="fileClicked()">
+            <span class="drag-in-title">Import or drag file here</span>
+            <span class="drag-over-title">Drop the file</span>
+            <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
+        </div>
+        <div *ngFor="let item of files">
+            <i class="fas fa-file"></i>
+            {{item}}
+        </div>
+    </div>
+</gridster-item>

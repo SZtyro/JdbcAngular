@@ -39,6 +39,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { PhotoWidgetComponent } from './main-app/widgets/photo-widget/photo-widget.component';
+
 
 
 
@@ -67,6 +69,8 @@ export function provideConfig() {
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent,
+    
+    
     
 
 

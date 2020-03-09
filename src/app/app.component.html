@@ -24,9 +24,32 @@
           <!-- Home -->
           <a routerLink="home"><button mat-raised-button matTooltip="{{'NAVBAR.HOME' | translate}}" color="primary"
               class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
+
           <!-- Database -->
-          <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE' | translate}}" color="primary"
-            [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
+          <div *ngIf="tableNames.length != 0; else noData">
+            <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" color="primary"
+              [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
+          </div>
+
+          <ng-template #noData>
+            <a routerLink="login">
+              <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE.NO_CONNECTION' | translate}}" color="warn"
+                class="sideNavContent"><i class="fas fa-database barIcon"></i></button></a>
+
+          </ng-template>
+
+          <!-- Users -->
+          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.USERS' | translate}}" color="primary"
+              class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
+
+          <!-- Widgets -->
+          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary"
+              class="sideNavContent"><i class="fas fa-th-large barIcon"></i></button></a>
+
+          <!-- Settings -->
+          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"
+              class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
+
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
 

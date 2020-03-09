@@ -26,6 +26,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { FilesUploadDirective } from './directives/FilesUpload/files-upload.directive'
+import { PhotoWidgetComponent } from './widgets/photo-widget/photo-widget.component';
+import {FileUploadModule} from 'ng2-file-upload';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -33,7 +38,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   entryComponents: [
     GmailWidgetComponent,
-    ChartWidgetComponent
+    ChartWidgetComponent,
+    PhotoWidgetComponent
   ],
   declarations: [
     HomeComponent,
@@ -43,7 +49,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ChartWidgetComponent,
     GridElemDirective,
     WidgetLoaderComponent,
-    GmailSenderPipe
+    GmailSenderPipe,
+    FilesUploadDirective,
+    PhotoWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +75,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    FileUploadModule,
+    MatProgressBarModule
   ],
   providers: []
 })

@@ -4,7 +4,6 @@ import { HomeWidget } from '../../interfaces/homeWidget';
 import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Subject, Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 
 @Component({
