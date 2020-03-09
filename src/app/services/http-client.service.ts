@@ -10,8 +10,8 @@ export class HttpClientService {
 
   constructor( private httpClient:HttpClient ) { }
 
-  //url = "http://192.168.1.205:8080";
-  url = "http://localhost:8080";
+ // url = "http://192.168.1.205:8080";
+url = "http://localhost:8080";
 
   getUploadedFiles(){
     return this.httpClient.get(this.url + "/getFiles")

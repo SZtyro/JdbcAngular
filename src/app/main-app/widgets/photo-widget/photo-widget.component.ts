@@ -47,7 +47,7 @@ export class PhotoWidgetComponent implements OnInit, GridsterItem, HomeWidget {
      this.uploader.onProgressItem = (progress: any) => {
      this.uploadProgress =  progress['progress'];
   };
-  
+  this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
   this.uploader.onCompleteAll = () => this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
   }
  
