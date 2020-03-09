@@ -21,11 +21,12 @@ export class PhotoWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   x: number = 0;
   y: number = 0;
   rows: number = 4;
-  cols: number = 4;
+  cols: number = 6;
   reader: FileReader;
 
   constructor(private clientService:HttpClientService) {
     this.reader = new FileReader();
+    this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
   }
 
   @ViewChild('fileInput',{static: true}) fileInput: ElementRef;
@@ -46,7 +47,7 @@ export class PhotoWidgetComponent implements OnInit, GridsterItem, HomeWidget {
      this.uploader.onProgressItem = (progress: any) => {
      this.uploadProgress =  progress['progress'];
   };
-  this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
+  
   this.uploader.onCompleteAll = () => this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
   }
  

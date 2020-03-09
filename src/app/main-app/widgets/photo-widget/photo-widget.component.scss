@@ -40,10 +40,12 @@
 
 .drop-box {
     cursor: pointer;
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    text-align: center;
-    padding: 40px;
+    
+    
+    // text-align: center;
+    padding: 10px;
+    height: 400px;
+    
   }
    
   .drag-over-title {
@@ -51,6 +53,7 @@
   }
    
   .drop-box.dragover {
+    border: 5px dashed #DDD;
     opacity: 0.6;
   }
    

@@ -32,7 +32,7 @@
   SessionStorage)
 - [x] zaimplementowanie co najmniej jednej dyrektywy
 - [x] samodzielne zastosowanie Promise lub Observable
-- [ ] zrealizowanie uploadu plików z drag&drop i paskiem postępu
+- [x] zrealizowanie uploadu plików z drag&drop i paskiem postępu
 - [x] wykorzystanie ngx-translate do internacjonalizacji
 - [ ] zaimplementowanie zestawu podstawowych testów komponentów (więcej niż daje 
    generator ;)

@@ -13,16 +13,23 @@
     <img [src]="url" height="200">  -->
     <div>
         <input #fileInput type="file" ng2FileSelect [uploader]="uploader" />
+        
+        <!-- <mat-divider style="margin: 10px;"></mat-divider> -->
 
-        <div class="drop-box" ng2FileDrop [ngClass]="{'dragover': isDropOver}" [uploader]="uploader"
+        <div class="drop-box " ng2FileDrop [ngClass]="{'dragover': isDropOver}" [uploader]="uploader"
             (fileOver)="fileOverAnother($event)" (click)="fileClicked()">
-            <span class="drag-in-title">Import or drag file here</span>
-            <span class="drag-over-title">Drop the file</span>
-            <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
-        </div>
-        <div *ngFor="let item of files">
-            <i class="fas fa-file"></i>
-            {{item}}
+            
+            <div *ngIf="uploadProgress != 0 && uploadProgress != 100" style="font-weight: 500; padding: 10px;">
+                Uploading file...
+                <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
+            </div>
+
+
+            <div *ngFor="let item of files"
+                style="padding: 2px; font-family: Roboto,Helvetica Neue,sans-serif; font-weight: 400;">
+                <i class="fas fa-file"></i>
+                {{item}}
+            </div>
         </div>
     </div>
 </gridster-item>
