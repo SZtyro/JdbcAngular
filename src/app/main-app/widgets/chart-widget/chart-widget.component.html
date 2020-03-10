@@ -6,16 +6,21 @@
             <button mat-menu-item *ngFor="let item of chartTypes" (click)="changeBarType(item)">{{item}}</button>
         </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="columns">Column</button>
+        <button mat-button [matMenuTriggerFor]="tables" (click)="getDataBaseTables()">Table</button>
+        <mat-menu #tables="matMenu">
+            <button mat-menu-item *ngFor="let item of tableNames" (click)="selectTable(item)">{{item}}</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="columns" (click)="getTableColumns()">Column</button>
         <mat-menu #columns="matMenu">
             <!-- <button mat-menu-item *ngFor="let item of baseColumnNames" (click)="addToColumns(item)">{{item}}</button> -->
             <div mat-menu-item *ngFor="let item of baseColumnNames">
                 <mat-checkbox (click)="addToColumns(item)">{{item}}</mat-checkbox>
             </div>
         </mat-menu>
-        {{chartTitle}}
-        <google-chart style="width: 100%; height: 100%;" [type]="myType" [data]="myData"
-            [columnNames]="mycolumnNames">
+        
+        <google-chart style="width: 500px; height: 300px;" [type]="myType" [data]="myData"
+            [columnNames]="colss">
         </google-chart>
     </div>
 

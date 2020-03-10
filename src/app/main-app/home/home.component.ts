@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   public items;
   
   changed(x:HomeWidget){
-    console.log("zmieniony");
+    console.log(x);
     x.onResize();
   }
 
