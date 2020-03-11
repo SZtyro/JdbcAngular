@@ -16,15 +16,20 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   @ViewChild('mainScreen', {read: ElementRef, static:false}) elementView: ElementRef;
   @ViewChild('chart', {read: ElementRef, static:false}) chartElem: ElementRef;
+  @ViewChild('buttons', {read: ElementRef, static:false}) buttonsElem: ElementRef;
+ 
 
 
   onResize() {
 
-    this.height = this.elementView.nativeElement.offsetHeight;
-    console.log(this.height);
-   // console.log(this.renderer);
+    this.height = this.elementView.nativeElement.offsetHeight - this.buttonsElem.nativeElement.offsetHeight - 20;
+    this.width = this.elementView.nativeElement.offsetWidth - 20;
+    console.log(this.type);
+    
     //if(this.renderer != null)
-    //this.renderer.setStyle(this.chartElem,"height","10px");
+    //this.renderer.setStyle(this.chartElem.nativeElement,"height",this.height+"px");
+    //this.renderer.setStyle(this.chartElem.nativeElement,"width",this.width+"px");
+    
   }
 
   chartTypes = [
@@ -44,47 +49,21 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   selectedTable;
 
   height;
-
+  width;
+  type;
   ngOnInit(): void {
 
     //this.getDataBaseTypes();
 
-    const type = GoogleChartPackagesHelper.getPackageForChartName(this.myType);
-    this.loaderService.onReady.subscribe(() => {
-      this.loaderService.loadChartPackages([type]).subscribe(() => {
-        // Start creating your chart now
-        // Example:
-        const formatter = new google.visualization.BarFormat();
-      });
+    // this.type = GoogleChartPackagesHelper.getPackageForChartName(this.myType);
+    // this.loaderService.onReady.subscribe(() => {
+    //   this.loaderService.loadChartPackages([this.type]).subscribe(() => {
+    //     // Start creating your chart now
+    //     // Example:
+    //     //const formatter = new google.visualization.BarFormat();
+    //   });
 
-    });
-
-    // this.dataBaseService.getTable("EMPLOYEES").subscribe(data => {
-    //   console.log(data)
-    //   this.rawBase = data;
-    //   this.fetchColumnNames();
-
-
-
-    //   this.myColumnNames.subscribe(columns => {
-    //     console.log("subik: ")
-    //     console.log(columns);
-    //     this.rawBase.forEach((element, index) => {
-    //       let rowData = [];
-    //       columns.forEach(element => {
-
-    //         rowData.push(data[index]["" + element]);
-    //       });
-    //       this.myData[index] = rowData;
-    //     });
-    //     console.log(this.myData);
-    //   })
-
-
-
-    //   console.log(this.myData);
-
-    // })
+    // });
 
   }
 
@@ -98,7 +77,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
 
   rawBase: Map<String, Object>[];
-  myType = "BarChart";
+  myType = "Bar";
   baseColumnNames = [];
   myColumnNames = new Subject<String[]>();
   tableName;

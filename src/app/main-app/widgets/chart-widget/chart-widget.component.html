@@ -1,6 +1,6 @@
 <gridster-item GridElem [item]="this" #mainScreen>
-    
-    <div style="padding: 10px;">
+
+    <div #buttons>
         <button mat-button [matMenuTriggerFor]="appMenu"><i class="fas fa-chart-line"></i></button>
         <mat-menu #appMenu="matMenu">
             <button mat-menu-item *ngFor="let item of chartTypes" (click)="changeBarType(item)">{{item}}</button>
@@ -18,10 +18,10 @@
                 <mat-checkbox (click)="addToColumns(item)">{{item}}</mat-checkbox>
             </div>
         </mat-menu>
-        
-        <google-chart style="width: 500px; " [type]="myType" [data]="myData"
-            [columnNames]="colss" #chart>
-        </google-chart>
     </div>
+    <google-chart [width]="width" [height]="height" [type]="myType" [data]="myData" [columnNames]="colss" #chart>
+    </google-chart>
+
+
 
 </gridster-item>
