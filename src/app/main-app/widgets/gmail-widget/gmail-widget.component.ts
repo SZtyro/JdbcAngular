@@ -29,7 +29,7 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   x: number = 0;
   y: number = 0;
   cols: number = 8;
-  rows: number = 3;
+  rows: number = 6;
 
   //USER
   private user: SocialUser;

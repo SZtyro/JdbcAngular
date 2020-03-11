@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, View
 import { Router } from '@angular/router';
 import { HttpClientService } from '../../services/http-client.service';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { GridsterConfig, GridsterItemComponent } from 'angular-gridster2';
+import { GridsterConfig, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
 import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
 import { GmailService } from 'src/app/services/Gmail/gmail.service';
 import { AuthService } from 'angularx-social-login';
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   public items;
   
   changed(x:HomeWidget){
-    console.log(x);
+   // console.log(itemComponent);
     x.onResize();
   }
 

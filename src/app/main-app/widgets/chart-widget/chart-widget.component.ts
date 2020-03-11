@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Injector, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
@@ -14,9 +14,17 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
+  @ViewChild('mainScreen', {read: ElementRef, static:false}) elementView: ElementRef;
+  @ViewChild('chart', {read: ElementRef, static:false}) chartElem: ElementRef;
+
+
   onResize() {
 
-
+    this.height = this.elementView.nativeElement.offsetHeight;
+    console.log(this.height);
+   // console.log(this.renderer);
+    //if(this.renderer != null)
+    //this.renderer.setStyle(this.chartElem,"height","10px");
   }
 
   chartTypes = [
@@ -34,6 +42,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   dataTypes;
   tableNames;
   selectedTable;
+
+  height;
 
   ngOnInit(): void {
 
@@ -99,7 +109,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   constructor(private loaderService: ScriptLoaderService,
     private dataBaseService: HttpClientService,
-
+    private renderer: Renderer2
   ) {
   }
 

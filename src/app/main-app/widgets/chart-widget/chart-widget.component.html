@@ -1,4 +1,4 @@
-<gridster-item GridElem [item]="this">
+<gridster-item GridElem [item]="this" #mainScreen>
     
     <div style="padding: 10px;">
         <button mat-button [matMenuTriggerFor]="appMenu"><i class="fas fa-chart-line"></i></button>
@@ -19,8 +19,8 @@
             </div>
         </mat-menu>
         
-        <google-chart style="width: 500px; height: 300px;" [type]="myType" [data]="myData"
-            [columnNames]="colss">
+        <google-chart style="width: 500px; " [type]="myType" [data]="myData"
+            [columnNames]="colss" #chart>
         </google-chart>
     </div>
 
