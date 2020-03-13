@@ -25,6 +25,15 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   chartColumns = [];
   chartColumnsTypes = [];
   chartType = "Bar";
+  chartLegendPositions = [
+    'bottom',
+    'lebeled',
+    'left',
+    'none',
+    'right',
+    'top'
+  ];
+  chartLegendPosition = 'right';
 
   selectedTable;
 
@@ -32,7 +41,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   rawColumns;
   rawColumnTypes;
   rawTable;
-
+  rawForeignColumns
 
   onResize() {
 
@@ -80,27 +89,6 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     google.charts.setOnLoadCallback(() => this.drawChart(this.chartElem.nativeElement));
   }
 
-  // drawChart(){
-
-  //   this.chartWrapper = new google.visualization.ChartWrapper();
-  //   this.chartWrapper.setChartType("Bar");
-  //   this.chartTable = new google.visualization.DataTable();
-  //   this.chartTable.addColumn("string");
-  //   this.chartTable.addColumn("number");
-  //   this.chartTable.addRow(["sdsds",123]);
-  //   this.chartTable.addRow(["qweweq",200]);
-  //   // this.myData.forEach((element,i) => {
-  //   //   this.table.insertRows(i,2);
-  //   //   this.table[i] = element;
-  //   //   console.log("tabelka");
-  //   //   console.log(this.table);
-  //   // });
-  //   this.chartWrapper.setDataTable(this.chartTable);
-
-
-  //   this.chartWrapper.draw(this.chartElem.nativeElement);
-  // }
-
   drawChart(ref) {
     this.chartWrapper = new google.visualization.ChartWrapper();
     this.chartTable = new google.visualization.DataTable();
@@ -121,27 +109,21 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     this.rawTable.forEach((row, index) => {
       let rowContainer = [];
       this.chartColumns.forEach((column, i) => {
-        rowContainer.push(row[column]);
+        if (this.chartTable.getColumnType(i) == "date")
+          rowContainer.push(new Date(row[column]));
+        else
+          rowContainer.push(row[column]);
       });
       this.chartTable.addRow(rowContainer);
     });
 
     var options = {
       width: this.width,
-      height: this.height
+      height: this.height,
+      legend: { position: "none" }
     };
 
     this.chartWrapper.setOptions(options);
-    // this.chartTable.addColumn("string");
-    // this.chartTable.addColumn("number");
-    // this.chartTable.addRow(["sdsds", 123]);
-    // this.chartTable.addRow(["qweweq", 200]);
-    // this.myData.forEach((element,i) => {
-    //   this.table.insertRows(i,2);
-    //   this.table[i] = element;
-    //   console.log("tabelka");
-    //   console.log(this.table);
-    // });
     this.chartWrapper.setDataTable(this.chartTable);
     this.chartWrapper.setChartType(this.chartType);
 

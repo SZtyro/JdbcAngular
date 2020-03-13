@@ -1,26 +1,43 @@
 <div #buttons>
     <h2 mat-dialog-title>{{father.chartTitle}} configuration</h2>
+    <div style="display: flex; justify-content: space-between;">
+        <mat-form-field style="margin-right: 10px;">
+            <mat-label>Chart type</mat-label>
+            <mat-select [(value)]="father.chartType">
+                <mat-option *ngFor="let item of father.chartTypes" value="{{item}}" (click)="setChartType(item)">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Legend</mat-label>
+            <mat-select [(value)]="father.chartLegendPosition">
+                <mat-option *ngFor="let item of father.chartLegendPositions" value="{{item}}" (click)="selectLegendPosition(item)">
+                    {{item | titlecase}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Table</mat-label>
+            <mat-select [(value)]="father.selectedTable" (click)="getTables()">
+                <mat-option *ngFor="let item of father.rawTableNames" value="{{item}}" (click)="selectTable(item)">
+                    {{item}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     
-    <mat-form-field>
-        <mat-label>Chart type</mat-label>
-        <mat-select [(value)]="father.chartType">
-            <mat-option *ngFor="let item of father.chartTypes" value="{{item}}" (click)="setChartType(item)">
-                {{item}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
 
-
-    <button mat-button [matMenuTriggerFor]="tables" (click)="getTables()">Table</button>
+    <!-- <button mat-button [matMenuTriggerFor]="tables" (click)="getTables()">Table</button>
     <mat-menu #tables="matMenu">
         <button mat-menu-item *ngFor="let item of father.rawTableNames" (click)="selectTable(item)">{{item}}</button>
-    </mat-menu>
+    </mat-menu> -->
 
-    <button mat-button [matMenuTriggerFor]="columns" (click)="getColumns()">Column</button>
+    <button mat-raised-button [matMenuTriggerFor]="columns" (click)="getColumns()" color="primary" *ngIf="father.selectedTable != null">Add column</button>
     <mat-menu #columns="matMenu">
         <!-- <button mat-menu-item *ngFor="let item of baseColumnNames" (click)="addToColumns(item)">{{item}}</button> -->
         <div mat-menu-item *ngFor="let item of father.rawColumns, let i = index">
-            <mat-checkbox (click)="addChartColumn(item,i)">{{item}}</mat-checkbox>
+            <mat-checkbox (click)="addChartColumn(item,i)" (mouseenter)="getForeignColumns()">{{item}}</mat-checkbox>
         </div>
     </mat-menu>
 
@@ -29,12 +46,13 @@
         <div class="example-box" *ngFor="let item of father.chartColumns" cdkDrag>{{item}}</div>
     </div>
 
-    
-    <h5 mat-dialog-title>Preview:</h5>
-    
-    <div style=" text-align: center; min-height: 500px;">
-        <div #chart>
 
+    <h5 mat-dialog-title>Preview:</h5>
+
+    <div style=" text-align: center; min-height: 500px; display: flex;">
+        <div #chart style="width: auto;
+        margin: 0 auto !important;">
+           
         </div>
     </div>
 </div>

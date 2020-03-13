@@ -112,6 +112,16 @@ export class ChartSettingsModalComponent implements OnInit {
   // getColumnTypes(){
   //   this.father.dataBaseService.getType(this.father.selectedTable).subscribe(data => {this.father.dataTypes = data})
   // }
+  getForeignColumns(){
+    this.father.dataBaseService.getForeignKeyColumns("'"+this.father.selectedTable+"'").subscribe(foreignColumns => {this.father.rawForeignColumns = foreignColumns})
+    this.father.rawForeignColumns.forEach(element => {
+      this.father.dataBaseService.getIds([this.father.selectedTable,element]).subscribe(id => {console.log(id)})
+    });
+  }
+
+  selectLegendPosition(legendPosition){
+    this.father.chartLegendPosition = legendPosition;
+  }
 
   setChartType(chartType){
     this.father.chartType = chartType;
