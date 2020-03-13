@@ -1,9 +1,13 @@
-import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Subject, Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { ChartSettingsModalComponent } from '../../modals/chart-settings-modal/chart-settings-modal.component';
+import { preserveWhitespacesDefault } from '@angular/compiler';
+import { FakeMissingTranslationHandler } from '@ngx-translate/core';
 
 
 @Component({
@@ -14,22 +18,29 @@ import { Subject, Observable } from 'rxjs';
 })
 export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
-  @ViewChild('mainScreen', {read: ElementRef, static:false}) elementView: ElementRef;
-  @ViewChild('chart', {read: ElementRef, static:false}) chartElem: ElementRef;
-  @ViewChild('buttons', {read: ElementRef, static:false}) buttonsElem: ElementRef;
- 
+  @ViewChild('mainScreen', { read: ElementRef, static: false }) elementView: ElementRef;
+  @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
+  chartWrapper: google.visualization.ChartWrapper;
+  chartTable: google.visualization.DataTable;
+  chartColumns = [];
+  chartColumnsTypes = [];
+  chartType = "Bar";
+
+  selectedTable;
+
+  rawTableNames;
+  rawColumns;
+  rawColumnTypes;
+  rawTable;
 
 
   onResize() {
 
-    this.height = this.elementView.nativeElement.offsetHeight - this.buttonsElem.nativeElement.offsetHeight - 20;
+    this.height = this.elementView.nativeElement.offsetHeight - 20;
     this.width = this.elementView.nativeElement.offsetWidth - 20;
-    console.log(this.type);
-    
-    //if(this.renderer != null)
-    //this.renderer.setStyle(this.chartElem.nativeElement,"height",this.height+"px");
-    //this.renderer.setStyle(this.chartElem.nativeElement,"width",this.width+"px");
-    
+    // this.chartWrapper.setOption("height",this.height);
+    // this.chartWrapper.setOption("width",this.width);
+    this.drawChart(this.chartElem.nativeElement);
   }
 
   chartTypes = [
@@ -44,9 +55,9 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     'DonutChart',
 
   ];
-  dataTypes;
-  tableNames;
-  selectedTable;
+  // dataTypes;
+  // tableNames;
+  // selectedTable;
 
   height;
   width;
@@ -64,7 +75,77 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     //   });
 
     // });
+    //google.charts.load('current', {packages: ['corechart', 'controls']});
 
+    google.charts.setOnLoadCallback(() => this.drawChart(this.chartElem.nativeElement));
+  }
+
+  // drawChart(){
+
+  //   this.chartWrapper = new google.visualization.ChartWrapper();
+  //   this.chartWrapper.setChartType("Bar");
+  //   this.chartTable = new google.visualization.DataTable();
+  //   this.chartTable.addColumn("string");
+  //   this.chartTable.addColumn("number");
+  //   this.chartTable.addRow(["sdsds",123]);
+  //   this.chartTable.addRow(["qweweq",200]);
+  //   // this.myData.forEach((element,i) => {
+  //   //   this.table.insertRows(i,2);
+  //   //   this.table[i] = element;
+  //   //   console.log("tabelka");
+  //   //   console.log(this.table);
+  //   // });
+  //   this.chartWrapper.setDataTable(this.chartTable);
+
+
+  //   this.chartWrapper.draw(this.chartElem.nativeElement);
+  // }
+
+  drawChart(ref) {
+    this.chartWrapper = new google.visualization.ChartWrapper();
+    this.chartTable = new google.visualization.DataTable();
+
+    this.chartColumns.forEach((element, i) => {
+      if (this.chartColumnsTypes[i] == "VARCHAR2")
+        this.chartTable.addColumn("string", element.toString());
+      else if (this.chartColumnsTypes[i] == "NUMBER")
+        this.chartTable.addColumn("number", element.toString());
+      else if (this.chartColumnsTypes[i] == "DATE")
+        this.chartTable.addColumn("date", element.toString());
+
+
+
+
+    });
+
+    this.rawTable.forEach((row, index) => {
+      let rowContainer = [];
+      this.chartColumns.forEach((column, i) => {
+        rowContainer.push(row[column]);
+      });
+      this.chartTable.addRow(rowContainer);
+    });
+
+    var options = {
+      width: this.width,
+      height: this.height
+    };
+
+    this.chartWrapper.setOptions(options);
+    // this.chartTable.addColumn("string");
+    // this.chartTable.addColumn("number");
+    // this.chartTable.addRow(["sdsds", 123]);
+    // this.chartTable.addRow(["qweweq", 200]);
+    // this.myData.forEach((element,i) => {
+    //   this.table.insertRows(i,2);
+    //   this.table[i] = element;
+    //   console.log("tabelka");
+    //   console.log(this.table);
+    // });
+    this.chartWrapper.setDataTable(this.chartTable);
+    this.chartWrapper.setChartType(this.chartType);
+
+    this.chartWrapper.draw(ref);
   }
 
   //GRIDSTER
@@ -87,64 +168,25 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   myData = [];
 
   constructor(private loaderService: ScriptLoaderService,
-    private dataBaseService: HttpClientService,
-    private renderer: Renderer2
+    public dataBaseService: HttpClientService,
+    public dialog: MatDialog
   ) {
-  }
-
-
-  changeBarType(item) {
-    this.myType = item;
-  }
-
-  setTableName(newTableName) {
-    this.tableName = newTableName;
-  }
-
-  fetchColumnNames() {
-    this.baseColumnNames = Object.keys(this.rawBase[0]);
 
   }
 
-  addToColumns(columnName) {
-    
-    this.colss.push(columnName)
-    this.myColumnNames.next(this.colss);
-    console.log(this.colss);
 
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ChartSettingsModalComponent, {
+      //width: '250px',
+      data: { father: this }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
-  getColumns(): Observable<String[]> {
-    return this.myColumnNames.asObservable();
-  }
 
-  getTableColumns() {
-    this.dataBaseService.getTable(this.selectedTable).subscribe(data => { 
-      this.baseColumnNames = Object.keys(data[0]);
-      this.rawBase = data;
-      this.myColumnNames.subscribe(columns => {
-            console.log("subik: ")
-            console.log(columns);
-            this.rawBase.forEach((element, index) => {
-              let rowData = [];
-              columns.forEach(element => {
-    
-                rowData.push(data[index]["" + element]);
-              });
-              this.myData[index] = rowData;
-            });
-            console.log(this.myData);
-          })
-    }, error => {console.log(error)})
-  }
-  getDataBaseTables(){
-    this.colss= [];
-    this.rawBase = [];
-    this.myData = [];
-    this.myType = "";
-    this.dataBaseService.getTableNames().subscribe(data=>{ this.tableNames = data}, error => {console.log(error)})
-  }
-  selectTable(item){
-    this.selectedTable = item;
-  }
 }

@@ -40,6 +40,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { PhotoWidgetComponent } from './main-app/widgets/photo-widget/photo-widget.component';
+import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -69,6 +72,7 @@ export function provideConfig() {
     AddModalComponent,
     TableMenuComponent,
     LoginWindowComponent,
+    ChartSettingsModalComponent,
     
     
     
@@ -110,7 +114,9 @@ export function provideConfig() {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatCheckboxModule,
+    DragDropModule
     
     
   ],
@@ -120,7 +126,8 @@ export function provideConfig() {
   entryComponents: [
     DeleteModalComponent,
     EditModalComponent,
-    AddModalComponent
+    AddModalComponent,
+    ChartSettingsModalComponent
   ],
   providers: [
     {

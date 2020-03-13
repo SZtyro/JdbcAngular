@@ -1,0 +1,40 @@
+<div #buttons>
+    <h2 mat-dialog-title>{{father.chartTitle}} configuration</h2>
+    
+    <mat-form-field>
+        <mat-label>Chart type</mat-label>
+        <mat-select [(value)]="father.chartType">
+            <mat-option *ngFor="let item of father.chartTypes" value="{{item}}" (click)="setChartType(item)">
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <button mat-button [matMenuTriggerFor]="tables" (click)="getTables()">Table</button>
+    <mat-menu #tables="matMenu">
+        <button mat-menu-item *ngFor="let item of father.rawTableNames" (click)="selectTable(item)">{{item}}</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="columns" (click)="getColumns()">Column</button>
+    <mat-menu #columns="matMenu">
+        <!-- <button mat-menu-item *ngFor="let item of baseColumnNames" (click)="addToColumns(item)">{{item}}</button> -->
+        <div mat-menu-item *ngFor="let item of father.rawColumns, let i = index">
+            <mat-checkbox (click)="addChartColumn(item,i)">{{item}}</mat-checkbox>
+        </div>
+    </mat-menu>
+
+
+    <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of father.chartColumns" cdkDrag>{{item}}</div>
+    </div>
+
+    
+    <h5 mat-dialog-title>Preview:</h5>
+    
+    <div style=" text-align: center; min-height: 500px;">
+        <div #chart>
+
+        </div>
+    </div>
+</div>
