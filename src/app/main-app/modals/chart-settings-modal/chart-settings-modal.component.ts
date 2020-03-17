@@ -130,7 +130,7 @@ export class ChartSettingsModalComponent implements OnInit {
   }
 
   getTables(){
-    this.father.rawTableNames = this.father.dataBaseService.getTableNames().subscribe(tableNames => {this.father.rawTableNames = tableNames});
+    this.father.dataBaseService.getTableNames().subscribe(tableNames => {this.father.rawTableNames = tableNames});
   }
 
   getRawTable(){

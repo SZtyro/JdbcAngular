@@ -20,6 +20,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   @ViewChild('mainScreen', { read: ElementRef, static: false }) elementView: ElementRef;
   @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
+  apiLoaded: boolean = false;
   chartWrapper: google.visualization.ChartWrapper;
   chartTable: google.visualization.DataTable;
   chartColumns = [];
@@ -33,25 +34,6 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     'right',
     'top'
   ];
-  chartLegendPosition = 'right';
-
-  selectedTable;
-
-  rawTableNames;
-  rawColumns;
-  rawColumnTypes;
-  rawTable;
-  rawForeignColumns
-
-  onResize() {
-
-    this.height = this.elementView.nativeElement.offsetHeight - 20;
-    this.width = this.elementView.nativeElement.offsetWidth - 20;
-    // this.chartWrapper.setOption("height",this.height);
-    // this.chartWrapper.setOption("width",this.width);
-    this.drawChart(this.chartElem.nativeElement);
-  }
-
   chartTypes = [
     'AnnotationChart',
     'AreaChart',
@@ -64,6 +46,24 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     'DonutChart',
 
   ];
+  chartLegendPosition = 'right';
+
+  selectedTable;
+
+  rawTableNames = [];
+  rawColumns;
+  rawColumnTypes;
+  rawTable = [];
+  rawForeignColumns
+
+  onResize() {
+
+    this.height = this.elementView.nativeElement.offsetHeight - 20;
+    this.width = this.elementView.nativeElement.offsetWidth - 20;
+    this.drawChart(this.chartElem.nativeElement);
+  }
+
+
   // dataTypes;
   // tableNames;
   // selectedTable;
@@ -72,62 +72,53 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   width;
   type;
   ngOnInit(): void {
+    google.charts.load('current', {packages: ['corechart', 'controls']});
 
-    //this.getDataBaseTypes();
-
-    // this.type = GoogleChartPackagesHelper.getPackageForChartName(this.myType);
-    // this.loaderService.onReady.subscribe(() => {
-    //   this.loaderService.loadChartPackages([this.type]).subscribe(() => {
-    //     // Start creating your chart now
-    //     // Example:
-    //     //const formatter = new google.visualization.BarFormat();
-    //   });
-
-    // });
-    //google.charts.load('current', {packages: ['corechart', 'controls']});
-
-    google.charts.setOnLoadCallback(() => this.drawChart(this.chartElem.nativeElement));
+    google.charts.setOnLoadCallback(() => {
+      this.apiLoaded = true;
+      this.drawChart(this.chartElem.nativeElement);
+    });
   }
 
   drawChart(ref) {
-    this.chartWrapper = new google.visualization.ChartWrapper();
-    this.chartTable = new google.visualization.DataTable();
+    if (this.apiLoaded) {
+      this.chartWrapper = new google.visualization.ChartWrapper();
+      this.chartTable = new google.visualization.DataTable();
 
-    this.chartColumns.forEach((element, i) => {
-      if (this.chartColumnsTypes[i] == "VARCHAR2")
-        this.chartTable.addColumn("string", element.toString());
-      else if (this.chartColumnsTypes[i] == "NUMBER")
-        this.chartTable.addColumn("number", element.toString());
-      else if (this.chartColumnsTypes[i] == "DATE")
-        this.chartTable.addColumn("date", element.toString());
+      this.chartColumns.forEach((element, i) => {
+        if (this.chartColumnsTypes[i] == "VARCHAR2")
+          this.chartTable.addColumn("string", element.toString());
+        else if (this.chartColumnsTypes[i] == "NUMBER")
+          this.chartTable.addColumn("number", element.toString());
+        else if (this.chartColumnsTypes[i] == "DATE")
+          this.chartTable.addColumn("date", element.toString());
 
-
-
-
-    });
-
-    this.rawTable.forEach((row, index) => {
-      let rowContainer = [];
-      this.chartColumns.forEach((column, i) => {
-        if (this.chartTable.getColumnType(i) == "date")
-          rowContainer.push(new Date(row[column]));
-        else
-          rowContainer.push(row[column]);
       });
-      this.chartTable.addRow(rowContainer);
-    });
 
-    var options = {
-      width: this.width,
-      height: this.height,
-      legend: { position: "none" }
-    };
+      this.rawTable.forEach((row, index) => {
+        let rowContainer = [];
+        this.chartColumns.forEach((column, i) => {
+          if (this.chartTable.getColumnType(i) == "date")
+            rowContainer.push(new Date(row[column]));
+          else
+            rowContainer.push(row[column]);
+        });
+        this.chartTable.addRow(rowContainer);
+      });
 
-    this.chartWrapper.setOptions(options);
-    this.chartWrapper.setDataTable(this.chartTable);
-    this.chartWrapper.setChartType(this.chartType);
+      var options = {
+        width: this.width,
+        height: this.height,
+        legend: { position: "none" }
+      };
 
-    this.chartWrapper.draw(ref);
+      this.chartWrapper.setOptions(options);
+      this.chartWrapper.setDataTable(this.chartTable);
+      this.chartWrapper.setChartType(this.chartType);
+
+      this.chartWrapper.draw(ref);
+    }
+
   }
 
   //GRIDSTER

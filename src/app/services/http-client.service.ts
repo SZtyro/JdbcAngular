@@ -28,7 +28,7 @@ url = "http://localhost:8080";
   }
 
   getTableNames(){
-    return this.httpClient.get<String>(this.url + '/getTableNames');
+    return this.httpClient.get<String[]>(this.url + '/getTableNames');
     
   }
 

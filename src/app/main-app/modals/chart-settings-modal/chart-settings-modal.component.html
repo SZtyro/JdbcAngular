@@ -37,7 +37,7 @@
     <mat-menu #columns="matMenu">
         <!-- <button mat-menu-item *ngFor="let item of baseColumnNames" (click)="addToColumns(item)">{{item}}</button> -->
         <div mat-menu-item *ngFor="let item of father.rawColumns, let i = index">
-            <mat-checkbox (click)="addChartColumn(item,i)" (mouseenter)="getForeignColumns()">{{item}}</mat-checkbox>
+            <mat-checkbox (click)="addChartColumn(item,i)" >{{item}}</mat-checkbox>
         </div>
     </mat-menu>
 
