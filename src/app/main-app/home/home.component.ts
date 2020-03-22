@@ -10,6 +10,7 @@ import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.compo
 import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../interfaces/homeWidget';
 import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.component';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 export interface Tile {
   type;
@@ -64,14 +65,13 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    
+    private shared: SharedService
   
   ) {
-   
+    shared.homeRef = this;
     this.items=[
       ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent,PhotoWidgetComponent
   ]
-
     
     //  this.items = [
     //   ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent

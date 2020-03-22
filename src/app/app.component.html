@@ -43,8 +43,8 @@
               class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
 
           <!-- Widgets -->
-          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary"
-              class="sideNavContent"><i class="fas fa-th-large barIcon"></i></button></a>
+          <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary"
+              class="sideNavContent" (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
 
           <!-- Settings -->
           <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"

@@ -30,6 +30,7 @@ import { FilesUploadDirective } from './directives/FilesUpload/files-upload.dire
 import { PhotoWidgetComponent } from './widgets/photo-widget/photo-widget.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { WidgetListModalComponent } from './widget-list-modal/widget-list-modal.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   entryComponents: [
     GmailWidgetComponent,
     ChartWidgetComponent,
-    PhotoWidgetComponent
+    PhotoWidgetComponent,
+    WidgetListModalComponent
   ],
   declarations: [
     HomeComponent,

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent},
   { path: 'home', component: HomeComponent},
   { path: 'table', component: TableMenuComponent},
-  { path: 'login', component: LoginWindowComponent}
+  { path: 'login', component: LoginWindowComponent},
 ];
 
 @NgModule({

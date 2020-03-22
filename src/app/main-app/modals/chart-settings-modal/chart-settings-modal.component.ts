@@ -112,6 +112,13 @@ export class ChartSettingsModalComponent implements OnInit {
   // getColumnTypes(){
   //   this.father.dataBaseService.getType(this.father.selectedTable).subscribe(data => {this.father.dataTypes = data})
   // }
+
+  reset(){
+    this.father.chartColumns = [];
+    //this.father.chartTable.removeColumns.;
+
+  }
+
   getForeignColumns(){
     this.father.dataBaseService.getForeignKeyColumns("'"+this.father.selectedTable+"'").subscribe(foreignColumns => {this.father.rawForeignColumns = foreignColumns})
     this.father.rawForeignColumns.forEach(element => {
