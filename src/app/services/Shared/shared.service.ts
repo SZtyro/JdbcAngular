@@ -10,7 +10,5 @@ export class SharedService {
 
   homeRef:HomeComponent;
 
-  getWidgets(){
-    return this.homeRef.items;
-  }
+  
 }

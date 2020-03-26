@@ -51,6 +51,9 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     ) {
       
   }
+  toSave() {
+    throw new Error("Method not implemented.");
+  }
 
   ngOnInit() {
     this.signInWithGoogle();

@@ -33,105 +33,35 @@ export class ChartSettingsModalComponent implements OnInit {
 
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.father.chartColumns, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.father.chartData.chartColumns, event.previousIndex, event.currentIndex);
     //this.father.myColumnNames.next(this.father.colss);
-    moveItemInArray(this.father.chartColumnsTypes,event.previousIndex, event.currentIndex)
-    console.log(this.father.chartColumns);
-    console.log(this.father.chartColumnsTypes);
+    moveItemInArray(this.father.chartData.chartColumnsTypes,event.previousIndex, event.currentIndex)
+    console.log(this.father.chartData.chartColumns);
+    console.log(this.father.chartData.chartColumnsTypes);
     this.father.drawChart(this.father.chartElem.nativeElement);
     this.father.drawChart(this.chartElem.nativeElement);
   }
 
-  // getTypeOfColumn(columnName){
-  //   this.getColumnTypes();
-  //   this.fetchColumnNames();
-  //   console.log(this.father.dataTypes[this.father.baseColumnNames.indexOf(columnName)])
-  //   return this.father.dataTypes[this.father.baseColumnNames.indexOf(columnName)];
-  // }
-
-  // changeBarType(item) {
-  //   this.father.myType = item;
-  // }
-
-  // setTableName(newTableName) {
-  //   this.father.tableName = newTableName;
-  // }
-
-  // fetchColumnNames() {
-  //   this.father.baseColumnNames = Object.keys(this.father.rawBase[0]);
-
-  // }
-
-  // addToColumns(columnName) {
-    
-  //   this.father.colss.push(columnName)
-  //   this.father.myColumnNames.next(this.father.colss);
-  //   console.log(this.father.colss);
-
-  // }
-
-  // getColumns(): Observable<String[]> {
-  //   return this.father.myColumnNames.asObservable();
-  // }
-
-  // getTableColumns() {
-  //   this.father.dataBaseService.getTable(this.father.selectedTable).subscribe(data => { 
-  //     this.father.baseColumnNames = Object.keys(data[0]);
-  //     this.father.rawBase = data;
-  //     this.father.myColumnNames.subscribe(columns => {
-  //           // console.log("subik: ")
-  //           // console.log(columns);
-  //           this.father.rawBase.forEach((element, index) => {
-              
-  //             let rowData = [];
-  //             columns.forEach(element => {
-                
-  //               rowData.push(data[index]["" + element]);
-  //             });
-  //             //this.father.myData[index] = rowData;
-  //             //this.father.table.addColumn()
-  //           });
-  //           this.father.ngOnInit();
-  //           console.log(this.father.myData);
-  //         })
-  //   }, error => {console.log(error)})
-
-    
-  // }
-  // getDataBaseTables(){
-  //   this.father.colss= [];
-  //   this.father.rawBase = [];
-  //   this.father.myData = [];
-  //   this.father.myType = "";
-  //   this.father.dataBaseService.getTableNames().subscribe(data=>{ this.father.tableNames = data}, error => {console.log(error)})
-  // }
-  // selectTable(item){
-  //   this.father.selectedTable = item;
-  // }
-
-  // getColumnTypes(){
-  //   this.father.dataBaseService.getType(this.father.selectedTable).subscribe(data => {this.father.dataTypes = data})
-  // }
 
   reset(){
-    this.father.chartColumns = [];
+    this.father.chartData.chartColumns = [];
     //this.father.chartTable.removeColumns.;
 
   }
 
   getForeignColumns(){
-    this.father.dataBaseService.getForeignKeyColumns("'"+this.father.selectedTable+"'").subscribe(foreignColumns => {this.father.rawForeignColumns = foreignColumns})
+    this.father.dataBaseService.getForeignKeyColumns("'"+this.father.chartData.selectedTable+"'").subscribe(foreignColumns => {this.father.rawForeignColumns = foreignColumns})
     this.father.rawForeignColumns.forEach(element => {
-      this.father.dataBaseService.getIds([this.father.selectedTable,element]).subscribe(id => {console.log(id)})
+      this.father.dataBaseService.getIds([this.father.chartData.selectedTable,element]).subscribe(id => {console.log(id)})
     });
   }
 
   selectLegendPosition(legendPosition){
-    this.father.chartLegendPosition = legendPosition;
+    this.father.chartData.chartLegendPosition = legendPosition;
   }
 
   setChartType(chartType){
-    this.father.chartType = chartType;
+    this.father.chartData.chartType = chartType;
     this.father.drawChart(this.father.chartElem.nativeElement);
     this.father.drawChart(this.chartElem.nativeElement);
   }
@@ -141,7 +71,7 @@ export class ChartSettingsModalComponent implements OnInit {
   }
 
   getRawTable(){
-    this.father.dataBaseService.getTable(this.father.selectedTable).subscribe(rawTable => {this.father.rawTable = rawTable})
+    this.father.dataBaseService.getTable(this.father.chartData.selectedTable).subscribe(rawTable => {this.father.rawTable = rawTable})
   }
 
   getColumns(){
@@ -149,19 +79,19 @@ export class ChartSettingsModalComponent implements OnInit {
   }
 
   getColumnTypes(){
-    this.father.dataBaseService.getType(this.father.selectedTable).subscribe(columnTypes => {this.father.rawColumnTypes = columnTypes})
+    this.father.dataBaseService.getType(this.father.chartData.selectedTable).subscribe(columnTypes => {this.father.rawColumnTypes = columnTypes})
   }
 
   selectTable(selectedTableName){
-    this.father.selectedTable = selectedTableName;
+    this.father.chartData.selectedTable = selectedTableName;
     this.getRawTable();
     this.getColumnTypes();
   }
 
   addChartColumn(columnName,i){
-    this.father.chartColumns.push(columnName);
-    this.father.chartColumnsTypes.push(this.father.rawColumnTypes[i]);
-    console.log(this.father.chartColumnsTypes);
+    this.father.chartData.chartColumns.push(columnName);
+    this.father.chartData.chartColumnsTypes.push(this.father.rawColumnTypes[i]);
+    //console.log(this.father.data.chartColumnsTypes);
     this.father.drawChart(this.father.chartElem.nativeElement);
     this.father.drawChart(this.chartElem.nativeElement);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../../services/http-client.service';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -14,8 +14,8 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 
 export interface Tile {
   type;
-  
-  
+
+
 }
 
 @Component({
@@ -27,14 +27,14 @@ export interface Tile {
 
 
 export class HomeComponent implements OnInit {
- 
+
 
   //x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
-  
+
   tableNames: String[] = [];
   opened: boolean = false;
-  
-  
+
+
 
   public options: GridsterConfig = {
     pushItems: true,
@@ -55,44 +55,66 @@ export class HomeComponent implements OnInit {
       enabled: true
     }
   }
-  public items;
-  
-  changed(x:HomeWidget){
-   // console.log(itemComponent);
+  public items:Type<unknown>[];
+
+  changed(x: HomeWidget) {
+    // console.log(itemComponent);
     x.onResize();
   }
+
+  appWidgets = {
+    'GmailWidgetComponent':GmailWidgetComponent,
+    'ChartWidgetComponent':ChartWidgetComponent,
+    'PhotoWidgetComponent':PhotoWidgetComponent
+  }
+
 
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
     private shared: SharedService
-  
+
   ) {
     shared.homeRef = this;
-    this.items=[
-      ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent,PhotoWidgetComponent
-  ]
+    //this.items = [GmailWidgetComponent]
+    //this.items = [];
+    this.items = [];
+    let acc = [];
     
-    //  this.items = [
-    //   ChartWidgetComponent,GmailWidgetComponent,ChartWidgetComponent
-        
+    acc = JSON.parse(localStorage.getItem('desktopWidgets'));
+    console.log(acc);
+    if(acc != null)
+    acc.forEach(element => {
+      
+      //this.items.push(GmailWidgetComponent); dziala
+      this.items.push(this.appWidgets[element]);
+    });
+    
+    
+  
+    
 
-    //  ];
-     
     // this.items = [
-    //   new GmailWidgetComponent(this.service, this.authService, new ElementRef(this)),
-    //    new ChartWidgetComponent(this.loaderService),
-    //     new ChartWidgetComponent(this.loaderService)
-        
-
-    // ];
-
+    //   ChartWidgetComponent,
+    //   GmailWidgetComponent,
+    //   ChartWidgetComponent,
+    //   PhotoWidgetComponent
+    // ]
+    
 
   }
 
-  
 
-  
+  save(){
+    let acc = [];
+    this.items.forEach(elem => {
+      acc.push(elem.name)
+    })
+    localStorage.setItem('desktopWidgets', JSON.stringify(acc));
+    console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
+    console.log("Storage save")
+  }
+
 
   ngOnInit() {
     this.httpClientService.getTableNames().subscribe(
