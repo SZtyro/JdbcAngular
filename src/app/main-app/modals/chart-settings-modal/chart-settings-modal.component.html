@@ -1,6 +1,6 @@
 <div #buttons>
     <h2 mat-dialog-title>{{father.chartTitle}} configuration</h2>
-     <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between;">
         <mat-form-field style="margin-right: 10px;">
             <mat-label>Chart type</mat-label>
             <mat-select [(value)]="father.chartData.chartType">
@@ -27,7 +27,7 @@
             </mat-select>
         </mat-form-field>
     </div>
-    
+
 
 
 
@@ -40,6 +40,7 @@
         </div>
     </mat-menu>
 
+    <button mat-raised-button (click)="reset()" color="primary"> Reset</button>
 
     <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of father.chartData.chartColumns" cdkDrag>{{item}}</div>

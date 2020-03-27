@@ -30,7 +30,7 @@ export class ChartSettingsModalComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.father.chartData.chartColumns, event.previousIndex, event.currentIndex);
@@ -44,8 +44,18 @@ export class ChartSettingsModalComponent implements OnInit {
 
 
   reset(){
-    this.father.chartData.chartColumns = [];
-    //this.father.chartTable.removeColumns.;
+    this.father.chartData = {
+      chartWrapper: null,
+      chartTable: null,
+      chartColumns: [],
+      chartColumnsTypes: [],
+      chartType: "Bar",
+      chartLegendPosition: "none",
+      selectedTable: null,
+    }
+    this.father.rawTable = [];
+    this.father.toSave();
+    
 
   }
 

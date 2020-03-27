@@ -5,6 +5,7 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
 import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
 import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.component';
+import { HomeWidget } from '../interfaces/homeWidget';
 
 interface widgetData {
   class:Type<unknown>;
@@ -36,7 +37,7 @@ export class WidgetListModalComponent implements OnInit {
   }
 
 
-  addWidget(widgetName:Type<unknown>) {
+  addWidget(widgetName:Type<HomeWidget>) {
     
     this.shared.homeRef.items.push(widgetName);
     //this.shared.homeRef.items.push(GmailWidgetComponent);

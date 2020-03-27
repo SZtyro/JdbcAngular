@@ -28,6 +28,10 @@ export class PhotoWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     this.reader = new FileReader();
     this.clientService.getUploadedFiles().subscribe(files => {this.files = files});
   }
+  onChange() {
+    throw new Error("Method not implemented.");
+  }
+  widgetNumber: number;
   toSave() {
     throw new Error("Method not implemented.");
   }

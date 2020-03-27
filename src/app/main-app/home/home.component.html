@@ -6,7 +6,7 @@
 
         <gridster [options]="options" style="overflow: initial; height: initial; background-color: unset;">
 
-                <app-widget-loader *ngFor="let item of items" [type]="item"></app-widget-loader>
+                <app-widget-loader *ngFor="let item of items, let i = index" [type]="item" [index]="i"></app-widget-loader>
 
 
 

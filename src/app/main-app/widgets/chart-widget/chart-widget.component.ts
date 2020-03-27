@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked, OnChanges, AfterViewInit } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { ChartSettingsModalComponent } from '../../modals/chart-settings-modal/chart-settings-modal.component';
 import { preserveWhitespacesDefault } from '@angular/compiler';
 import { FakeMissingTranslationHandler } from '@ngx-translate/core';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { FakeMissingTranslationHandler } from '@ngx-translate/core';
   styleUrls: ['./chart-widget.component.scss'],
 
 })
-export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
+export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, AfterViewInit {
 
   @ViewChild('mainScreen', { read: ElementRef, static: false }) elementView: ElementRef;
   @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
@@ -31,6 +32,11 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     selectedTable: string,
 
   }
+  rawTableNames = [];
+  rawColumns;
+  rawColumnTypes;
+  rawTable = [];
+  rawForeignColumns;
   chartLegendPositions = [
     'bottom',
     'lebeled',
@@ -54,11 +60,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
 
 
-  rawTableNames = [];
-  rawColumns;
-  rawColumnTypes;
-  rawTable = [];
-  rawForeignColumns
+
 
   onResize() {
 
@@ -69,6 +71,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
     this.renderer.setAttribute(this.chartElem.nativeElement, "height", this.height);
     this.drawChart(this.chartElem.nativeElement);
+    this.toSave();
   }
 
 
@@ -80,12 +83,15 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   width;
   type;
   ngOnInit(): void {
+    this.load();
+    console.log(this.widgetNumber + " Chart")
+
     google.charts.load('current', { packages: ['corechart', 'controls'] });
-    //this.chartData.chartType = "sss"
+
     google.charts.setOnLoadCallback(() => {
       this.apiLoaded = true;
 
-      //this.drawChart(this.chartElem.nativeElement);
+      this.drawChart(this.chartElem.nativeElement);
     });
   }
 
@@ -130,6 +136,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
       this.chartData.chartWrapper.setChartType(this.chartData.chartType);
 
       this.chartData.chartWrapper.draw(ref);
+      this.toSave();
     }
 
   }
@@ -156,10 +163,11 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   constructor(private loaderService: ScriptLoaderService,
     public dataBaseService: HttpClientService,
     public dialog: MatDialog,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private shared: SharedService
   ) {
     this.chartData = {
-      chartWrapper: null ,
+      chartWrapper: null,
       chartTable: null,
       chartColumns: [],
       chartColumnsTypes: [],
@@ -168,9 +176,47 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget {
       selectedTable: null,
     };
 
+
+
   }
+  onChange() {
+    this.toSave();
+  }
+  ngAfterViewInit(): void {
+
+    console.log("x: " + this.x);
+
+    this.toSave();
+  }
+
+
+  widgetNumber: number;
   toSave() {
-    
+    let saveData = {
+      chartData: this.chartData,
+      x: this.x,
+      y: this.y,
+      cols: this.cols,
+      rows: this.rows,
+      rawTable: this.rawTable
+    }
+    localStorage.setItem('ChartWidget' + this.widgetNumber, JSON.stringify(saveData));
+    console.log("zapisano: ");
+    console.log(saveData);
+  }
+
+  load() {
+    let acc = JSON.parse(localStorage.getItem('ChartWidget' + this.widgetNumber));
+    if (acc != null) {
+      this.chartData = acc.chartData;
+      this.x = acc.x;
+      this.y = acc.y;
+      this.cols = acc.cols;
+      this.rows = acc.rows;
+      this.rawTable = acc.rawTable;
+      console.log("wczytano: ");
+      console.log(acc);
+    }
   }
 
 

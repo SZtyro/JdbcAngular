@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   tableNames: String[] = [];
   opened: boolean = false;
 
-
+  num:number = 0;
 
   public options: GridsterConfig = {
     pushItems: true,
@@ -44,7 +44,8 @@ export class HomeComponent implements OnInit {
     minRows: 7,
     fixedRowHeight: 100,
     fixedColWidth: 100,
-    itemResizeCallback: this.changed.bind(this),
+    itemResizeCallback: this.resize.bind(this),
+    itemChangeCallback: this.changed.bind(this),
     setGridSize: true,
     mobileBreakpoint: 0,
     gridType: 'scrollVertical',
@@ -55,12 +56,18 @@ export class HomeComponent implements OnInit {
       enabled: true
     }
   }
-  public items:Type<unknown>[];
+  public items:Type<HomeWidget>[];
+
+  resize(x: HomeWidget){
+    x.onResize();
+  }
 
   changed(x: HomeWidget) {
     // console.log(itemComponent);
-    x.onResize();
+    x.onChange();
   }
+
+
 
   appWidgets = {
     'GmailWidgetComponent':GmailWidgetComponent,
@@ -88,10 +95,11 @@ export class HomeComponent implements OnInit {
       
       //this.items.push(GmailWidgetComponent); dziala
       this.items.push(this.appWidgets[element]);
+      this.num++;
     });
     
     
-  
+    
     
 
     // this.items = [
