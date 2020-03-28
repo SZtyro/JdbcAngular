@@ -64,10 +64,10 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
         width: '100%',
         height: '100%',
         chartArea: {
-          height: '100%',
-          width: '100%'
+          height: '90%',
+          width: '90%'
         },
-        legend: { position: "none" }
+        legend: { position: this.father.chartData.chartLegendPosition }
       };
 
       this.father.chartData.chartWrapper.setOptions(options);
@@ -116,6 +116,8 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
   selectLegendPosition(legendPosition) {
     this.father.chartData.chartLegendPosition = legendPosition;
+    this.father.drawChart(this.father.chartElem.nativeElement);
+    this.drawChart(this.chartElem.nativeElement);
   }
 
   setChartType(chartType) {
@@ -144,6 +146,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     this.father.chartData.selectedTable = selectedTableName;
     this.getRawTable();
     this.getColumnTypes();
+    
   }
 
   addChartColumn(columnName, i) {
@@ -158,7 +161,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
     //console.log (this.father.chartData.chartColumns.indexOf(columnName));
     this.father.chartData.chartColumns.splice(this.father.chartData.chartColumns.indexOf(columnName), 1);
-    console.log(this.father.chartData.chartColumns)
+    this.father.chartData.chartColumnsTypes.splice(i, 1);
     this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }

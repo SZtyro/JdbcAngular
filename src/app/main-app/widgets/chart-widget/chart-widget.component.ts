@@ -125,10 +125,10 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
         width: this.width,
         height: this.height,
         chartArea: {
-          height: '100%',
-          width: '100%'
+          height: '90%',
+          width: '90%'
         },
-        legend: { position: "none" }
+        legend: { position: this.chartData.chartLegendPosition }
       };
 
       this.chartData.chartWrapper.setOptions(options);

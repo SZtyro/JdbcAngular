@@ -45,7 +45,7 @@
     <h5 mat-dialog-title style="margin-top: 10px; margin-bottom: 10px;">Parameters:</h5>
 
     <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of father.chartData.chartColumns" cdkDrag>{{item}}
+        <div class="example-box" *ngFor="let item of father.chartData.chartColumns, let i = index" cdkDrag>{{item}}
             <button mat-button (click)="removeChartColumn(item,i)" style="width:30px !important;min-width: 15px; color: #c62828; 
                 display: flex; justify-content: center; line-height: 30px !important;"><i class="fas fa-times"></i></button>
         </div>
