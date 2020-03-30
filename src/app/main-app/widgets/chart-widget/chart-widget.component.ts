@@ -3,11 +3,9 @@ import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
 import { HttpClientService } from 'src/app/services/http-client.service';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable} from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { ChartSettingsModalComponent } from '../../modals/chart-settings-modal/chart-settings-modal.component';
-import { preserveWhitespacesDefault } from '@angular/compiler';
-import { FakeMissingTranslationHandler } from '@ngx-translate/core';
 import { SharedService } from 'src/app/services/Shared/shared.service';
 
 
@@ -30,7 +28,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     chartType: string,
     chartLegendPosition: string,
     selectedTable: string,
-
+    chartTitle:string,
+    showTitle:boolean
   }
   rawTableNames = [];
   rawColumns;
@@ -147,7 +146,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
   cols: number = 6;
   rows: number = 4;
 
-  chartTitle = "Chart"
+  
 
 
   rawBase: Map<String, Object>[];
@@ -174,6 +173,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       chartType: "Bar",
       chartLegendPosition: "none",
       selectedTable: null,
+      chartTitle: "Chart",
+      showTitle: false
     };
 
 

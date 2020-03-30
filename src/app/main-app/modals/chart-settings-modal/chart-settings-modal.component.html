@@ -1,5 +1,10 @@
 <div #buttons>
-    <h2 mat-dialog-title>{{father.chartTitle}} configuration</h2>
+    <h1 mat-dialog-title>Editing chart: <i>{{father.chartData.chartTitle}}</i></h1>
+    <mat-form-field style="margin-right: 10px;">
+        <mat-label>Chart name</mat-label>
+        <input matInput placeholder="Name your chart!" [(ngModel)]="father.chartData.chartTitle" >
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="father.chartData.showTitle">Show name of chart.</mat-checkbox>
     <div style="display: flex; justify-content: space-between;">
         <mat-form-field style="margin-right: 10px;">
             <mat-label>Chart type</mat-label>
@@ -47,7 +52,8 @@
     <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of father.chartData.chartColumns, let i = index" cdkDrag>{{item}}
             <button mat-button (click)="removeChartColumn(item,i)" style="width:30px !important;min-width: 15px; color: #c62828; 
-                display: flex; justify-content: center; line-height: 30px !important;"><i class="fas fa-times"></i></button>
+                display: flex; justify-content: center; line-height: 30px !important;"><i
+                    class="fas fa-times"></i></button>
         </div>
     </div>
 

@@ -51,6 +51,7 @@ import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-li
 
 
 
+
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -76,7 +77,8 @@ export function provideConfig() {
     TableMenuComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
-    WidgetListModalComponent
+    WidgetListModalComponent,
+    
     
     
     

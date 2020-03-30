@@ -12,15 +12,7 @@ import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.compo
 export class GridElemDirective implements OnInit {
   private bar;
 
-  @HostListener('mouseover') onMouseOver() {
-    
-    //console.log(this.renderer.parentNode(this.bar))
-    //this.renderer.insertBefore(this.element.nativeElement,this.bar,this.element.nativeElement);
-  }
-
-  @HostListener('mouseout') onMouseOut() {
-    
-  }
+  
 
   ngOnInit(): void {
     this.renderer.setStyle(this.element.nativeElement, "border-radius", "15px");
@@ -28,7 +20,8 @@ export class GridElemDirective implements OnInit {
     this.renderer.addClass(this.element.nativeElement, "mat-elevation-z8");
   }
 
-  constructor(private element: ElementRef,
+  constructor(
+    private element: ElementRef,
     private renderer: Renderer2,
   ) {
     

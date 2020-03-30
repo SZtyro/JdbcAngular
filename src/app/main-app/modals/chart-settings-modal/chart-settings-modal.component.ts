@@ -100,6 +100,8 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
       chartType: "Bar",
       chartLegendPosition: "none",
       selectedTable: null,
+      chartTitle: "Chart",
+      showTitle: false
     }
     this.father.rawTable = [];
     this.father.toSave();
