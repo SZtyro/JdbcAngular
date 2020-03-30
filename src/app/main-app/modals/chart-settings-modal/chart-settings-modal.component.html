@@ -1,8 +1,12 @@
 <div #buttons>
-    <h1 mat-dialog-title>Editing chart: <i>{{father.chartData.chartTitle}}</i></h1>
+    <div style="display: flex; justify-content: space-between; max-height: 32px; margin-bottom: 10px;">
+        <h1 mat-dialog-title>Editing chart: <i>{{father.chartData.chartTitle}}</i></h1>
+        <button mat-raised-button style="background-color: #66bb6a; float: right;"> Save </button>
+    </div>
+    
     <mat-form-field style="margin-right: 10px;">
         <mat-label>Chart name</mat-label>
-        <input matInput placeholder="Name your chart!" [(ngModel)]="father.chartData.chartTitle" >
+        <input matInput placeholder="Name your chart!" [(ngModel)]="father.chartData.chartTitle">
     </mat-form-field>
     <mat-checkbox [(ngModel)]="father.chartData.showTitle">Show name of chart.</mat-checkbox>
     <div style="display: flex; justify-content: space-between;">
@@ -25,7 +29,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Table</mat-label>
-            <mat-select [(value)]="father.chartData.selectedTable" (click)="getTables()">
+            <mat-select [(ngModel)]="father.chartData.selectedTable" (click)="getTables()">
                 <mat-option *ngFor="let item of father.rawTableNames" value="{{item}}" (click)="selectTable(item)">
                     {{item}}
                 </mat-option>
@@ -66,4 +70,5 @@
 
         </div>
     </div>
+    
 </div>

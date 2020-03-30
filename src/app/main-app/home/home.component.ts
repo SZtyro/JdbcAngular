@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
     }
   }
   public items:Type<HomeWidget>[];
+  editGrid: boolean = false;
 
   resize(x: HomeWidget){
     x.onResize();

@@ -46,9 +46,17 @@
           <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary"
               class="sideNavContent" (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
 
+          <!-- Widget editing -->
+          <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="primary"
+            class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+
           <!-- Settings -->
           <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"
               class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
+
+          <!-- Bug report -->
+          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-raised-button matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" color="primary"
+            class="sideNavContent"><i class="fas fa-bug barIcon"></i></button></a>
 
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>

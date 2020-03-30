@@ -1,6 +1,6 @@
 <gridster-item GridElem  [item]="this" #mainScreen>
     
-    <div  style="font-weight: 600; text-align: center;display: flex; justify-content: space-between;">
+    <div *ngIf="shared.homeRef.editGrid == true" style="font-weight: 600; text-align: center;display: flex; justify-content: space-between;">
         <button mat-raised-button color="primary" (click)="openDialog()">Edit</button>
         
         

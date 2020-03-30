@@ -159,11 +159,11 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
   myData = [];
 
-  constructor(private loaderService: ScriptLoaderService,
+  constructor(
     public dataBaseService: HttpClientService,
     public dialog: MatDialog,
     private renderer: Renderer2,
-    private shared: SharedService
+    public shared: SharedService,
   ) {
     this.chartData = {
       chartWrapper: null,

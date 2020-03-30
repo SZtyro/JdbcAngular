@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
 import { Observable } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 @Component({
   selector: 'app-chart-settings-modal',
@@ -14,16 +15,18 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
 
   father: ChartWidgetComponent;
-
+  shared: SharedService;
   constructor(
+    
     public dialogRef: MatDialogRef<ChartSettingsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     this.father = data.father;
-
+    this.shared = this.father.shared;
   }
   ngAfterViewInit(): void {
     this.drawChart(this.chartElem.nativeElement);
+    
   }
 
   onNoClick(): void {

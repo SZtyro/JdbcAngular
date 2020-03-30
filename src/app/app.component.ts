@@ -6,6 +6,7 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
 import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-list-modal.component';
 import { MatDialog } from '@angular/material';
+import { SharedService } from './services/Shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     private router: Router,
     private authService: AuthService,
     public translate: TranslateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private shared: SharedService
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
@@ -78,6 +80,10 @@ export class AppComponent implements OnInit, AfterContentInit {
   setTableNames(data) {
     this.tableNames = data;
 
+  }
+  
+  editGrid(){
+    this.shared.homeRef.editGrid = !this.shared.homeRef.editGrid;
   }
 
   openTable(name) {
