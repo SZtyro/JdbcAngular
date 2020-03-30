@@ -29,13 +29,11 @@ export interface Tile {
 export class HomeComponent implements OnInit {
 
 
-  //x: GmailWidgetComponent = new GmailWidgetComponent(this.service, this.authService, new ElementRef(this));
-
   tableNames: String[] = [];
   opened: boolean = false;
 
   num:number = 0;
-
+  
   public options: GridsterConfig = {
     pushItems: true,
     displayGrid: 'none',
@@ -50,10 +48,10 @@ export class HomeComponent implements OnInit {
     mobileBreakpoint: 0,
     gridType: 'scrollVertical',
     resizable: {
-      enabled: true
+      enabled: false
     },
     draggable: {
-      enabled: true
+      enabled: false
     }
   }
   public items:Type<HomeWidget>[];
@@ -98,18 +96,6 @@ export class HomeComponent implements OnInit {
       this.items.push(this.appWidgets[element]);
       this.num++;
     });
-    
-    
-    
-    
-
-    // this.items = [
-    //   ChartWidgetComponent,
-    //   GmailWidgetComponent,
-    //   ChartWidgetComponent,
-    //   PhotoWidgetComponent
-    // ]
-    
 
   }
 
