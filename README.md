@@ -1,7 +1,9 @@
-# Ocena Projektu
+# Angualr
+
+
+
 
 -------------------------------------------------------------------------------
- POZIOM_1 (dst, dst+)
 -------------------------------------------------------------------------------
 - [x] co najmniej 3 komponenty
 - [x] poprawne rozdzielenie widoku i logiki
@@ -10,7 +12,6 @@
 - [x] aktywne (!) korzystanie z VCS
 
 -------------------------------------------------------------------------------
- POZIOM_2 (db, db+)
 -------------------------------------------------------------------------------
 
 - [x] więcej komponentów i (sensowny) podział na co najmniej 2 moduły
@@ -23,7 +24,6 @@
 - [x] wprowadzenie okienka typu modal do potwierdzenia operacji (np. usunięcia)
 
 -------------------------------------------------------------------------------
- POZIOM_3 (db+, bdb)
 -------------------------------------------------------------------------------
 
 - [x] wprowadzenie jakiejś formy wizualizacji danych (wykresy, grafy, mapy itp.)
