@@ -37,6 +37,11 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
   }
 
+  saveChart(){
+    this.father.drawChart(this.father.chartElem.nativeElement);
+    this.father.toSave();
+  }
+
   drawChart(ref) {
     if (this.father.apiLoaded) {
       this.father.chartData.chartWrapper = new google.visualization.ChartWrapper();
@@ -78,7 +83,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
       this.father.chartData.chartWrapper.setChartType(this.father.chartData.chartType);
 
       this.father.chartData.chartWrapper.draw(ref);
-      this.father.toSave();
+     
     }
 
   }
@@ -89,7 +94,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     moveItemInArray(this.father.chartData.chartColumnsTypes, event.previousIndex, event.currentIndex)
     console.log(this.father.chartData.chartColumns);
     console.log(this.father.chartData.chartColumnsTypes);
-    this.father.drawChart(this.father.chartElem.nativeElement);
+    //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }
 
@@ -121,13 +126,13 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
   selectLegendPosition(legendPosition) {
     this.father.chartData.chartLegendPosition = legendPosition;
-    this.father.drawChart(this.father.chartElem.nativeElement);
+    //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }
 
   setChartType(chartType) {
     this.father.chartData.chartType = chartType;
-    this.father.drawChart(this.father.chartElem.nativeElement);
+    //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }
 
@@ -158,7 +163,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     this.father.chartData.chartColumns.push(columnName);
     this.father.chartData.chartColumnsTypes.push(this.father.rawColumnTypes[i]);
     //console.log(this.father.data.chartColumnsTypes);
-    this.father.drawChart(this.father.chartElem.nativeElement);
+    //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }
 
@@ -167,7 +172,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     //console.log (this.father.chartData.chartColumns.indexOf(columnName));
     this.father.chartData.chartColumns.splice(this.father.chartData.chartColumns.indexOf(columnName), 1);
     this.father.chartData.chartColumnsTypes.splice(i, 1);
-    this.father.drawChart(this.father.chartElem.nativeElement);
+    //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }
 

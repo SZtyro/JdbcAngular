@@ -33,6 +33,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { WidgetListModalComponent } from './widget-list-modal/widget-list-modal.component';
 import { WidgetDirective } from '../main-app/directives/WidgetDirective/widget.directive';
 import { MatInputModule } from '@angular/material/input';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -83,7 +84,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     FileUploadModule,
     MatProgressBarModule,
-    MatInputModule
+    MatInputModule,
+    MatBadgeModule
   ],
   providers: []
 })

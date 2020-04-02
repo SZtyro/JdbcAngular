@@ -1,7 +1,7 @@
 <div #buttons>
     <div style="display: flex; justify-content: space-between; max-height: 32px; margin-bottom: 10px;">
         <h1 mat-dialog-title>Editing chart: <i>{{father.chartData.chartTitle}}</i></h1>
-        <button mat-raised-button style="background-color: #66bb6a; float: right;"> Save </button>
+        <button mat-raised-button style="background-color: #66bb6a; float: right;" (click)="saveChart()"> Save </button>
     </div>
     
     <mat-form-field style="margin-right: 10px;">

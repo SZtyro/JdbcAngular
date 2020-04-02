@@ -8,7 +8,7 @@ import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.compo
 import { HomeWidget } from '../interfaces/homeWidget';
 
 interface widgetData {
-  class:Type<unknown>;
+  class?:Type<unknown>;
   icon;
   description: String;
 }
@@ -28,7 +28,10 @@ export class WidgetListModalComponent implements OnInit {
   widgets: widgetData[] = [
     { class: GmailWidgetComponent, icon: "far fa-envelope", description: "Manage your mailbox." },
     { class: ChartWidgetComponent, icon: "fas fa-chart-line", description: "Visualise data from connected databse." },
-    { class: PhotoWidgetComponent, icon: "fas fa-folder", description: "Container for your data." }
+    { class: PhotoWidgetComponent, icon: "fas fa-folder", description: "Container for your data." },
+    { icon: "fas fa-cloud-sun-rain", description: "All about weather." },
+    { icon: "fas fa-shopping-cart", description: "Manage your orders." },
+    { icon: "fas fa-tasks", description: "Manage your tasks." }
   ];
 
 

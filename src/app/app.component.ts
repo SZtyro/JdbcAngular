@@ -87,6 +87,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.shared.homeRef.options.draggable.enabled = !this.shared.homeRef.options.draggable.enabled;
     this.shared.homeRef.options.resizable.enabled = !this.shared.homeRef.options.resizable.enabled;
     this.shared.homeRef.options.api.optionsChanged();
+   
   }
 
   openTable(name) {

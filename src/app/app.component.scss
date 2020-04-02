@@ -28,4 +28,10 @@
 
 button{
     outline: none;
+    transition: all .2s ease-in-out;
+}
+
+button:hover{
+   
+    transform: scale(1.07);
 }
