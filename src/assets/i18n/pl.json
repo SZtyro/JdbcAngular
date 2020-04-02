@@ -8,9 +8,11 @@
         },
         "USERS" : "Użytkownicy",
         "WIDGETS": "Widżety",
+        "EDIT": "Edytuj siatkę",
         "SETTINGS": "Ustawienia",
         "LANGUAGE": "Zmień język",
-        "SIGN_OUT": "Wyloguj"
+        "SIGN_OUT": "Wyloguj",
+        "BUG_REPORT": "Zgłoś błąd"
     },
     "GMAIL_WIDGET": {
         "SENDER": "Nadawca",

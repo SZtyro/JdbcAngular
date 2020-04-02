@@ -5,6 +5,7 @@ import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-lo
 import { MatTableDataSource } from '@angular/material';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { TranslateService } from '@ngx-translate/core';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 
 interface GThread {
@@ -47,13 +48,22 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     private service: GmailService,
     private authService: AuthService,
     private elem:ElementRef,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private shared:SharedService
     ) {
       
+  }
+  onChange() {
+    throw new Error("Method not implemented.");
+  }
+  widgetNumber: number;
+  toSave() {
+    throw new Error("Method not implemented.");
   }
 
   ngOnInit() {
     this.signInWithGoogle();
+    console.log(this.widgetNumber + " Gmail");
   }
 
   fetchMails() {

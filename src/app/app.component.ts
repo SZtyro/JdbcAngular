@@ -4,6 +4,9 @@ import { HttpClientService } from './services/http-client.service';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-list-modal.component';
+import { MatDialog } from '@angular/material';
+import { SharedService } from './services/Shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +30,9 @@ export class AppComponent implements OnInit, AfterContentInit {
     private httpClientService: HttpClientService,
     private router: Router,
     private authService: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public dialog: MatDialog,
+    private shared: SharedService
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
@@ -76,11 +81,31 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.tableNames = data;
 
   }
+  
+  editGrid(){
+    this.shared.homeRef.editGrid = !this.shared.homeRef.editGrid;
+    this.shared.homeRef.options.draggable.enabled = !this.shared.homeRef.options.draggable.enabled;
+    this.shared.homeRef.options.resizable.enabled = !this.shared.homeRef.options.resizable.enabled;
+    this.shared.homeRef.options.api.optionsChanged();
+   
+  }
 
   openTable(name) {
     //this.router.navigate(['/home']);
     this.router.navigate(['/table', name]);
-
+    
     this.router.onSameUrlNavigation = 'reload';
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(WidgetListModalComponent, {
+      width: '80%',
+      height: '80%',
+      data: { father: this }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 }

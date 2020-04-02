@@ -1,7 +1,7 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px; ">
-      <div style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;">
+    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px;  ">
+      <div style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;">
         <div>
           <div>
             <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
@@ -43,12 +43,30 @@
               class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
 
           <!-- Widgets -->
-          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary"
-              class="sideNavContent"><i class="fas fa-th-large barIcon"></i></button></a>
+          <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary" 
+              class="sideNavContent" (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
+
+          <!-- Widget editing -->
+          <div *ngIf="this.shared.homeRef.editGrid != null">
+            <div *ngIf="this.shared.homeRef.editGrid == false; else editingEnabled">
+              <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="primary"
+              class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+            </div>
+          </div>
+         
+          <ng-template #editingEnabled>
+            <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent"
+            class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+          </ng-template>
+          
 
           <!-- Settings -->
           <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"
               class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
+
+          <!-- Bug report -->
+          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-raised-button matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" color="primary"
+            class="sideNavContent"><i class="fas fa-bug barIcon"></i></button></a>
 
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>

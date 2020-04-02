@@ -8,9 +8,11 @@
         },
         "USERS" : "Users",
         "WIDGETS": "Widgets",
+        "EDIT": "Edit grid",
         "SETTINGS": "Settings",
         "LANGUAGE": "Change language",
-        "SIGN_OUT": "Sign out"
+        "SIGN_OUT": "Sign out",
+        "BUG_REPORT": "Report bug"
     },
     "GMAIL_WIDGET": {
         "SENDER": "Sender",

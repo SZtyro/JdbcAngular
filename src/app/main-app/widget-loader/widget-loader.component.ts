@@ -11,6 +11,8 @@ export class WidgetLoaderComponent implements OnInit {
   @Input()
   type:Type<unknown>;
   
+  @Input()
+  index:number;
 
   constructor(public viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver) { }
@@ -19,8 +21,8 @@ export class WidgetLoaderComponent implements OnInit {
     let childComponent = this.componentFactoryResolver.resolveComponentFactory(this.type);
     
     let ref = this.viewContainerRef.createComponent(childComponent);
-    console.log(ref.instance)
-    //ref.instance["rows"]= 10;
+    
+    ref.instance["widgetNumber"]= this.index;
     //console.log(this.childs)
 
     

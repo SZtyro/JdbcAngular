@@ -43,6 +43,10 @@ import { PhotoWidgetComponent } from './main-app/widgets/photo-widget/photo-widg
 import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-list-modal.component';
+
+
+
 
 
 
@@ -73,6 +77,9 @@ export function provideConfig() {
     TableMenuComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
+    WidgetListModalComponent,
+    
+    
     
     
     
@@ -116,7 +123,8 @@ export function provideConfig() {
       }
     }),
     MatCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    
     
     
   ],

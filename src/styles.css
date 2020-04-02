@@ -1,12 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
-
-html, body { 
+html, body {
     height: 100%;
-    
-    
-
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-drawer-inner-container{ display: flex;}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-drawer-inner-container {
+    display: flex;
+}
+
