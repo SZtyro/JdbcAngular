@@ -1,23 +1,15 @@
 import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClientService } from '../../services/http-client.service';
-import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { HttpClientService } from '../../../services/http-client.service';
 import { GridsterConfig, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
-import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
-import { GmailService } from 'src/app/services/Gmail/gmail.service';
-import { AuthService } from 'angularx-social-login';
-import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
+import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
+import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
 import { ScriptLoaderService } from 'angular-google-charts';
-import { HomeWidget } from '../interfaces/homeWidget';
-import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.component';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { HomeWidget } from '../../interfaces/homeWidget';
+import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
+import { SharedService } from '../../../services/Shared/shared.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 
-export interface Tile {
-  type;
-
-
-}
 
 @Component({
   selector: 'main-app-home',

@@ -4,7 +4,7 @@ import { HttpClientService } from './services/http-client.service';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
-import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-list-modal.component';
+import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
 

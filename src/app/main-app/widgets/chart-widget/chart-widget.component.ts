@@ -1,12 +1,10 @@
 import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked, OnChanges, AfterViewInit } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
-import { ScriptLoaderService, GoogleChartPackagesHelper } from 'angular-google-charts';
 import { HttpClientService } from 'src/app/services/http-client.service';
-import { Subject, Observable} from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { ChartSettingsModalComponent } from '../../modals/chart-settings-modal/chart-settings-modal.component';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from '../../../services/Shared/shared.service';
 
 
 @Component({
@@ -28,9 +26,10 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     chartType: string,
     chartLegendPosition: string,
     selectedTable: string,
-    chartTitle:string,
-    showTitle:boolean
+    chartTitle: string,
+    showTitle: boolean
   }
+  rawBase: Map<String, Object>[];
   rawTableNames = [];
   rawColumns;
   rawColumnTypes;
@@ -57,9 +56,23 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
   ];
 
+  //GRIDSTER
+  x: number = 0;
+  y: number = 0;
+  cols: number = 6;
+  rows: number = 4;
+  height;
+  width;
+  //type;
+  
+  //myType = "Bar";
+  //baseColumnNames = [];
+  //myColumnNames = new Subject<String[]>();
+  //tableName;
 
+  //colss = [];
 
-
+  //myData = [];
 
   onResize() {
 
@@ -74,13 +87,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
   }
 
 
-  // dataTypes;
-  // tableNames;
-  // selectedTable;
-
-  height;
-  width;
-  type;
+  
   ngOnInit(): void {
     this.load();
     console.log(this.widgetNumber + " Chart")
@@ -140,24 +147,12 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
   }
 
-  //GRIDSTER
-  x: number = 0;
-  y: number = 0;
-  cols: number = 6;
-  rows: number = 4;
+
+
+
+
 
   
-
-
-  rawBase: Map<String, Object>[];
-  myType = "Bar";
-  baseColumnNames = [];
-  myColumnNames = new Subject<String[]>();
-  tableName;
-
-  colss = [];
-
-  myData = [];
 
   constructor(
     public dataBaseService: HttpClientService,

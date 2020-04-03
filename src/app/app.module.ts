@@ -24,7 +24,7 @@ import { AddModalComponent } from './data-base/add-modal/add-modal.component';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
 import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
-import { LoginWindowComponent } from './main-app/login-window/login-window.component';
+import { LoginWindowComponent } from './main-app/components/login-window/login-window.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -43,7 +43,7 @@ import { PhotoWidgetComponent } from './main-app/widgets/photo-widget/photo-widg
 import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { WidgetListModalComponent } from './main-app/widget-list-modal/widget-list-modal.component';
+import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 
 
 

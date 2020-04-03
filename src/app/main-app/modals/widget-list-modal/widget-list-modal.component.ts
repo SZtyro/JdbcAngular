@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject, Type } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SharedService } from '../../services/Shared/shared.service';
-import { GmailWidgetComponent } from '../widgets/gmail-widget/gmail-widget.component';
-import { ChartWidgetComponent } from '../widgets/chart-widget/chart-widget.component';
-import { PhotoWidgetComponent } from '../widgets/photo-widget/photo-widget.component';
-import { HomeWidget } from '../interfaces/homeWidget';
+import { HomeComponent } from '../../components/home/home.component';
+import { SharedService } from 'src/app/services/Shared/shared.service';
+import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
+import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
+import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
+import { HomeWidget } from '../../interfaces/homeWidget';
 
 interface widgetData {
   class?:Type<unknown>;

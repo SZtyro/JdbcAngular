@@ -1,9 +1,8 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
-import { Observable } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { SharedService } from 'src/app/services/Shared/shared.service';
+import { SharedService } from '../../../services/Shared/shared.service';
 
 @Component({
   selector: 'app-chart-settings-modal',
