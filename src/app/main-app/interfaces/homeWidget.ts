@@ -3,4 +3,6 @@ export interface HomeWidget {
     onChange();
     onResize();
     toSave();
+    load();
+    delete();
 }

@@ -47,8 +47,8 @@
               class="sideNavContent" (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
 
           <!-- Widget editing -->
-          <div *ngIf="this.shared.homeRef.editGrid != null">
-            <div *ngIf="this.shared.homeRef.editGrid == false; else editingEnabled">
+          <div *ngIf="this.shared.editGrid != null">
+            <div *ngIf="this.shared.editGrid == false; else editingEnabled">
               <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="primary"
               class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
             </div>

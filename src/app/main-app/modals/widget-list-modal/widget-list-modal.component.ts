@@ -5,7 +5,7 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
 import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
 import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
-import { HomeWidget } from '../../interfaces/homeWidget';
+import { item } from 'src/app/main-app/components/home/home.component';
 
 interface widgetData {
   class?:Type<unknown>;
@@ -20,7 +20,8 @@ interface widgetData {
 })
 export class WidgetListModalComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<WidgetListModalComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<WidgetListModalComponent>,
     private shared: SharedService,
     @Inject(MAT_DIALOG_DATA) public data
   ) { }
@@ -40,10 +41,17 @@ export class WidgetListModalComponent implements OnInit {
   }
 
 
-  addWidget(widgetName:Type<HomeWidget>) {
-    
-    this.shared.homeRef.items.push(widgetName);
-    //this.shared.homeRef.items.push(GmailWidgetComponent);
+  addWidget(widgetName:string) {
+    if(this.shared.homeRef.items != null){
+      let num = this.shared.homeRef.items.push({typeName: widgetName});
+      
+    } 
+    else{
+      this.shared.homeRef.items = []
+      let num = this.shared.homeRef.items.push({typeName: widgetName});
+      
+    }
+      
     this.shared.homeRef.save();
     
   }

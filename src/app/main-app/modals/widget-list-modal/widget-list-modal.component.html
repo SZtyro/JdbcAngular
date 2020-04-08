@@ -4,7 +4,7 @@
 
         <div *ngFor="let item of widgets" class="widgetTile col-12  col-md-6 col-lg-4" style="padding: 2px;">
             <div *ngIf="item.class != null; else soonSection">
-                <button mat-button (click)="addWidget(item.class)" style="width: 100%;">
+                <button mat-button (click)="addWidget(item.class.name)" style="width: 100%;">
 
                     <i style="margin: 10px; font-size: 50px;" class="{{item.icon}}"></i>
                     <div>

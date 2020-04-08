@@ -10,32 +10,15 @@ import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.co
 import { SharedService } from '../../../services/Shared/shared.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 
+export interface item  {
+  typeName: string,
+  index?: number
+}
 
 @Component({
   selector: 'main-app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [
-    trigger('openClose', [
-      
-      state('open', style({
-        height: '200px',
-        opacity: 1,
-        backgroundColor: 'yellow'
-      })),
-      state('closed', style({
-        height: '100px',
-        opacity: 0.5,
-        backgroundColor: 'green'
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ]),
-      transition('closed => open', [
-        animate('0.5s')
-      ]),
-    ]),
-  ]
+  styleUrls: ['./home.component.scss']
 })
 
 
@@ -68,8 +51,7 @@ export class HomeComponent implements OnInit {
       enabled: false
     }
   }
-  public items:Type<HomeWidget>[];
-  editGrid: boolean = false;
+  public items:item[] = [];
 
   resize(x: HomeWidget){
     x.onResize();
@@ -80,6 +62,10 @@ export class HomeComponent implements OnInit {
     x.onChange();
   }
 
+  deleteAllWidgets(){
+    this.items = [];
+    localStorage.removeItem('desktopWidgets');
+  }
 
 
   appWidgets = {
@@ -97,30 +83,42 @@ export class HomeComponent implements OnInit {
   ) {
     shared.homeRef = this;
     //this.items = [GmailWidgetComponent]
-    //this.items = [];
     this.items = [];
-    let acc = [];
+    this.loadWidgets();
     
-    acc = JSON.parse(localStorage.getItem('desktopWidgets'));
-    console.log(acc);
-    if(acc != null)
-    acc.forEach(element => {
-      
-      //this.items.push(GmailWidgetComponent); dziala
-      this.items.push(this.appWidgets[element]);
-      this.num++;
-    });
+    this.shared.getEditGrid().subscribe(isEditing => {
+      if(!isEditing)
+        this.save();
+    })
+    
 
   }
+  
 
-
-  save(){
+  loadWidgets(){
+    this.items = [];
     let acc = [];
-    this.items.forEach(elem => {
-      acc.push(elem.name)
-    })
-    localStorage.setItem('desktopWidgets', JSON.stringify(acc));
-    console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
+    this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
+    // console.log(acc);
+    // if(acc != null)
+    // acc.forEach(element => {
+      
+    //   //this.items.push(GmailWidgetComponent); dziala
+    //   this.items.push({
+    //     typeName: this.appWidgets[element],
+    //     index: 
+    //   });
+    //   this.num++;
+    // });
+  }
+  save(){
+    //let acc = [];
+    // this.items.forEach(elem => {
+    //   acc.push(elem.type.name)
+    //   acc.push(elem.index)
+    // })
+    localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
+    //console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
     console.log("Storage save")
   }
 

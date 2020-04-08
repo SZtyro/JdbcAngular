@@ -1,10 +1,11 @@
-import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, AfterContentChecked, AfterViewChecked, OnChanges, AfterViewInit, ComponentRef, ViewContainerRef } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { MatDialog } from '@angular/material';
 import { ChartSettingsModalComponent } from '../../modals/chart-settings-modal/chart-settings-modal.component';
 import { SharedService } from '../../../services/Shared/shared.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -63,16 +64,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
   rows: number = 4;
   height;
   width;
-  //type;
   
-  //myType = "Bar";
-  //baseColumnNames = [];
-  //myColumnNames = new Subject<String[]>();
-  //tableName;
-
-  //colss = [];
-
-  //myData = [];
+  loaderRef:ViewContainerRef;
 
   onResize() {
 
@@ -83,14 +76,14 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
     this.renderer.setAttribute(this.chartElem.nativeElement, "height", this.height);
     this.drawChart(this.chartElem.nativeElement);
-    this.toSave();
+    //this.toSave();
   }
 
 
   
   ngOnInit(): void {
     this.load();
-    console.log(this.widgetNumber + " Chart")
+    console.log("Numer indexu: " + this.widgetNumber)
 
     google.charts.load('current', { packages: ['corechart', 'controls'] });
 
@@ -150,7 +143,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
 
 
-
+  subscription:Subscription;
 
   
 
@@ -172,24 +165,29 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       showTitle: false
     };
 
-
+    this.subscription = this.shared.getEditGrid().subscribe(isEditing => {
+      if(!isEditing)
+        this.toSave();
+    })
+    
+    
 
   }
   onChange() {
-    this.toSave();
+    //this.toSave();
   }
   ngAfterViewInit(): void {
 
-    console.log("x: " + this.x);
-
-    this.toSave();
+    
+    //this.toSave();
   }
 
 
-  widgetNumber: number;
+  widgetNumber: number = null;
   toSave() {
     let saveData = {
       chartData: this.chartData,
+      widgetNumber: this.widgetNumber,
       x: this.x,
       y: this.y,
       cols: this.cols,
@@ -197,7 +195,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       rawTable: this.rawTable
     }
     localStorage.setItem('ChartWidget' + this.widgetNumber, JSON.stringify(saveData));
-    console.log("zapisano: ");
+    console.log("zapisano: "+'ChartWidget' + this.widgetNumber);
     console.log(saveData);
   }
 
@@ -205,6 +203,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     let acc = JSON.parse(localStorage.getItem('ChartWidget' + this.widgetNumber));
     if (acc != null) {
       this.chartData = acc.chartData;
+      this.widgetNumber = acc.widgetNumber,
       this.x = acc.x;
       this.y = acc.y;
       this.cols = acc.cols;
@@ -215,7 +214,17 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     }
   }
 
-
+  delete(){
+    //this.loaderRef.remove(this.widgetNumber);
+    //this.shared.homeRef.items.splice(this.widgetNumber, 1);
+    this.subscription.unsubscribe();
+    delete this.shared.homeRef.items[this.widgetNumber];
+    localStorage.removeItem('ChartWidget' + this.widgetNumber);
+    console.log("Usunieto: ChartWidget" + this.widgetNumber);
+    console.log(this.shared.homeRef.items);
+    this.shared.homeRef.save();
+    this.shared.homeRef.loadWidgets();
+  }
 
 
   openDialog(): void {

@@ -53,8 +53,14 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
     ) {
       
   }
-  onChange() {
+  load() {
     throw new Error("Method not implemented.");
+  }
+  delete() {
+    throw new Error("Method not implemented.");
+  }
+  onChange() {
+    
   }
   widgetNumber: number;
   toSave() {

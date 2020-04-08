@@ -39,9 +39,9 @@ export class WidgetListModalComponent implements OnInit {
   }
 
 
-  addWidget(widgetName:Type<HomeWidget>) {
+  addWidget(widgetName:string) {
     
-    this.shared.homeRef.items.push(widgetName);
+    this.shared.homeRef.items.push({typeName: widgetName});
     //this.shared.homeRef.items.push(GmailWidgetComponent);
     this.shared.homeRef.save();
     
