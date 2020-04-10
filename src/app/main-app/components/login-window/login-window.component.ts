@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 @Component({
   selector: 'app-login-window',
@@ -17,7 +18,9 @@ export class LoginWindowComponent implements OnInit {
 
   constructor(
     private httpClientService: HttpClientService,
-    private router: Router) { }
+    private router: Router,
+    private shared:SharedService
+    ) { }
 
 
   ngOnInit() {
@@ -34,6 +37,7 @@ export class LoginWindowComponent implements OnInit {
           localStorage.setItem('url', JSON.stringify(this.url));
           localStorage.setItem('userName', JSON.stringify(this.userName));
           this.router.navigate(['/home'])
+          this.shared.setdbConnnection();
         }
         
       }

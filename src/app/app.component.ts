@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
   title = 'AngularJDBC';
   tableNames: String[] = [];
+  dbConnection: boolean = false;
   opened: boolean = false;
   private user: SocialUser;
   private loggedIn: boolean = false;
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
 
   ngOnInit() {
+    this.subscribeDBConnection();
     this.httpClientService.getTableNames().subscribe(
       data => {
 
@@ -60,6 +62,10 @@ export class AppComponent implements OnInit, AfterContentInit {
     )
 
 
+  }
+
+  subscribeDBConnection(){
+    this.shared.getdbConnnection().subscribe(data=> this.dbConnection = data);
   }
 
   signInWithGoogle(): void {

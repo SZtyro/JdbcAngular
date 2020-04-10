@@ -26,7 +26,7 @@
               class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
 
           <!-- Database -->
-          <div *ngIf="tableNames.length != 0; else noData">
+          <div *ngIf="dbConnection==true; else noData">
             <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" color="primary"
               [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
           </div>

@@ -12,7 +12,19 @@ export class SharedService {
   homeRef:HomeComponent;
   private editGrid: boolean = false;
   private editGridSubject = new Subject<boolean>();
+
+  private dbConnnection: boolean = false;
+  private dbConnnectionSubject = new Subject<boolean>();
   
+  setdbConnnection(){
+    this.dbConnnection = !this.dbConnnection;
+    this.dbConnnectionSubject.next(this.dbConnnection);
+  }
+
+  getdbConnnection():Observable<boolean>{
+    return this.dbConnnectionSubject.asObservable();
+  }
+
   setEditGrid(){
     this.editGrid = !this.editGrid;
     this.editGridSubject.next(this.editGrid);
