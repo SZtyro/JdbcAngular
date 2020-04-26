@@ -29,11 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {
-  SocialLoginModule,
-  AuthServiceConfig,
-  GoogleLoginProvider
-} from 'angularx-social-login';
+
 import { GridsterModule } from 'angular-gridster2';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -44,6 +40,7 @@ import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-mo
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
+import { WelcomeModule } from './welcome/welcome.module';
 
 
 
@@ -52,21 +49,23 @@ import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/wi
 
 
 
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("36592518046-vna364b979556f9d5o8g2bav1vnms4pi.apps.googleusercontent.com")
-  }
+// const config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider("36592518046-vna364b979556f9d5o8g2bav1vnms4pi.apps.googleusercontent.com")
+//   }
   
-]);
+// ]);
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 export function provideConfig() {
   
-  return config;
+  //return config;
 }
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,13 +76,7 @@ export function provideConfig() {
     TableMenuComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
-    WidgetListModalComponent,
-    
-    
-    
-    
-    
-
+    WidgetListModalComponent
 
   ],
   imports: [
@@ -111,7 +104,7 @@ export function provideConfig() {
     MatCardModule,
     MatListModule,
     MatExpansionModule,
-    SocialLoginModule,
+    //SocialLoginModule,
     GridsterModule,
     MatMenuModule,
     MatTooltipModule,
@@ -124,6 +117,7 @@ export function provideConfig() {
     }),
     MatCheckboxModule,
     DragDropModule,
+    WelcomeModule
     
     
     
@@ -138,10 +132,10 @@ export function provideConfig() {
     ChartSettingsModalComponent
   ],
   providers: [
-    {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
-    }
+    // {
+    //   provide: AuthServiceConfig,
+    //   useFactory: provideConfig
+    // }
 
   ],
   bootstrap: [AppComponent]

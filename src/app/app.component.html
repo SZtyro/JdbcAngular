@@ -1,7 +1,8 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
     <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px;  ">
-      <div style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;">
+      <div
+        style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;">
         <div>
           <div>
             <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
@@ -10,11 +11,11 @@
           </div>
           <button mat-raised-button matTooltip="{{'NAVBAR.GOOGLE_LOGIN' | translate}}" class="sideNavContent"
             style="padding: 0px;" (click)="signInWithGoogle()">
-            <ng-container *ngIf="user == null; else userPhoto">
+            <ng-container *ngIf="false; else userPhoto">
               <i class="fab fa-google barIcon"></i>
             </ng-container>
             <ng-template #userPhoto>
-              <img src="{{ user.photoUrl }}" class="sideNavContent" style="margin: 0px;">
+              <img src="{{photoUrl}}" class="sideNavContent" style="margin: 0px;">
             </ng-template>
           </button>
           <mat-divider style="margin: 10px;"></mat-divider>
@@ -43,30 +44,31 @@
               class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
 
           <!-- Widgets -->
-          <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary" 
-              class="sideNavContent" (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
+          <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary" class="sideNavContent"
+            (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
 
           <!-- Widget editing -->
           <div *ngIf="this.shared.editGrid != null">
             <div *ngIf="this.shared.editGrid == false; else editingEnabled">
               <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="primary"
-              class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+                class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
             </div>
           </div>
-         
+
           <ng-template #editingEnabled>
-            <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent"
-            class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+            <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
+              (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
           </ng-template>
-          
+
 
           <!-- Settings -->
           <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"
               class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
 
           <!-- Bug report -->
-          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-raised-button matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" color="primary"
-            class="sideNavContent"><i class="fas fa-bug barIcon"></i></button></a>
+          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-raised-button
+              matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" color="primary" class="sideNavContent"><i
+                class="fas fa-bug barIcon"></i></button></a>
 
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
@@ -111,20 +113,28 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">
+      <div *ngIf="false; else noUser">
+        <div (mouseenter)="sidenav.open()"
+          style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
+          <i class="fas fa-caret-right fa-2x"></i>
+        </div>
 
-      <div (mouseenter)="sidenav.open()"
-        style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
-        <i class="fas fa-caret-right fa-2x"></i>
+        <div style="width: 98%;">
+          <router-outlet></router-outlet>
+        </div>
+
+
+        <div style="height: 100%;width: 1%; float: right; ">
+
+        </div>
       </div>
+      <ng-template #noUser>
+        <div style="width: 100%;">
+          <router-outlet></router-outlet>
+        </div>
+      </ng-template>
+      
 
-      <div style="width: 98%;">
-        <router-outlet></router-outlet>
-      </div>
-
-
-      <div style="height: 100%;width: 1%; float: right; ">
-
-      </div>
 
 
     </mat-sidenav-content>

@@ -1,19 +1,20 @@
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
-import { AuthService, SocialUser } from "angularx-social-login";
+//import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { TranslateService } from '@ngx-translate/core';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
+import { AuthService } from './services/Auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterContentInit {
+export class AppComponent implements OnInit {
   ngAfterContentInit(): void {
     
 
@@ -22,66 +23,56 @@ export class AppComponent implements OnInit, AfterContentInit {
   tableNames: String[] = [];
   dbConnection: boolean = false;
   opened: boolean = false;
-  private user: SocialUser;
-  private loggedIn: boolean = false;
-
+  photoUrl:String;
 
 
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private authService: AuthService,
+    //private authService: AuthService,
     public translate: TranslateService,
     public dialog: MatDialog,
-    private shared: SharedService
+    private shared: SharedService,
+    private auth: AuthService
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
     translate.use('en')
-    
+    //this.auth.getUserData().subscribe(userData => {this.photoUrl = userData.imageUrl})
+    //console.log(this.auth.auth2.currentUser)
   }
 
-
+  signOut(){
+    this.auth.getUserData().subscribe().unsubscribe();
+    this.router.navigate([''])
+    this.auth.signOut();
+  }
+  
 
   ngOnInit() {
     this.subscribeDBConnection();
-    this.httpClientService.getTableNames().subscribe(
-      data => {
-
-        this.setTableNames(data);
-        //console.log("Home Table names fetched! ", data);
-
-
-      },
-
-      error => {
-
-        console.log("Error", error);
-
-      }
-    )
-
-
+    this.photoUrl = this.auth.imageUrl;
+    console.log(this.photoUrl)
   }
 
   subscribeDBConnection(){
-    this.shared.getdbConnnection().subscribe(data=> this.dbConnection = data);
-  }
-
-  signInWithGoogle(): void {
-
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
-      this.user = user;
-      this.loggedIn = (user != null);
-
+    this.shared.getdbConnnection().subscribe(data=> {
+      if(data){
+        //Fetching table names
+        this.httpClientService.getTableNames().subscribe(
+          data => {   
+            this.setTableNames(data);
+            //console.log("Home Table names fetched! ", data);   
+          },  
+          error => {    
+            console.log("Error", error);  
+          }
+        )
+      }
+      this.dbConnection = data
     });
   }
 
-  signOut(): void {
-    this.authService.signOut();
-  }
 
   setTableNames(data) {
     this.tableNames = data;

@@ -9,6 +9,7 @@ import { HomeWidget } from '../../interfaces/homeWidget';
 import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
 import { SharedService } from '../../../services/Shared/shared.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 
 export interface item  {
   typeName: string,
@@ -78,9 +79,15 @@ export class HomeComponent implements OnInit {
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
-    private shared: SharedService
-
+    private shared: SharedService,
+    private auth:AuthService
   ) {
+    this.auth.getUserData().subscribe((data)=>{
+      console.log(data);
+      if(data.imageUrl == null)
+        this.auth.signIn();
+        console.log("nima");
+    })
     shared.homeRef = this;
     //this.items = [GmailWidgetComponent]
     this.items = [];

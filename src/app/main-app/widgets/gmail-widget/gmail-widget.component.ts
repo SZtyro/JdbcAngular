@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { GmailService, GMailContent } from 'src/app/services/Gmail/gmail.service';
-import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+//import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { MatTableDataSource } from '@angular/material';
 import { HomeWidget } from '../../interfaces/homeWidget';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,7 +33,7 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   rows: number = 6;
 
   //USER
-  private user: SocialUser;
+  //private user: SocialUser;
 
   //TABLE
   dataSource;
@@ -46,7 +46,7 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
 
   constructor(
     private service: GmailService,
-    private authService: AuthService,
+    //private authService: AuthService,
     private elem:ElementRef,
     public translate: TranslateService,
     private shared:SharedService
@@ -68,46 +68,46 @@ export class GmailWidgetComponent implements OnInit, GridsterItem, HomeWidget {
   }
 
   ngOnInit() {
-    this.signInWithGoogle();
+    //this.signInWithGoogle();
     console.log(this.widgetNumber + " Gmail");
   }
 
-  fetchMails() {
-    this.service.getMessages(this.user.id, this.user.authToken).subscribe(messages => {
+  // fetchMails() {
+  //   this.service.getMessages(this.user.id, this.user.authToken).subscribe(messages => {
 
-      this.threads = messages["messages"];
+  //     this.threads = messages["messages"];
 
-      //console.log(this.threads);
-      this.threads.forEach((element, i) => {
-        this.service.getMessage(this.user.id, this.user.authToken, this.threads[i].id).subscribe(d => {
+  //     //console.log(this.threads);
+  //     this.threads.forEach((element, i) => {
+  //       this.service.getMessage(this.user.id, this.user.authToken, this.threads[i].id).subscribe(d => {
 
-          this.messages[i] = (d);
+  //         this.messages[i] = (d);
 
-        });
-      });
-    },
-      error => { console.log(error) },
-      () => {
-        this.messages.forEach((element, i) => {
-          element.payload.headers.forEach(el => {
-            if (el.name === "From")
+  //       });
+  //     });
+  //   },
+  //     error => { console.log(error) },
+  //     () => {
+  //       this.messages.forEach((element, i) => {
+  //         element.payload.headers.forEach(el => {
+  //           if (el.name === "From")
 
-              this.messages[i].from = el.value;
-          })
-        });
-        this.dataSource = new MatTableDataSource(this.messages);
-      }
-    )
-  }
+  //             this.messages[i].from = el.value;
+  //         })
+  //       });
+  //       this.dataSource = new MatTableDataSource(this.messages);
+  //     }
+  //   )
+  // }
 
-  signInWithGoogle(): void {
+  // signInWithGoogle(): void {
 
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
-      this.user = user;
-      this.fetchMails();
+  //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+  //   this.authService.authState.subscribe((user) => {
+  //     console.log(user);
+  //     this.user = user;
+  //     this.fetchMails();
 
-    });
-  }
+  //   });
+  // }
 }

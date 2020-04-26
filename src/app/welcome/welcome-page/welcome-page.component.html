@@ -1,0 +1,70 @@
+<div style="height:100%; font-family: Roboto, 'Helvetica Neue', sans-serif;">
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 100%;">
+
+    <button mat-button
+      style="position: absolute;z-index: 10;right: 230px; color: whitesmoke; top: 50px; outline: 0;">EN</button>
+    <button mat-raised-button style="position: absolute;right: 0;z-index: 10;margin: 50px; background-color: #EA4335;"
+      (click)="auth.signIn()">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button>
+
+
+
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+
+    </ol>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active ">
+        <div class="container" style="color: whitesmoke;">
+          <div class="row">
+            <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+              <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_1.HEADER' | translate}}</h1>
+              <p>{{'WELCOME_PAGE.SLIDE_1.TEXT' | translate}}</p>
+            </div>
+          </div>
+  
+          
+        </div>
+        <img src="assets/images/boss.jpg" class="d-block" class="carouselImg">
+
+      </div>
+
+
+      <div class="carousel-item">
+        <div style="color: whitesmoke;">
+          <div class="container">
+            <div class="row">
+              <div class="col-6" style="top:300px; position: absolute;z-index: 10">
+                <h1 style="font-size: 50px; font-weight: 600; ">{{'WELCOME_PAGE.SLIDE_2.HEADER' | translate}}</h1>
+                <p>{{'WELCOME_PAGE.SLIDE_2.TEXT' | translate}}</p>
+              </div>
+            </div>
+          </div>
+          <img src="assets/images/teamwork.jpg" class="d-block " class="carouselImg">
+        </div>
+      </div>
+    </div>
+
+
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+</div>
+<!-- 
+<button id="googleBtn">Google</button>
+<button (click)="auth.signIn()">login</button>
+<button (click)="aaa()">Zwykly get zwracajacy aaa</button>
+<button (click)="ttt()">Zwykly get zwracajacy ttt</button>
+<button (click)="auth.validate()">Validate</button>
+<button (click)="auth.signOut()">SignOut</button> -->
