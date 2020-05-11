@@ -6,7 +6,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material';
 import { HttpLoaderFactory } from '../main-app/main-app.module';
-
+import {MatMenuModule} from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { HttpLoaderFactory } from '../main-app/main-app.module';
         deps: [HttpClient]
       }
     }),
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    RouterModule
   ]
 })
 export class WelcomeModule { }

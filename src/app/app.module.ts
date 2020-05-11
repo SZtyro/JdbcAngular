@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './data-base/table/table.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient,HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { WelcomeModule } from './welcome/welcome.module';
+import { AuthService } from './services/Auth/auth.service';
 
 
 
@@ -117,8 +118,8 @@ export function provideConfig() {
     }),
     MatCheckboxModule,
     DragDropModule,
-    WelcomeModule
-    
+    WelcomeModule,
+    HttpClientJsonpModule
     
     
   ],
@@ -132,10 +133,7 @@ export function provideConfig() {
     ChartSettingsModalComponent
   ],
   providers: [
-    // {
-    //   provide: AuthServiceConfig,
-    //   useFactory: provideConfig
-    // }
+    AuthService
 
   ],
   bootstrap: [AppComponent]

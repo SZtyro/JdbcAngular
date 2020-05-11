@@ -82,12 +82,19 @@ export class HomeComponent implements OnInit {
     private shared: SharedService,
     private auth:AuthService
   ) {
-    this.auth.getUserData().subscribe((data)=>{
-      console.log(data);
-      if(data.imageUrl == null)
-        this.auth.signIn();
-        console.log("nima");
-    })
+    // try{
+    //   if(!auth.isSignedIn())
+    //   this.auth.signIn();
+    // }catch(Excepiton){
+    //   router.navigate([''])
+    // }
+    
+    // this.auth.getUserData().subscribe((data)=>{
+    //   //auth.getAuthInstance().current;
+    //   //console.log(auth.getAuthInstance().isSignedIn.ie);
+      
+      
+    // })
     shared.homeRef = this;
     //this.items = [GmailWidgetComponent]
     this.items = [];

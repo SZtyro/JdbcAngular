@@ -8,6 +8,7 @@ import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/wi
 import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
 import { AuthService } from './services/Auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,16 +17,17 @@ import { AuthService } from './services/Auth/auth.service';
 })
 export class AppComponent implements OnInit {
   ngAfterContentInit(): void {
-    
+
 
   }
   title = 'AngularJDBC';
   tableNames: String[] = [];
   dbConnection: boolean = false;
   opened: boolean = false;
-  photoUrl:String;
+  photoUrl: String;
+  currentNavigation;
 
-
+  isSignedIn$: Observable<boolean>;
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
@@ -40,32 +42,50 @@ export class AppComponent implements OnInit {
     translate.use('en')
     //this.auth.getUserData().subscribe(userData => {this.photoUrl = userData.imageUrl})
     //console.log(this.auth.auth2.currentUser)
+    setTimeout(() => {
+      this.isSignedIn$ = this.auth.isSignedIn()
+      this.isSignedIn$.subscribe((isSignedIn) => {
+        if (this.router.url != "/")
+          this.opened = isSignedIn
+      })
+    }, 1000);
+
   }
 
-  signOut(){
-    this.auth.getUserData().subscribe().unsubscribe();
-    this.router.navigate([''])
-    this.auth.signOut();
+  signOut() {
+    //this.auth.getUserData().subscribe().unsubscribe();
+    //this.router.navigate([''])
+    //this.auth.signOut();
   }
-  
+
+  isAuthInstance() {
+    try {
+      //this.auth.getAuthInstance();
+      return true;
+    } catch (Ex) {
+      console.log(Ex);
+      return false;
+    }
+
+  }
 
   ngOnInit() {
     this.subscribeDBConnection();
-    this.photoUrl = this.auth.imageUrl;
-    console.log(this.photoUrl)
+    //this.photoUrl = this.auth.imageUrl;
+    //console.log(this.photoUrl)
   }
 
-  subscribeDBConnection(){
-    this.shared.getdbConnnection().subscribe(data=> {
-      if(data){
+  subscribeDBConnection() {
+    this.shared.getdbConnnection().subscribe(data => {
+      if (data) {
         //Fetching table names
         this.httpClientService.getTableNames().subscribe(
-          data => {   
+          data => {
             this.setTableNames(data);
             //console.log("Home Table names fetched! ", data);   
-          },  
-          error => {    
-            console.log("Error", error);  
+          },
+          error => {
+            console.log("Error", error);
           }
         )
       }
@@ -78,19 +98,19 @@ export class AppComponent implements OnInit {
     this.tableNames = data;
 
   }
-  
-  editGrid(){
+
+  editGrid() {
     this.shared.setEditGrid();
     this.shared.homeRef.options.draggable.enabled = !this.shared.homeRef.options.draggable.enabled;
     this.shared.homeRef.options.resizable.enabled = !this.shared.homeRef.options.resizable.enabled;
     this.shared.homeRef.options.api.optionsChanged();
-   
+
   }
 
   openTable(name) {
     //this.router.navigate(['/home']);
     this.router.navigate(['/table', name]);
-    
+
     this.router.onSameUrlNavigation = 'reload';
   }
 

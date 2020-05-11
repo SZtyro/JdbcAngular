@@ -1,21 +1,25 @@
-
+a{
+    color: inherit;
+}
 
 .sideNavContent{
     /* display: flex; */
     /* justify-content: space-around; */
     
-    width: 70px;
-    height: 70px;
+    //width: 40px;
+    //height: 40px;
     /* padding: 15px;
     padding-top: 0px;
     padding-bottom: 0px; */
-    margin: 5px;
+    margin: 0 auto;
     border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    color: inherit;
     
 }
 
@@ -23,7 +27,8 @@
 .barIcon{
     /* display: block;
     margin: 0 auto; */
-    font-size: 35px;
+    font-size: 25px;
+    
 }
 
 button{

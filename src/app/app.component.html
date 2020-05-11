@@ -1,73 +1,56 @@
 <body class="mat-app-background">
   <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="push" (mouseleave)="sidenav.close()" [(opened)]="opened" style="width: 80px;  ">
+    <mat-sidenav #sidenav mode="side"  [(opened)]="opened" style="width: 60px;  ">
       <div
         style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;">
-        <div>
-          <div>
-            <!-- <img src="{{ user.photoUrl }}" class="sideNavContent"> -->
-            <!-- <h4>{{ user.name }}</h4>
-            <p>{{ user.email }}</p> -->
-          </div>
-          <button mat-raised-button matTooltip="{{'NAVBAR.GOOGLE_LOGIN' | translate}}" class="sideNavContent"
-            style="padding: 0px;" (click)="signInWithGoogle()">
-            <ng-container *ngIf="false; else userPhoto">
-              <i class="fab fa-google barIcon"></i>
-            </ng-container>
-            <ng-template #userPhoto>
-              <img src="{{photoUrl}}" class="sideNavContent" style="margin: 0px;">
-            </ng-template>
-          </button>
-          <mat-divider style="margin: 10px;"></mat-divider>
-
-
-
+        <div style="color: black;">
+          
           <!-- Home -->
-          <a routerLink="home"><button mat-raised-button matTooltip="{{'NAVBAR.HOME' | translate}}" color="primary"
+          <a routerLink="home"><button mat-button matTooltip="{{'NAVBAR.HOME' | translate}}" 
               class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
 
           <!-- Database -->
           <div *ngIf="dbConnection==true; else noData">
-            <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" color="primary"
+            <button mat-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" 
               [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
           </div>
 
           <ng-template #noData>
             <a routerLink="login">
-              <button mat-raised-button matTooltip="{{'NAVBAR.DATABASE.NO_CONNECTION' | translate}}" color="warn"
+              <button mat-button matTooltip="{{'NAVBAR.DATABASE.NO_CONNECTION' | translate}}" color="warn"
                 class="sideNavContent"><i class="fas fa-database barIcon"></i></button></a>
 
           </ng-template>
 
           <!-- Users -->
-          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.USERS' | translate}}" color="primary"
+          <a routerLink=""><button mat-button matTooltip="{{'NAVBAR.USERS' | translate}}" 
               class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
 
           <!-- Widgets -->
-          <button mat-raised-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" color="primary" class="sideNavContent"
+          <button mat-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}"  class="sideNavContent"
             (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
 
           <!-- Widget editing -->
           <div *ngIf="this.shared.editGrid != null">
             <div *ngIf="this.shared.editGrid == false; else editingEnabled">
-              <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="primary"
+              <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" 
                 class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
             </div>
           </div>
 
           <ng-template #editingEnabled>
-            <button mat-raised-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
+            <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
               (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
           </ng-template>
 
 
           <!-- Settings -->
-          <a routerLink=""><button mat-raised-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" color="primary"
+          <a routerLink=""><button mat-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" 
               class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
 
           <!-- Bug report -->
-          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-raised-button
-              matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" color="primary" class="sideNavContent"><i
+          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-button
+              matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}"  class="sideNavContent"><i
                 class="fas fa-bug barIcon"></i></button></a>
 
           <mat-menu #menu="matMenu">
@@ -84,12 +67,12 @@
           <mat-divider style="margin: 10px;"></mat-divider>
 
           <!-- Info -->
-          <a href="https://github.com/SZtyro"><button mat-raised-button color="primary" class="sideNavContent"><i
+          <a href="https://github.com/SZtyro"><button mat-button  class="sideNavContent"><i
                 class="fas fa-info  barIcon"></i></button></a>
 
           <!-- Change language -->
 
-          <button mat-raised-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" color="primary"
+          <button mat-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" 
             [matMenuTriggerFor]="langMenu" class="sideNavContent"
             style="font-size: 30px; font-weight: 800; ">{{translate.currentLang | uppercase }}</button>
           <mat-menu #langMenu="matMenu">
@@ -100,7 +83,7 @@
 
 
           <!-- Sing out -->
-          <button mat-raised-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" color="primary"
+          <button mat-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" 
             class="sideNavContent" (click)="signOut()"><i class="fas fa-door-open barIcon"></i></button>
         </div>
       </div>
@@ -113,27 +96,31 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">
-      <div *ngIf="false; else noUser">
-        <div (mouseenter)="sidenav.open()"
+      
+      <div *ngIf="(isSignedIn$ | async); else noUser">
+        <!-- <div (mouseenter)="sidenav.open()"
           style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
           <i class="fas fa-caret-right fa-2x"></i>
-        </div>
-
-        <div style="width: 98%;">
-          <router-outlet></router-outlet>
-        </div>
-
-
-        <div style="height: 100%;width: 1%; float: right; ">
-
-        </div>
-      </div>
-      <ng-template #noUser>
+        </div> -->
+       
         <div style="width: 100%;">
           <router-outlet></router-outlet>
         </div>
+<!-- 
+        zz
+        <div style="height: 100%;width: 1%; float: right; ">
+
+        </div> -->
+      </div>
+
+
+      <ng-template #noUser>
+        <div style="width: 100%;">
+          
+          <router-outlet></router-outlet>
+        </div>
       </ng-template>
-      
+
 
 
 
