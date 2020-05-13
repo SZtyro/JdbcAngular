@@ -7,24 +7,29 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class Localhost(unittest.TestCase):
+class BaseTest(unittest.TestCase):
 
+    @classmethod
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path='chromedriver.exe')
+        self.driver.get('http://localhost:4200/')
+        self.driver.get('http://localhost:4200/')
 
-    def tests_main(self):
+    def test_main(self):
         driver = self.driver
-        driver.get('http://localhost:4200/')
-        driver.get('http://localhost:4200/')
+
         self.assertIn('AngularJDBC', driver.title)
         print(driver.title)
+
+    def google_main(self):
+        driver = self.driver
 
         parentWindow = driver.window_handles
         print(parentWindow)
         driver.implicitly_wait(15)
 
-        #wait = WebDriverWait(driver, 10)
-        #element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'ng-star-inserted')))
+        # wait = WebDriverWait(driver, 10)
+        # element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'ng-star-inserted')))
 
         elem = driver.find_element_by_css_selector('button.ng-star-inserted')
         elem.click()
@@ -38,6 +43,7 @@ class Localhost(unittest.TestCase):
 
         self.assertTrue('Logowanie – Kontax Google', googleTitle)
 
+    @classmethod
     def setDown(self):
         self.driver.close()
 
