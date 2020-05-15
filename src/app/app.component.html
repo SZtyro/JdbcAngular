@@ -1,18 +1,52 @@
 <body class="mat-app-background">
-  <mat-sidenav-container class="example-container" style="height: 100%;">
-    <mat-sidenav #sidenav mode="side"  [(opened)]="opened" style="width: 60px;  ">
+  <mat-sidenav-container class="example-container" style="height: 100%; ">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" style="width: 50px; background-color: rgb(34, 34, 34);"
+      (mouseenter)="sideNavExtend()" (mouseleave)=" sideNavExtend()"
+      [@openClose]="sideNavExtension ? 'open' : 'closed'">
+      <div *ngIf="sideNavExtension">
+
+      </div>
       <div
-        style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden;">
-        <div style="color: black;">
-          
+        style="display: flex ; flex-direction: column; justify-content: space-between ; align-items: flex-end;overflow: hidden; ">
+        <div style="color: white; display: flex; flex-direction: column; width: 100%;">
+
           <!-- Home -->
-          <a routerLink="home"><button mat-button matTooltip="{{'NAVBAR.HOME' | translate}}" 
-              class="sideNavContent"><i class="fas fa-home barIcon"></i></button></a>
+
+          <a routerLink="home">
+            <button mat-button matTooltip="{{'NAVBAR.HOME' | translate}}" class="sideNavContent">
+              <!-- <div *ngIf="sideNavExtension">
+                  Home
+                </div> -->
+              <div style="display: flex;flex-direction: row; justify-content: space-between;">
+                <div style="color: whitesmoke; ">
+
+                  <span class="material-icons"
+                    style="font-size: 20px; vertical-align: middle;padding: 10px;">home</span>
+                </div>
+                <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                  Home
+                </div>
+              </div>
+            </button></a>
+
+
+
 
           <!-- Database -->
-          <div *ngIf="dbConnection==true; else noData">
-            <button mat-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" 
-              [matMenuTriggerFor]="menu" class="sideNavContent"><i class="fas fa-database barIcon"></i></button>
+          <div *ngIf="true; else noData">
+            <button mat-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" [matMenuTriggerFor]="menu"
+              class="sideNavContent">
+              <div style="display: flex;flex-direction: row; justify-content: space-between;">
+                <div style="color: whitesmoke; ">
+
+                  <span class="material-icons"
+                    style="font-size: 20px; vertical-align: middle;padding: 10px;">storage</span>
+                </div>
+                <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                  Database
+                </div>
+              </div>
+            </button>
           </div>
 
           <ng-template #noData>
@@ -22,37 +56,54 @@
 
           </ng-template>
 
-          <!-- Users -->
-          <a routerLink=""><button mat-button matTooltip="{{'NAVBAR.USERS' | translate}}" 
-              class="sideNavContent"><i class="fas fa-users barIcon"></i></button></a>
 
           <!-- Widgets -->
-          <button mat-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}"  class="sideNavContent"
-            (click)="openDialog()"><i class="fas fa-th-large barIcon"></i></button>
+          <button mat-button matTooltip="{{'NAVBAR.WIDGETS' | translate}}" class="sideNavContent"
+            (click)="openDialog()">
+            <div style="display: flex;flex-direction: row; justify-content: space-between;">
+              <div style="color: whitesmoke; ">
+
+                <span class="material-icons"
+                  style="font-size: 20px; vertical-align: middle;padding: 10px;">dashboard</span>
+              </div>
+              <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                Widgets
+              </div>
+            </div>
+          </button>
 
           <!-- Widget editing -->
-          <div *ngIf="this.shared.editGrid != null">
-            <div *ngIf="this.shared.editGrid == false; else editingEnabled">
-              <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" 
-                class="sideNavContent" (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+          <!-- <div *ngIf="this.shared.editGrid != null">
+              <div *ngIf="this.shared.editGrid == false; else editingEnabled">
+                <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" class="sideNavContent"
+                  (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+              </div>
             </div>
-          </div>
 
-          <ng-template #editingEnabled>
-            <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
-              (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
-          </ng-template>
+            <ng-template #editingEnabled>
+              <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
+                (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
+            </ng-template> -->
 
 
           <!-- Settings -->
-          <a routerLink=""><button mat-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" 
-              class="sideNavContent"><i class="fas fa-cogs barIcon"></i></button></a>
+          <a routerLink=""><button mat-button matTooltip="{{'NAVBAR.SETTINGS' | translate}}" class="sideNavContent">
+              <div style="display: flex;flex-direction: row; justify-content: space-between;">
+                <div style="color: whitesmoke; ">
+
+                  <span class="material-icons"
+                    style="font-size: 20px; vertical-align: middle;padding: 10px;">settings</span>
+                </div>
+                <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                  Settings
+                </div>
+              </div>
+            </button></a>
 
           <!-- Bug report -->
-          <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-button
-              matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}"  class="sideNavContent"><i
-                class="fas fa-bug barIcon"></i></button></a>
-
+          <!-- <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-button
+              matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" class="sideNavContent"><i
+                class="fas fa-bug barIcon"></i></button></a>-->
           <mat-menu #menu="matMenu">
             <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
 
@@ -63,18 +114,28 @@
 
 
         <!-- <div style="align-self: flex-end; display: flex; justify-content: end; align-items: flex-end; flex-direction: column;"> -->
-        <div style="justify-content: flex-end;">
-          <mat-divider style="margin: 10px;"></mat-divider>
+        <div style="width: 100%; color: white;">
+          <!-- <mat-divider style="margin: 10px;"></mat-divider> -->
 
           <!-- Info -->
-          <a href="https://github.com/SZtyro"><button mat-button  class="sideNavContent"><i
-                class="fas fa-info  barIcon"></i></button></a>
+          <!-- <a href="https://github.com/SZtyro"><button mat-button class="sideNavContent"><i
+                class="fas fa-info  barIcon"></i></button></a> -->
 
           <!-- Change language -->
 
-          <button mat-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" 
-            [matMenuTriggerFor]="langMenu" class="sideNavContent"
-            style="font-size: 30px; font-weight: 800; ">{{translate.currentLang | uppercase }}</button>
+          <button mat-button matTooltip="{{'NAVBAR.LANGUAGE' | translate}}" [matMenuTriggerFor]="langMenu"
+            class="sideNavContent">
+            <div style="display: flex;flex-direction: row; justify-content: space-between;">
+              <div style="color: whitesmoke; ">
+
+                <span class="material-icons"
+                  style="font-size: 20px; vertical-align: middle;padding: 10px;">translate</span>
+              </div>
+              <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                Language
+              </div>
+            </div>
+          </button>
           <mat-menu #langMenu="matMenu">
             <button mat-menu-item *ngFor="let lang of translate.getLangs()"
               (click)="translate.use(lang)">{{lang | uppercase}}</button>
@@ -82,9 +143,19 @@
           </mat-menu>
 
 
-          <!-- Sing out -->
-          <button mat-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" 
-            class="sideNavContent" (click)="signOut()"><i class="fas fa-door-open barIcon"></i></button>
+          <!-- Sign out -->
+          <button mat-button matTooltip="{{'NAVBAR.SIGN_OUT' | translate}}" class="sideNavContent" (click)="signOut()">
+            <div style="display: flex;flex-direction: row; justify-content: space-between;">
+              <div style="color: whitesmoke; ">
+
+                <span class="material-icons"
+                  style="font-size: 20px; vertical-align: middle;padding: 10px;">meeting_room</span>
+              </div>
+              <div *ngIf="sideNavExtension" style="vertical-align: middle;">
+                Language
+              </div>
+            </div>
+          </button>
         </div>
       </div>
 
@@ -96,17 +167,17 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="display: flex;">
-      
-      <div *ngIf="(isSignedIn$ | async); else noUser">
+
+      <div *ngIf="isSignedIn; else noUser">
         <!-- <div (mouseenter)="sidenav.open()"
           style="height: 100%;width: 1%; float: left; display: flex; justify-content: center; align-items: center;">
           <i class="fas fa-caret-right fa-2x"></i>
         </div> -->
-       
+
         <div style="width: 100%;">
           <router-outlet></router-outlet>
         </div>
-<!-- 
+        <!-- 
         zz
         <div style="height: 100%;width: 1%; float: right; ">
 
@@ -116,7 +187,7 @@
 
       <ng-template #noUser>
         <div style="width: 100%;">
-          
+
           <router-outlet></router-outlet>
         </div>
       </ng-template>

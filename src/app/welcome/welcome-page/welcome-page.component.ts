@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -26,13 +26,15 @@ export class WelcomePageComponent implements OnInit {
     
   }
 
+
   ngOnInit() {
     //window.addEventListener('scroll', this.scrollFunction, true);
+    this.isSignedIn$ = this.auth.isSignedIn()
   }
 
   ngAfterViewInit() {
     //sthis.googleInit();
-    setTimeout(() => this.isSignedIn$ = this.auth.isSignedIn(), 1000);
+    //setTimeout(() => this.isSignedIn$ = this.auth.isSignedIn(), 1000);
   }
 
   tryLogin() {

@@ -9,25 +9,42 @@ import { MatDialog } from '@angular/material';
 import { SharedService } from './services/Shared/shared.service';
 import { AuthService } from './services/Auth/auth.service';
 import { Observable } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state('open', style({
+        width: '200px',        
+      })),
+      state('closed', style({
+        width: '50px',        
+      })),
+      transition('open => closed', [
+        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
+      ]),
+      transition('closed => open', [
+        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
+      ]),
+    ]),
+  ]
 })
-export class AppComponent implements OnInit {
-  ngAfterContentInit(): void {
-
-
-  }
+export class AppComponent implements OnInit,AfterContentInit {
+ 
   title = 'AngularJDBC';
   tableNames: String[] = [];
   dbConnection: boolean = false;
-  opened: boolean = false;
-  photoUrl: String;
-  currentNavigation;
+  opened: boolean = true;
+  sideNavExtension:boolean = false;
+  //photoUrl: String;
+  //currentNavigation;
 
   isSignedIn$: Observable<boolean>;
+  isSignedIn: boolean;
   constructor(
     private httpClientService: HttpClientService,
     private router: Router,
@@ -42,13 +59,8 @@ export class AppComponent implements OnInit {
     translate.use('en')
     //this.auth.getUserData().subscribe(userData => {this.photoUrl = userData.imageUrl})
     //console.log(this.auth.auth2.currentUser)
-    setTimeout(() => {
-      this.isSignedIn$ = this.auth.isSignedIn()
-      this.isSignedIn$.subscribe((isSignedIn) => {
-        if (this.router.url != "/")
-          this.opened = isSignedIn
-      })
-    }, 1000);
+
+
 
   }
 
@@ -68,11 +80,34 @@ export class AppComponent implements OnInit {
     }
 
   }
-
-  ngOnInit() {
+  ngAfterContentInit(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
     this.subscribeDBConnection();
-    //this.photoUrl = this.auth.imageUrl;
-    //console.log(this.photoUrl)
+    this.subscribeLoggedUser();
+  }
+  ngOnInit() {
+    
+
+    // console.log('subskrybuje')
+    // this.isSignedIn$ = this.auth.isSignedIn();
+    // this.isSignedIn$.subscribe((isSignedIn) => {
+
+    //   setTimeout(() => {
+    //     console.log('informacja o zalogowaniu: ' + isSignedIn)
+    //     if (this.router.url != "/")
+    //       this.opened = isSignedIn
+
+    //   }, 1000)
+    // })
+  }
+
+  subscribeLoggedUser() {
+    this.shared.getIsUserLogged().subscribe(data => {
+      this.isSignedIn = data;
+      this.opened = data;
+      console.log("opened: " + data)
+    });
   }
 
   subscribeDBConnection() {
@@ -93,6 +128,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  sideNavExtend(){
+    this.sideNavExtension = !this.sideNavExtension;
+  }
 
   setTableNames(data) {
     this.tableNames = data;

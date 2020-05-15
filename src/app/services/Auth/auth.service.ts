@@ -2,6 +2,7 @@ import { Injectable, HostListener, AfterViewInit } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { Router } from '@angular/router';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { SharedService } from '../Shared/shared.service';
 declare const gapi: any;
 
 @Injectable({
@@ -16,8 +17,9 @@ export class AuthService implements AfterViewInit {
   googleInitialized: boolean = false;
 
   constructor(
-    private http:HttpClientService,
-    private router: Router
+    private http: HttpClientService,
+    private router: Router,
+    private shared: SharedService
   ) {
     //this.isSigned.subscribe((data) => { this.isLoggedIn = data });
     this.googleInit();
@@ -31,19 +33,19 @@ export class AuthService implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
   isSignedIn() {
-    
+    console.log('funkcja zwaracjaca observable')
     return this.isSigned.asObservable();
   }
 
-  sendToken(){
+  sendToken() {
     console.log(this.getAuthInstance().currentUser.ie.tc.id_token);
-    this.http.aaa(this.getAuthInstance().currentUser.ie.tc.id_token).subscribe(answer => {console.log(answer)})
+    this.http.aaa(this.getAuthInstance().currentUser.ie.tc.id_token).subscribe(answer => { console.log(answer) })
   }
-  
+
   signIn() {
     this.getAuthInstance().signIn({
       scope: 'profile email',
@@ -53,9 +55,21 @@ export class AuthService implements AfterViewInit {
     }).then(googleUser => {
       //console.log(googleUser.getAuthResponse().id_token)
       localStorage.setItem("AuthInstance", JSON.stringify(this.getAuthInstance().currentUser));
-      this.isSigned.next(true);
-      this.http.tryLogin(googleUser.getAuthResponse().id_token).subscribe(answer => {console.log(answer)})
-      this.router.navigate(['/home'])
+
+      this.http.tryLogin(googleUser.getAuthResponse().id_token).subscribe(answer => {
+        if (answer) {
+          this.shared.setIsUserLogged(answer);
+          this.router.navigate(['/home']).then(() => {
+            //window.location.reload();
+            //this.isSigned.next(true);
+            //console.log('wyslano true')
+          });
+        }
+        else {
+          console.log("Wystapil blad logowania");
+        }
+      })
+      //this.router.navigate(['/home'])
       //this.imageUrl = gapi.auth2.getAuthInstance().currentUser.ie.Pt.fL;
 
       //this.setUserData(gapi.auth2.getAuthInstance().currentUser.ie.Pt.fL);
@@ -100,8 +114,8 @@ export class AuthService implements AfterViewInit {
   //     });
   // }
 
-  getAuthInstance(){
-    if(this.googleInitialized){
+  getAuthInstance() {
+    if (this.googleInitialized) {
       return gapi.auth2.getAuthInstance();
     }
   }
@@ -113,17 +127,17 @@ export class AuthService implements AfterViewInit {
         cookiepolicy: 'none',
         scope: 'profile email'
       }).then(() => {
-        this.googleInitialized = true; 
+        this.googleInitialized = true;
         console.log("Google initialized")
         //console.log(this.auth2..isSignedIn.get());
         this.isSigned.next(gapi.auth2.getAuthInstance().isSignedIn.get());
-        
+
         //localStorage.setItem("AuthInstance", JSON.stringify(this.getAuthInstance().currentUser.ie.tc.id_token) );
         //this.authInstance = JSON.parse(localStorage.getItem("AuthInstance"));
         //if (this.authInstance != null) {
         //  console.log("pobrana instancja z session storage: ")
         //  console.log(this.authInstance);
-          //this.http.tryLogin(this.authInstance);
+        //this.http.tryLogin(this.authInstance);
         //}
       }
 

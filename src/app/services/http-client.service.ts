@@ -51,7 +51,7 @@ export class HttpClientService {
   tryLogin(token) {
     return this.httpClient.get(this.url + "/loginUser",
       {
-        responseType: "text",
+        
         headers:
           { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' }
       });

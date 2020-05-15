@@ -15,7 +15,19 @@ export class SharedService {
 
   private dbConnnection: boolean = false;
   private dbConnnectionSubject = new Subject<boolean>();
+
+  private isUserLogged: boolean = false;
+  private isUserLoggedSubject = new Subject<boolean>();
   
+  setIsUserLogged(isLogged){
+    this.isUserLogged = isLogged;
+    this.isUserLoggedSubject.next(this.isUserLogged);
+  }
+
+  getIsUserLogged():Observable<boolean>{
+    return this.isUserLoggedSubject.asObservable();
+  }
+
   setdbConnnection(){
     this.dbConnnection = !this.dbConnnection;
     this.dbConnnectionSubject.next(this.dbConnnection);
