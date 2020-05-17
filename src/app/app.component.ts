@@ -38,7 +38,7 @@ export class AppComponent implements OnInit,AfterContentInit {
   title = 'AngularJDBC';
   tableNames: String[] = [];
   dbConnection: boolean = false;
-  opened: boolean = true;
+  opened: boolean = false;
   sideNavExtension:boolean = false;
   //photoUrl: String;
   //currentNavigation;

@@ -100,9 +100,9 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       this.chartData.chartTable = new google.visualization.DataTable();
 
       this.chartData.chartColumns.forEach((element, i) => {
-        if (this.chartData.chartColumnsTypes[i] == "VARCHAR2")
+        if (this.chartData.chartColumnsTypes[i].toUpperCase() == "VARCHAR2" || this.chartData.chartColumnsTypes[i].toUpperCase() == "VARCHAR")
           this.chartData.chartTable.addColumn("string", element.toString());
-        else if (this.chartData.chartColumnsTypes[i] == "NUMBER")
+        else if (this.chartData.chartColumnsTypes[i].toUpperCase() == "NUMBER" || this.chartData.chartColumnsTypes[i].toUpperCase() == "INT")
           this.chartData.chartTable.addColumn("number", element.toString());
         else if (this.chartData.chartColumnsTypes[i] == "DATE")
           this.chartData.chartTable.addColumn("date", element.toString());

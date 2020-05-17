@@ -47,9 +47,9 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
       this.father.chartData.chartTable = new google.visualization.DataTable();
 
       this.father.chartData.chartColumns.forEach((element, i) => {
-        if (this.father.chartData.chartColumnsTypes[i] == "VARCHAR2")
+        if (this.father.chartData.chartColumnsTypes[i].toUpperCase() == "VARCHAR2" || this.father.chartData.chartColumnsTypes[i].toUpperCase() == "VARCHAR")
           this.father.chartData.chartTable.addColumn("string", element.toString());
-        else if (this.father.chartData.chartColumnsTypes[i] == "NUMBER")
+        else if (this.father.chartData.chartColumnsTypes[i].toUpperCase() == "NUMBER" || this.father.chartData.chartColumnsTypes[i].toUpperCase() == "INT")
           this.father.chartData.chartTable.addColumn("number", element.toString());
         else if (this.father.chartData.chartColumnsTypes[i] == "DATE")
           this.father.chartData.chartTable.addColumn("date", element.toString());
