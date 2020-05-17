@@ -21,7 +21,7 @@ export class HttpClientService {
     return this.httpClient.get(this.url + "/getFiles")
   }
   loginUser(data) {
-    return this.httpClient.post(this.url + '/login', data, { responseType: 'text' });
+    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: {'Access-Control-Allow-Origin': 'http://localhost:4200'} });
   }
   getTable(tableName) {
     return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);

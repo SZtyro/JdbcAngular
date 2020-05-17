@@ -117,7 +117,7 @@ export class AppComponent implements OnInit,AfterContentInit {
         this.httpClientService.getTableNames().subscribe(
           data => {
             this.setTableNames(data);
-            //console.log("Home Table names fetched! ", data);   
+            console.log("Home Table names fetched! ", data);   
           },
           error => {
             console.log("Error", error);
@@ -157,6 +157,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       width: '80%',
       height: '80%',
       data: { father: this }
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -6,7 +6,10 @@
             <div *ngIf="item.class != null; else soonSection">
                 <button mat-button (click)="addWidget(item.class.name)" style="width: 100%;">
 
-                    <i style="margin: 10px; font-size: 50px;" class="{{item.icon}}"></i>
+                    <!-- <i style="margin: 10px; font-size: 50px;" class="{{item.icon}}"></i> -->
+                    <div class="material-icons">
+                        {{item.icon}}
+                    </div>
                     <div>
                         <h5>{{item.class.name.split("Component")[0]}}</h5>
                         <p>{{item.description}}</p>
@@ -14,9 +17,12 @@
 
                 </button>
             </div>
-            <ng-template #soonSection >
+            <ng-template #soonSection>
                 <button mat-button style="width: 100%; opacity: 50%;">
-                    <i style="margin: 10px; font-size: 50px;" class="{{item.icon}}"></i>
+                    <!-- <i style="margin: 10px; font-size: 50px;" class="{{item.icon}}"></i> -->
+                    <span class="material-icons">
+                        {{item.icon}}
+                    </span>
                     <div>
                         <h6>This widget will be added soon</h6>
                         <p>{{item.description}}</p>

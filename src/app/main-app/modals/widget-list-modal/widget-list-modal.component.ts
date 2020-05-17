@@ -27,11 +27,11 @@ export class WidgetListModalComponent implements OnInit {
   ) { }
 
   widgets: widgetData[] = [
-    { class: GmailWidgetComponent, icon: "far fa-envelope", description: "Manage your mailbox." },
-    { class: ChartWidgetComponent, icon: "fas fa-chart-line", description: "Visualise data from connected databse." },
-    { class: PhotoWidgetComponent, icon: "fas fa-folder", description: "Container for your data." },
-    { icon: "fas fa-cloud-sun-rain", description: "All about weather." },
-    { icon: "fas fa-shopping-cart", description: "Manage your orders." },
+    { class: GmailWidgetComponent, icon: "mail_outline", description: "Manage your mailbox." },
+    { class: ChartWidgetComponent, icon: "bar_chart", description: "Visualise data from connected databse." },
+    { class: PhotoWidgetComponent, icon: "folder_open", description: "Container for your data." },
+    { icon: "wb_sunny", description: "All about weather." },
+    { icon: "shopping_cart", description: "Manage your orders." },
     { icon: "fas fa-tasks", description: "Manage your tasks." }
   ];
 

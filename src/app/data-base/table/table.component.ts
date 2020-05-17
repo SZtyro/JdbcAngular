@@ -144,9 +144,9 @@ export class TableComponent implements OnInit {
   }
 
   saveToContainer(index, elem) {
-    if (this.type[index] == "NUMBER")
+    if (this.type[index].toUpperCase() == "NUMBER" || this.type[index].toUpperCase() == "INT"  )
       this.newRowContainer[index] = elem;
-    else if (this.type[index] == "VARCHAR2")
+    else if (this.type[index].toUpperCase() == "VARCHAR2" || this.type[index].toUpperCase() =="VARCHAR" )
       this.newRowContainer[index] = "'" + elem + "'";
     else if (this.type[index] == "DATE")
       this.newRowContainer[index] = "'" + elem.split("T")[0] + "'";
