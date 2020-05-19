@@ -135,7 +135,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       this.chartData.chartWrapper.setChartType(this.chartData.chartType);
 
       this.chartData.chartWrapper.draw(ref);
-      this.toSave();
+      //this.toSave();
     }
 
   }
@@ -166,8 +166,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     };
 
     this.subscription = this.shared.getEditGrid().subscribe(isEditing => {
-      if(!isEditing)
-        this.toSave();
+      //if(!isEditing)
+        //this.toSave();
     })
     
     
@@ -195,6 +195,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       rawTable: this.rawTable
     }
     localStorage.setItem('ChartWidget' + this.widgetNumber, JSON.stringify(saveData));
+    this.shared.homeRef.items.push({typeName: 'ChartWidgetComponent', index: this.widgetNumber, data: saveData})
     console.log("zapisano: "+'ChartWidget' + this.widgetNumber);
     console.log(saveData);
   }

@@ -29,15 +29,15 @@ export class WidgetLoaderComponent implements OnInit {
       
       if (this.type.index == null){
         this.type.index = this.index;
-        this.shared.homeRef.items[this.index] = this.type;
+        //this.shared.homeRef.items[this.index] = this.type;
         ref.instance["widgetNumber"] = this.index;
       }
       else{
         ref.instance["widgetNumber"] = this.type.index
       }
-        console.log("//////////////////////////////////////////////////////////////////////////")
-        console.log(ref.instance["widgetNumber"])
-        this.shared.homeRef.save();
+        //console.log("//////////////////////////////////////////////////////////////////////////")
+        //console.log(ref.instance["widgetNumber"])
+        //this.shared.homeRef.save();
       
        
       ref.instance["loaderRef"] = this.viewContainerRef;

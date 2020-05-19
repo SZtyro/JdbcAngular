@@ -48,6 +48,14 @@ export class HttpClientService {
     return this.httpClient.post(this.url + "/delete", id);
   }
 
+  setDashboard(mail:String, dashboard:String){
+    return this.httpClient.post(this.url + "/saveDashboard",[mail,dashboard]);
+  }
+
+  getDashboard(mail:String){   
+    return this.httpClient.post(this.url + "/loadDashboard",mail,{responseType: 'text'});
+  }
+
   tryLogin(token) {
     return this.httpClient.get(this.url + "/loginUser",
       {

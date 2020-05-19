@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewChecked, AfterContentChecked, AfterContentInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { HttpClientService } from './services/http-client.service';
 //import { AuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -19,10 +19,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('openClose', [
       // ...
       state('open', style({
-        width: '200px',        
+        width: '200px',
       })),
       state('closed', style({
-        width: '50px',        
+        width: '50px',
       })),
       transition('open => closed', [
         animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')
@@ -33,13 +33,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ]
 })
-export class AppComponent implements OnInit,AfterContentInit {
- 
+export class AppComponent implements OnInit, AfterContentInit {
+
   title = 'AngularJDBC';
   tableNames: String[] = [];
   dbConnection: boolean = false;
-  opened: boolean = false;
-  sideNavExtension:boolean = false;
+  opened: boolean = true;
+  sideNavExtension: boolean = false;
   //photoUrl: String;
   //currentNavigation;
 
@@ -61,7 +61,9 @@ export class AppComponent implements OnInit,AfterContentInit {
     //console.log(this.auth.auth2.currentUser)
 
 
-
+    console.log(this.router.url);
+    console.log(window.location.href.split(window.location.host));
+    
   }
 
   signOut() {
@@ -85,9 +87,10 @@ export class AppComponent implements OnInit,AfterContentInit {
     //Add 'implements AfterContentInit' to the class.
     this.subscribeDBConnection();
     this.subscribeLoggedUser();
+
   }
   ngOnInit() {
-    
+    console.log(this.router.url);
 
     // console.log('subskrybuje')
     // this.isSignedIn$ = this.auth.isSignedIn();
@@ -117,7 +120,7 @@ export class AppComponent implements OnInit,AfterContentInit {
         this.httpClientService.getTableNames().subscribe(
           data => {
             this.setTableNames(data);
-            console.log("Home Table names fetched! ", data);   
+            console.log("Home Table names fetched! ", data);
           },
           error => {
             console.log("Error", error);
@@ -128,7 +131,7 @@ export class AppComponent implements OnInit,AfterContentInit {
     });
   }
 
-  sideNavExtend(){
+  sideNavExtend() {
     this.sideNavExtension = !this.sideNavExtension;
   }
 
@@ -157,7 +160,7 @@ export class AppComponent implements OnInit,AfterContentInit {
       width: '80%',
       height: '80%',
       data: { father: this }
-      
+
     });
 
     dialogRef.afterClosed().subscribe(result => {

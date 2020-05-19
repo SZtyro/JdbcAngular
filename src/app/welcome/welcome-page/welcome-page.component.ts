@@ -22,10 +22,11 @@ export class WelcomePageComponent implements OnInit {
     private auth: AuthService,
     public translate: TranslateService,
   ) {
-    
-    
+
+
   }
 
+  
 
   ngOnInit() {
     //window.addEventListener('scroll', this.scrollFunction, true);

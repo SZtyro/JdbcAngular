@@ -13,7 +13,8 @@ import { AuthService } from 'src/app/services/Auth/auth.service';
 
 export interface item  {
   typeName: string,
-  index?: number
+  index?: number,
+  data?
 }
 
 @Component({
@@ -101,8 +102,8 @@ export class HomeComponent implements OnInit {
     this.loadWidgets();
     
     this.shared.getEditGrid().subscribe(isEditing => {
-      if(!isEditing)
-        this.save();
+     // if(!isEditing)
+      //  this.save();
     })
     
 
@@ -111,8 +112,14 @@ export class HomeComponent implements OnInit {
 
   loadWidgets(){
     this.items = [];
-    let acc = [];
-    this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
+    //let acc = [];
+    //this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
+    this.httpClientService.getDashboard('fabixd123@gmail.com').subscribe((dashboard)=>{
+      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+      console.log(dashboard)
+        this.items = JSON.parse(dashboard);
+        console.log(this.items)
+    })
     // console.log(acc);
     // if(acc != null)
     // acc.forEach(element => {
@@ -131,9 +138,13 @@ export class HomeComponent implements OnInit {
     //   acc.push(elem.type.name)
     //   acc.push(elem.index)
     // })
-    localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
+
+    let jsonStorage = JSON.stringify(this.items);
+    //localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
     //console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
+    this.httpClientService.setDashboard('fabixd123@gmail.com',jsonStorage).subscribe((d)=>{console.log(d)});
     console.log("Storage save")
+    //console.log(jsonStorage);
   }
 
 
