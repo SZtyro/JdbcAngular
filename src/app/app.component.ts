@@ -132,7 +132,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   }
 
   sideNavExtend() {
-    this.sideNavExtension = !this.sideNavExtension;
+    //this.sideNavExtension = !this.sideNavExtension;
   }
 
   setTableNames(data) {

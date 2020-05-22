@@ -11,7 +11,7 @@ import { SharedService } from '../../../services/Shared/shared.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { AuthService } from 'src/app/services/Auth/auth.service';
 
-export interface item  {
+export interface item {
   typeName: string,
   index?: number,
   data?
@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit {
   tableNames: String[] = [];
   opened: boolean = false;
 
-  num:number = 0;
-  
+  num: number = 0;
+
   public options: GridsterConfig = {
     pushItems: true,
     displayGrid: 'none',
@@ -53,9 +53,9 @@ export class HomeComponent implements OnInit {
       enabled: false
     }
   }
-  public items:item[] = [];
+  public items: item[] = [];
 
-  resize(x: HomeWidget){
+  resize(x: HomeWidget) {
     x.onResize();
   }
 
@@ -64,16 +64,16 @@ export class HomeComponent implements OnInit {
     x.onChange();
   }
 
-  deleteAllWidgets(){
+  deleteAllWidgets() {
     this.items = [];
     localStorage.removeItem('desktopWidgets');
   }
 
 
   appWidgets = {
-    'GmailWidgetComponent':GmailWidgetComponent,
-    'ChartWidgetComponent':ChartWidgetComponent,
-    'PhotoWidgetComponent':PhotoWidgetComponent
+    'GmailWidgetComponent': GmailWidgetComponent,
+    'ChartWidgetComponent': ChartWidgetComponent,
+    'PhotoWidgetComponent': PhotoWidgetComponent
   }
 
 
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
     private httpClientService: HttpClientService,
     private router: Router,
     private shared: SharedService,
-    private auth:AuthService
+    private auth: AuthService
   ) {
     // try{
     //   if(!auth.isSignedIn())
@@ -89,41 +89,41 @@ export class HomeComponent implements OnInit {
     // }catch(Excepiton){
     //   router.navigate([''])
     // }
-    
+
     // this.auth.getUserData().subscribe((data)=>{
     //   //auth.getAuthInstance().current;
     //   //console.log(auth.getAuthInstance().isSignedIn.ie);
-      
-      
+
+
     // })
     shared.homeRef = this;
     //this.items = [GmailWidgetComponent]
     this.items = [];
     this.loadWidgets();
-    
+
     this.shared.getEditGrid().subscribe(isEditing => {
-     // if(!isEditing)
+      // if(!isEditing)
       //  this.save();
     })
-    
+
 
   }
-  
 
-  loadWidgets(){
+
+  loadWidgets() {
     this.items = [];
     //let acc = [];
     //this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
-    this.httpClientService.getDashboard('fabixd123@gmail.com').subscribe((dashboard)=>{
+    this.httpClientService.getDashboard('fabixd123@gmail.com').subscribe((dashboard) => {
       console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-      console.log(dashboard)
-        this.items = JSON.parse(dashboard);
-        console.log(this.items)
+      //console.log(dashboard)
+      this.items = JSON.parse(dashboard);
+      console.log(this.items);
     })
     // console.log(acc);
     // if(acc != null)
     // acc.forEach(element => {
-      
+
     //   //this.items.push(GmailWidgetComponent); dziala
     //   this.items.push({
     //     typeName: this.appWidgets[element],
@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
     //   this.num++;
     // });
   }
-  save(){
+  save() {
     //let acc = [];
     // this.items.forEach(elem => {
     //   acc.push(elem.type.name)
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
     let jsonStorage = JSON.stringify(this.items);
     //localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
     //console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
-    this.httpClientService.setDashboard('fabixd123@gmail.com',jsonStorage).subscribe((d)=>{console.log(d)});
+    this.httpClientService.setDashboard('fabixd123@gmail.com', jsonStorage).subscribe((d) => { console.log(d) });
     console.log("Storage save")
     //console.log(jsonStorage);
   }
