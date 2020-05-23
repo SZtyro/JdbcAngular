@@ -1,8 +1,9 @@
 export interface HomeWidget {
     widgetNumber:number;
+    widgetData;
     onChange();
     onResize();
     toSave();
-    load();
+    load(index);
     delete();
 }

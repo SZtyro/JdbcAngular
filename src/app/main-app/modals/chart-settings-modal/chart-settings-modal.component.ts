@@ -42,7 +42,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   }
 
   drawChart(ref) {
-    if (this.father.apiLoaded) {
+    if (this.father.apiLoaded && this.father.chartData!=null) {
       this.father.chartData.chartWrapper = new google.visualization.ChartWrapper();
       this.father.chartData.chartTable = new google.visualization.DataTable();
 

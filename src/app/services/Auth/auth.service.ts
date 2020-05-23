@@ -120,7 +120,7 @@ export class AuthService implements AfterViewInit {
     }
   }
 
-  public googleInit() {
+  public async googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         client_id: '36592518046-43kubsqj6gut5165dugs9u0cha4e0hah.apps.googleusercontent.com',
@@ -141,7 +141,7 @@ export class AuthService implements AfterViewInit {
         //}
       }
 
-      );
+      ).catch(er => console.log(er));
 
       // this.auth2.currentUser.listen((d) => {
       //   if (d.Pt != null)

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type } from '@angular/core';
+import { Component, OnInit, ElementRef, Injector, Inject, ViewContainerRef, ViewChild, ComponentFactoryResolver, AfterViewInit, Type, ComponentRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../../../services/http-client.service';
 import { GridsterConfig, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
@@ -14,7 +14,8 @@ import { AuthService } from 'src/app/services/Auth/auth.service';
 export interface item {
   typeName: string,
   index?: number,
-  data?
+  data?,
+  componentRef?: ComponentRef<HomeWidget>
 }
 
 @Component({
@@ -102,13 +103,32 @@ export class HomeComponent implements OnInit {
     this.loadWidgets();
 
     this.shared.getEditGrid().subscribe(isEditing => {
-      // if(!isEditing)
-      //  this.save();
+      if (!isEditing)
+        this.save();
     })
 
 
   }
 
+  deleteWidget(i) {
+    //this.loaderRef.remove(this.widgetNumber);
+    //this.shared.homeRef.items.splice(this.widgetNumber, 1);
+    //this.subscription.unsubscribe();
+    this.shared.homeRef.items.splice(i, 1);
+    //localStorage.removeItem('ChartWidget' + this.widgetNumber);
+    this.shared.homeRef.items.forEach((elem, index) => {
+      elem.index = index;
+      elem.componentRef.instance["widgetNumber"] = index;
+      //ref.instance["widgetNumber"] = index
+      //elem.data.widgetNumber = index;
+      //console.log(index)
+    })
+    //console.log("Usunieto: ChartWidget" + this.widgetNumber);
+    //console.log(this.shared.homeRef.items);
+
+    //this.shared.homeRef.save();
+    //this.shared.homeRef.loadWidgets();
+  }
 
   loadWidgets() {
     this.items = [];
@@ -138,7 +158,10 @@ export class HomeComponent implements OnInit {
     //   acc.push(elem.type.name)
     //   acc.push(elem.index)
     // })
-
+    this.items.forEach(elem => {
+      elem.componentRef.instance.toSave();
+      elem.componentRef = null;
+    })
     let jsonStorage = JSON.stringify(this.items);
     //localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
     //console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
