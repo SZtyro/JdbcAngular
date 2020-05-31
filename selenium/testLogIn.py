@@ -26,14 +26,13 @@ class GoogleLogin(unittest.TestCase):
 
         for handle in self.driver.window_handles:
             self.driver.switch_to.window(handle)
+            google = page.GooglePage(self.driver)
         login = self.driver.find_element_by_id("identifierId")
         login.send_keys("nwta1234nwta@gmail.com")
-        nextBtn = self.driver.find_element_by_id('identifierNext')
-        nextBtn.click()
+        google.click_next()
         password = self.driver.find_element_by_name("password")
         password.send_keys("Nwta1234!")
-        loginBtn = self.driver.find_element_by_id('passwordNext')
-        loginBtn.click()
+        google.click_next2()
 
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.number_of_windows_to_be(1))
