@@ -20,6 +20,7 @@ class GoogleWindow(unittest.TestCase):
 
         main = page.MainPage(self.driver)
         main.click_button()
+        #main.click_button()
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.number_of_windows_to_be(2))
 

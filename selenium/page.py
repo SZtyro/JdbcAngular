@@ -24,3 +24,5 @@ class MainPage(BasePage):
         """Triggers the search"""
         element = self.driver.find_element_by_css_selector('button.ng-star-inserted')
         element.click()
+
+
