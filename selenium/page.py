@@ -24,3 +24,22 @@ class MainPage(BasePage):
         """Triggers the search"""
         element = self.driver.find_element_by_css_selector('button.ng-star-inserted')
         element.click()
+
+
+class GooglePage(BasePage):
+    """Google page action methods come here."""
+
+    def is_title_matches_google(self, title):
+      """Verifies that the hardcoded text appears in page title"""
+      return title in self.driver.title
+
+    def click_next(self):
+      """Triggers the search"""
+      element = self.driver.find_element_by_id('identifierNext')
+      element.click()
+
+    def click_next2(self):
+      """Triggers the search"""
+      element = self.driver.find_element_by_id('passwordNext')
+      element.click()
+

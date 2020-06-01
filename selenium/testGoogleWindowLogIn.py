@@ -20,19 +20,20 @@ class GoogleWindow(unittest.TestCase):
 
         main = page.MainPage(self.driver)
         main.click_button()
+        main.click_button()
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.number_of_windows_to_be(2))
 
         for handle in self.driver.window_handles:
             self.driver.switch_to.window(handle)
+            google = page.GooglePage(self.driver)
             googleTitle = self.driver.title
-            assert main.is_title_matches(googleTitle)
+            assert google.is_title_matches_google(googleTitle)
 
         #assert main.is_title_matches(googleTitle)
         #self.assertTrue('Logowanie – Kontax Google', googleTitle)
 
     def tearDown(self):
-        self.driver.close()
         self.driver.close()
 
 if __name__ == "__main__":
