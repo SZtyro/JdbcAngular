@@ -88,15 +88,15 @@ export class AppComponent implements OnInit, AfterContentInit {
     //Add 'implements AfterContentInit' to the class.
     this.subscribeDBConnection();
     this.subscribeLoggedUser();
-    
+    this.shared.getShowNavBar().subscribe((data)=>{
+      setTimeout(()=>{this.opened = data});
+    })
   }
 
   ngAfterContentChecked(): void {
     //Called after every check of the component's or directive's content.
     //Add 'implements AfterContentChecked' to the class.
-    this.shared.getShowNavBar().subscribe((data)=>{
-      setTimeout(()=>{this.opened = data});
-    })
+    
   }
 
   ngOnInit() {
