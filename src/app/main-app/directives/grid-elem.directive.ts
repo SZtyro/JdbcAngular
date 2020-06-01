@@ -19,7 +19,7 @@ export class GridElemDirective implements OnInit {
   ele;
 
   ngOnInit(): void {
-    console.log("offset: " + this.host.$item.x);
+    //console.log("offset: " + this.host.$item.x);
     this.renderer.setStyle(this.element.nativeElement, "border-radius", "5px");
     this.renderer.setStyle(this.element.nativeElement, "padding", "10px");
     this.renderer.addClass(this.element.nativeElement, "mat-elevation-z8");

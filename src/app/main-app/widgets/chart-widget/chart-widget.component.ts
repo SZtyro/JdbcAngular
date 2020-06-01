@@ -83,7 +83,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     this.height = this.elementView.nativeElement.offsetHeight - 52;
     //this.height = this.height - this.height % 100;
     this.width = this.elementView.nativeElement.offsetWidth - 20;
-    console.log(this.elementView.nativeElement.offsetHeight)
+    //console.log(this.elementView.nativeElement.offsetHeight)
 
     this.renderer.setAttribute(this.chartElem.nativeElement, "height", this.height);
     this.drawChart(this.chartElem.nativeElement);
@@ -93,10 +93,10 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
 
   ngOnInit(): void {
-    console.log(this.widgetNumber)
+    //console.log(this.widgetNumber)
     this.load(this.widgetNumber);
-    console.log("widgetData:");
-    console.log(this.widgetData);
+    //console.log("widgetData:");
+    //console.log(this.widgetData);
     // console.log("Numer indexu: " + this.widgetNumber)
 
     google.charts.load('current', { packages: ['corechart', 'controls'] });
@@ -210,12 +210,12 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       rawTable: this.rawTable
     }
     //localStorage.setItem('ChartWidget' + this.widgetNumber, JSON.stringify(saveData));
-    console.log('usuwam widget: ' + this.widgetNumber)
+    //console.log('usuwam widget: ' + this.widgetNumber)
     //this.shared.homeRef.items.splice(this.widgetNumber, 1);
     //this.shared.homeRef.items.push({ typeName: 'ChartWidgetComponent', index: null, data: saveData })
     this.shared.homeRef.items[this.widgetNumber].data = saveData;
-    console.log("zapisano: " + 'ChartWidget' + this.widgetNumber);
-    console.log(this.shared.homeRef.items);
+    //console.log("zapisano: " + 'ChartWidget' + this.widgetNumber);
+    //console.log(this.shared.homeRef.items);
   }
 
   load(index) {
@@ -223,8 +223,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     try {
       //let acc = this.shared.homeRef.items[index].data;
       let acc = this.widgetData;
-      console.log('FFFFFFFFFFFFFFFFFFFFFFFFFF')
-      console.log(acc)
+      //console.log('FFFFFFFFFFFFFFFFFFFFFFFFFF')
+      //console.log(acc)
       if (acc != null) {
         this.chartData = acc.chartData;
         this.widgetNumber = acc.widgetNumber,
@@ -233,8 +233,8 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
         this.cols = acc.cols;
         this.rows = acc.rows;
         this.rawTable = acc.rawTable;
-        console.log("wczytano: ");
-        console.log(acc);
+        //console.log("wczytano: ");
+        //console.log(acc);
         this.widgetData = acc;
       } else {
         let saveData = {
@@ -264,7 +264,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       this.widgetData = saveData;
     }
 
-    console.log('zaladowany llllllllllllllllllllll')
+    //console.log('zaladowany llllllllllllllllllllll')
     //console.log(this.shared.homeRef.items)
     //console.log(this.shared.homeRef.items)
   }

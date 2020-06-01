@@ -4,6 +4,7 @@ import { HttpClientService } from 'src/app/services/http-client.service';
 import { AuthService } from 'src/app/services/Auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { SharedService } from 'src/app/services/Shared/shared.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
-export class WelcomePageComponent implements OnInit {
+export class WelcomePageComponent implements OnInit, OnDestroy {
 
   //isSignedIn: boolean = false;
   isSignedIn$: Observable<boolean>;
@@ -21,16 +22,22 @@ export class WelcomePageComponent implements OnInit {
     private http: HttpClientService,
     private auth: AuthService,
     public translate: TranslateService,
+    private shared: SharedService
   ) {
 
 
   }
 
+  ngOnDestroy(): void {
+    this.shared.setShowNavBar(true);
+    
+  }
   
 
   ngOnInit() {
     //window.addEventListener('scroll', this.scrollFunction, true);
     this.isSignedIn$ = this.auth.isSignedIn()
+    this.shared.setShowNavBar(false);
   }
 
   ngAfterViewInit() {

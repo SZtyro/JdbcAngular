@@ -135,10 +135,10 @@ export class HomeComponent implements OnInit {
     //let acc = [];
     //this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
     this.httpClientService.getDashboard('fabixd123@gmail.com').subscribe((dashboard) => {
-      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+      //console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
       //console.log(dashboard)
       this.items = JSON.parse(dashboard);
-      console.log(this.items);
+      //console.log(this.items);
     })
     // console.log(acc);
     // if(acc != null)

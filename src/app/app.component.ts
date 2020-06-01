@@ -38,10 +38,11 @@ export class AppComponent implements OnInit, AfterContentInit {
   title = 'AngularJDBC';
   tableNames: String[] = [];
   dbConnection: boolean = false;
-  opened: boolean = true;
+  opened: boolean = false;
   sideNavExtension: boolean = false;
   //photoUrl: String;
   //currentNavigation;
+
 
   isSignedIn$: Observable<boolean>;
   isSignedIn: boolean;
@@ -87,11 +88,20 @@ export class AppComponent implements OnInit, AfterContentInit {
     //Add 'implements AfterContentInit' to the class.
     this.subscribeDBConnection();
     this.subscribeLoggedUser();
-
+    
   }
+
+  ngAfterContentChecked(): void {
+    //Called after every check of the component's or directive's content.
+    //Add 'implements AfterContentChecked' to the class.
+    this.shared.getShowNavBar().subscribe((data)=>{
+      setTimeout(()=>{this.opened = data});
+    })
+  }
+
   ngOnInit() {
     console.log(this.router.url);
-
+    
     // console.log('subskrybuje')
     // this.isSignedIn$ = this.auth.isSignedIn();
     // this.isSignedIn$.subscribe((isSignedIn) => {

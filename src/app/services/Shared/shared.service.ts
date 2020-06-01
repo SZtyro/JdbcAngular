@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HomeComponent } from 'src/app/main-app/components/home/home.component';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,19 @@ export class SharedService {
 
   private isUserLogged: boolean = false;
   private isUserLoggedSubject = new Subject<boolean>();
+
+  private showNavBar: boolean = true;
+  private showNavBarSubject = new BehaviorSubject<boolean>(this.showNavBar);
   
+  setShowNavBar(state:boolean){
+    this.showNavBar = state;
+    this.showNavBarSubject.next(this.showNavBar);
+  }
+
+  getShowNavBar():Observable<boolean>{
+    return this.showNavBarSubject.asObservable();
+  }
+
   setIsUserLogged(isLogged){
     this.isUserLogged = isLogged;
     this.isUserLoggedSubject.next(this.isUserLogged);

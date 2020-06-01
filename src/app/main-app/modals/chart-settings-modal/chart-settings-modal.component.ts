@@ -91,8 +91,8 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     moveItemInArray(this.father.chartData.chartColumns, event.previousIndex, event.currentIndex);
     //this.father.myColumnNames.next(this.father.colss);
     moveItemInArray(this.father.chartData.chartColumnsTypes, event.previousIndex, event.currentIndex)
-    console.log(this.father.chartData.chartColumns);
-    console.log(this.father.chartData.chartColumnsTypes);
+    //console.log(this.father.chartData.chartColumns);
+    //console.log(this.father.chartData.chartColumnsTypes);
     //this.father.drawChart(this.father.chartElem.nativeElement);
     this.drawChart(this.chartElem.nativeElement);
   }

@@ -73,17 +73,24 @@
           </button>
 
           <!-- Widget editing -->
-          <div *ngIf="this.shared.editGrid != null">
-              <div *ngIf="this.shared.editGrid == false; else editingEnabled">
-                <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" class="sideNavContent"
-                  (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
-              </div>
+          <!-- <div *ngIf="this.shared.editGrid != null">
+            <div *ngIf="this.shared.editGrid == false; else editingEnabled">
+              <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" class="sideNavContent"
+                (click)="editGrid()"><span class="material-icons"
+                  style="font-size: 20px; vertical-align: middle;padding: 10px;">
+                  tune
+                </span>
+              </button>
             </div>
+          </div> -->
 
-            <ng-template #editingEnabled>
-              <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
-                (click)="editGrid()"><i class="fas fa-edit barIcon"></i></button>
-            </ng-template>
+          <ng-template #editingEnabled>
+            <button mat-button matTooltip="{{'NAVBAR.EDIT' | translate}}" color="accent" class="sideNavContent"
+              (click)="editGrid()"><span class="material-icons"
+                style="font-size: 20px; vertical-align: middle;padding: 10px;">
+                tune
+              </span></button>
+          </ng-template>
 
 
           <!-- Settings -->
