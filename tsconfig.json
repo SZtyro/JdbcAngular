@@ -11,6 +11,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "types": [
+      "gapi.auth2"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ],

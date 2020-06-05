@@ -21,6 +21,10 @@ a {
     // justify-content: center;
     // align-items: center;
     // color: inherit;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .barIcon {
@@ -34,7 +38,7 @@ button {
     transition: all 0.2s ease-in-out;
 
     width: 100%;
-    
+
     padding: 0px;
     padding-right: 10px;
     margin: 4px;

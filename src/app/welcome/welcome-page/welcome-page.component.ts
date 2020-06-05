@@ -15,7 +15,8 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 export class WelcomePageComponent implements OnInit, OnDestroy {
 
   //isSignedIn: boolean = false;
-  isSignedIn$: Observable<boolean>;
+  isSignedIn: boolean;
+  userPhoto;
 
   constructor(
     private router: Router,
@@ -30,14 +31,25 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.shared.setShowNavBar(true);
-    
-  }
-  
 
-  ngOnInit() {
+  }
+
+
+  async ngOnInit() {
     //window.addEventListener('scroll', this.scrollFunction, true);
-    this.isSignedIn$ = this.auth.isSignedIn()
     this.shared.setShowNavBar(false);
+    await this.auth.checkIfUserLogged().then(isLogged => {
+        this.auth.isSigned.subscribe((isSigned)=> {
+          this.isSignedIn = isSigned;
+          if (isSigned) {
+            this.userPhoto = this.auth.user.getBasicProfile().getImageUrl();  
+          }
+        })
+      
+      
+    })
+
+    console.log('welcome')
   }
 
   ngAfterViewInit() {
@@ -58,15 +70,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   token;
-
-
-  aaa() {
-    //this.auth.attachSignin();
-    //this.http.aaa(this.token ).subscribe(d=>console.log(d));
-  }
-  ttt() {
-    this.http.ttt().subscribe((d) => { console.log(d) });
-  }
 
   scrollToElement($element): void {
     //console.log($element);

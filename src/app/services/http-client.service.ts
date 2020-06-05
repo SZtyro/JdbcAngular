@@ -64,29 +64,13 @@ export class HttpClientService {
           { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' }
       });
   }
-
+  checkToken(token) {
+    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
+  }
   aaa(token) {
     return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
   }
-  ttt() {
-    // if (this.auth.expireTime > Date.now()) {
-    //   //console.log("token wazny do: " + new Date(this.auth.expireTime));
-    //   //console.log("wazny jeszcze przez: " + new Date(this.auth.expireTime - Date.now()).toUTCString())
 
-    // }
-    // else{
-    //   console.log("token wygasl. zaloguj sie ponownie");
-    // }
-    return this.httpClient.get(this.url + "/ttt", { responseType: "text" });
-    //return this.httpClient.get(this.url + "/ttt", { responseType: "text", headers: { 'sec-fetch-site': 'cross-site' } });
-  }
 
-  tttt() {
-    return this.httpClient.jsonp(this.url + "/ttt", 'callback');
-  }
-
-  callback = function (responseJson) {
-    console.log(responseJson); // output: {"id":100}
-  }
 }
 

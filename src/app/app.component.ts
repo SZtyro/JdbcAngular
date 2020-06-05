@@ -70,19 +70,10 @@ export class AppComponent implements OnInit, AfterContentInit {
   signOut() {
     //this.auth.getUserData().subscribe().unsubscribe();
     //this.router.navigate([''])
-    //this.auth.signOut();
+    this.auth.signOut();
   }
 
-  isAuthInstance() {
-    try {
-      //this.auth.getAuthInstance();
-      return true;
-    } catch (Ex) {
-      console.log(Ex);
-      return false;
-    }
-
-  }
+ 
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
@@ -99,8 +90,14 @@ export class AppComponent implements OnInit, AfterContentInit {
     
   }
 
-  ngOnInit() {
-    console.log(this.router.url);
+  async ngOnInit() {
+    await this.auth.checkIfUserLogged()
+    this.auth.isSigned.subscribe((loginStatus)=> {
+      if(!loginStatus){
+        this.router.navigate([''])
+        console.log('przenoszenie na glowna')
+      }
+    })
     
     // console.log('subskrybuje')
     // this.isSignedIn$ = this.auth.isSignedIn();

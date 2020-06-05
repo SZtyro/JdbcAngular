@@ -21,10 +21,10 @@
             (click)="translate.use(lang)">{{lang | uppercase}}</button>
         </mat-menu>
         
-        <div *ngIf="(isSignedIn$ | async) ;else signInBlock" >
+        <div *ngIf="isSignedIn ;else signInBlock" >
           <a routerLink="home" style="color: inherit;"><button mat-button >Home</button></a>
           <button mat-button (click)="auth.signOut()">Log out</button>
-          <img src="{{auth.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl()}}" style="border-radius: 4px;max-height: 36px">
+          <img src="{{userPhoto}}" style="border-radius: 4px;max-height: 36px">
         </div>
         <ng-template #signInBlock>
           <button mat-raised-button style=" background-color: #EA4335;"

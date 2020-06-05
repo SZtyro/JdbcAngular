@@ -134,12 +134,18 @@ export class HomeComponent implements OnInit {
     this.items = [];
     //let acc = [];
     //this.items = JSON.parse(localStorage.getItem('desktopWidgets'));
-    this.httpClientService.getDashboard('fabixd123@gmail.com').subscribe((dashboard) => {
-      //console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-      //console.log(dashboard)
-      this.items = JSON.parse(dashboard);
-      //console.log(this.items);
+    console.log()
+    var userMail;
+    this.auth.getCurrentUser().then(user => {
+      userMail = user.getBasicProfile().getEmail();
+      this.httpClientService.getDashboard(userMail).subscribe((dashboard) => {
+        //console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        //console.log(dashboard)
+        this.items = JSON.parse(dashboard);
+        //console.log(this.items);
+      })
     })
+    
     // console.log(acc);
     // if(acc != null)
     // acc.forEach(element => {
