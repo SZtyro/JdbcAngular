@@ -113,15 +113,3 @@ export class AuthService {
   }
 
 };
-
-
-
-
-class UserData {
-  name: String;
-  imageUrl: String;
-
-  constructor(image) {
-    this.imageUrl = image;
-  }
-}

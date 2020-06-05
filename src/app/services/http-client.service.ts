@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './Auth/auth.service';
+
 
 
 
@@ -11,7 +11,7 @@ export class HttpClientService {
 
   constructor(
     private httpClient: HttpClient,
-    //private auth: AuthService
+    
   ) { }
 
   // url = "http://192.168.1.205:8080";
