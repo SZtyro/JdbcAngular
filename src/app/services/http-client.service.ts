@@ -16,13 +16,13 @@ export class HttpClientService {
   ) { }
 
   // url = "http://192.168.1.205:8080";
-  url = "http://localhost:8080";
+  url = "https://nwta.azurewebsites.net";
 
   getUploadedFiles() {
     return this.httpClient.get(this.url + "/getFiles")
   }
   loginUser(data) {
-    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
+    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.url } });
   }
   getTable(tableName) {
     return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);
@@ -63,15 +63,15 @@ export class HttpClientService {
         headers:
         {
           "Authorization": token,
-          'Access-Control-Allow-Origin': 'http://localhost:4200'
+          'Access-Control-Allow-Origin': this.url
         }
       });
   }
   checkToken(token) {
-    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
+    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.url } });
   }
   aaa(token) {
-    return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
+    return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.url } });
   }
 
 
