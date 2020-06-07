@@ -10,9 +10,9 @@ import { SharedService } from 'src/app/services/Shared/shared.service';
 })
 export class LoginWindowComponent implements OnInit {
 
-  private userName: String = "";
-  private password: String = "";
-  private url:String = "";
+  userName: String = "";
+  password: String = "";
+  url:String = "";
   
 
 

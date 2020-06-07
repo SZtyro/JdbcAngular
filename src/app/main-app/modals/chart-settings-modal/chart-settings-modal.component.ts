@@ -11,7 +11,7 @@ import { SharedService } from '../../../services/Shared/shared.service';
 })
 export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
+  @ViewChild('chart', { read: ElementRef }) chartElem: ElementRef;
 
   father: ChartWidgetComponent;
   shared: SharedService;

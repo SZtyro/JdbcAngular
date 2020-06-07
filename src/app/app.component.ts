@@ -52,8 +52,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     //private authService: AuthService,
     public translate: TranslateService,
     public dialog: MatDialog,
-    private shared: SharedService,
-    private auth: AuthService
+    public shared: SharedService,
+    public auth: AuthService
   ) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');

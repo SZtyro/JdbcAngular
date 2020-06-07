@@ -15,7 +15,7 @@ import { GridsterItemComponent } from 'angular-gridster2';
 })
 export class GridElemDirective implements OnInit {
   
-  @ViewChild('mainScreen', { read: ElementRef, static: false }) elementView: ElementRef;
+  @ViewChild('mainScreen', { read: ElementRef }) elementView: ElementRef;
   ele;
 
   ngOnInit(): void {

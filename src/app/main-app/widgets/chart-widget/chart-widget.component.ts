@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs';
 })
 export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, AfterViewInit {
 
-  @ViewChild('mainScreen', { read: ElementRef, static: false }) elementView: ElementRef;
-  @ViewChild('chart', { read: ElementRef, static: false }) chartElem: ElementRef;
+  @ViewChild('mainScreen', { read: ElementRef }) elementView: ElementRef;
+  @ViewChild('chart', { read: ElementRef }) chartElem: ElementRef;
   apiLoaded: boolean = false;
   widgetData = null;
   public chartData: {

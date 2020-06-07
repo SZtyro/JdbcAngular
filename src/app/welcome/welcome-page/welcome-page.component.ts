@@ -21,9 +21,9 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private http: HttpClientService,
-    private auth: AuthService,
+    public auth: AuthService,
     public translate: TranslateService,
-    private shared: SharedService
+    public shared: SharedService
   ) {
 
 

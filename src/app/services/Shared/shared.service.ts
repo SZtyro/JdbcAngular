@@ -10,16 +10,16 @@ export class SharedService {
   constructor() { }
 
   homeRef:HomeComponent;
-  private editGrid: boolean = false;
+  editGrid: boolean = false;
   private editGridSubject = new Subject<boolean>();
 
-  private dbConnnection: boolean = false;
+  dbConnnection: boolean = false;
   private dbConnnectionSubject = new Subject<boolean>();
 
-  private isUserLogged: boolean = false;
+  isUserLogged: boolean = false;
   private isUserLoggedSubject = new Subject<boolean>();
 
-  private showNavBar: boolean = true;
+  showNavBar: boolean = true;
   private showNavBarSubject = new BehaviorSubject<boolean>(this.showNavBar);
   
   setShowNavBar(state:boolean){
