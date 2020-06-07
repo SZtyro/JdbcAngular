@@ -1,0 +1,32 @@
+{
+    "NAVBAR": {
+        "GOOGLE_LOGIN": "Zaloguj się przez Google!",
+        "HOME": "Strona główna",
+        "DATABASE": {
+            "CONNECTION": "Baza danych",
+            "NO_CONNECTION": "Nie jesteś połączony do bazy danych!"
+        },
+        "USERS" : "Użytkownicy",
+        "WIDGETS": "Widżety",
+        "EDIT": "Edytuj siatkę",
+        "SETTINGS": "Ustawienia",
+        "LANGUAGE": "Zmień język",
+        "SIGN_OUT": "Wyloguj",
+        "BUG_REPORT": "Zgłoś błąd"
+    },
+    "WELCOME_PAGE":{
+        "GOOGLE_LOGIN":"Zaloguj się przez Google!",
+        "SLIDE_1": {
+            "HEADER": "Szef, gdziekolwiek jesteś.",
+            "TEXT": "Dom, pociąg, biuro? Zarządzaj swoją firmą gdziekolwiek jesteś i zawsze bądz poinformowany! Wszystko czego potrzebujesz to konto Google i dostęp do internetu."
+        } ,
+        "SLIDE_2": {
+            "HEADER": "Współpraca.",
+            "TEXT": "ABC"
+        } 
+    },
+    "GMAIL_WIDGET": {
+        "SENDER": "Nadawca",
+        "SNIPPET": "Wiadomość"
+    }
+}

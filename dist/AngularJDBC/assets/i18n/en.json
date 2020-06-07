@@ -1,0 +1,32 @@
+{
+    "NAVBAR": {
+        "GOOGLE_LOGIN": "Sign in with Google!",
+        "HOME": "Home",
+        "DATABASE": {
+            "CONNECTION": "Database",
+            "NO_CONNECTION": "You are not connected to database!"
+        },
+        "USERS" : "Users",
+        "WIDGETS": "Widgets",
+        "EDIT": "Edit grid",
+        "SETTINGS": "Settings",
+        "LANGUAGE": "Change language",
+        "SIGN_OUT": "Sign out",
+        "BUG_REPORT": "Report bug"
+    },
+    "WELCOME_PAGE":{
+        "GOOGLE_LOGIN":"Sign in with Google!",
+        "SLIDE_1": {
+            "HEADER": "Boss, wherever you want.",
+            "TEXT": "Home, train, office? Manage your buisness from anywhere and always be informed! All you need is a Google account and Internet connection."
+        } ,
+        "SLIDE_2": {
+            "HEADER": "Teamwork",
+            "TEXT": "ABC"
+        } 
+    },
+    "GMAIL_WIDGET": {
+        "SENDER": "Sender",
+        "SNIPPET": "Snippet"
+    }
+}
