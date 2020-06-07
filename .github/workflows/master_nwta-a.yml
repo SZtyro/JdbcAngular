@@ -28,7 +28,7 @@ jobs:
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'nwta-a'
+        app-name: 'AngularJDBC'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3a4c152772ce4eb0a415eeea90a0fd14 }}
         package: './dist/AngularJDBC'
