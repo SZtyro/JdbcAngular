@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class HttpClientService {
 
   constructor(
     private httpClient: HttpClient,
-    
+
   ) { }
 
   // url = "http://192.168.1.205:8080";
@@ -21,7 +22,7 @@ export class HttpClientService {
     return this.httpClient.get(this.url + "/getFiles")
   }
   loginUser(data) {
-    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: {'Access-Control-Allow-Origin': 'http://localhost:4200'} });
+    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': 'http://localhost:4200' } });
   }
   getTable(tableName) {
     return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);
@@ -48,20 +49,22 @@ export class HttpClientService {
     return this.httpClient.post(this.url + "/delete", id);
   }
 
-  setDashboard(mail:String, dashboard:String){
-    return this.httpClient.post(this.url + "/saveDashboard",[mail,dashboard]);
+  setDashboard(mail: String, dashboard: String) {
+    return this.httpClient.post(this.url + "/saveDashboard", [mail, dashboard]);
   }
 
-  getDashboard(mail:String){   
-    return this.httpClient.post(this.url + "/loadDashboard",mail,{responseType: 'text'});
+  getDashboard(mail: String) {
+    return this.httpClient.post(this.url + "/loadDashboard", mail, { responseType: 'text' });
   }
 
   tryLogin(token) {
     return this.httpClient.get(this.url + "/loginUser",
       {
-        
         headers:
-          { "Authorization": token, 'Access-Control-Allow-Origin': 'http://localhost:4200' }
+        {
+          "Authorization": token,
+          'Access-Control-Allow-Origin': 'http://localhost:4200'
+        }
       });
   }
   checkToken(token) {

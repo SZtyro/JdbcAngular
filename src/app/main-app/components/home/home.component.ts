@@ -139,41 +139,38 @@ export class HomeComponent implements OnInit {
     this.auth.getCurrentUser().then(user => {
       userMail = user.getBasicProfile().getEmail();
       this.httpClientService.getDashboard(userMail).subscribe((dashboard) => {
-        //console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-        //console.log(dashboard)
-        this.items = JSON.parse(dashboard);
-        //console.log(this.items);
+        try {
+          this.items = JSON.parse(dashboard);
+        } catch{
+
+        }
+
+
       })
     })
-    
-    // console.log(acc);
-    // if(acc != null)
-    // acc.forEach(element => {
 
-    //   //this.items.push(GmailWidgetComponent); dziala
-    //   this.items.push({
-    //     typeName: this.appWidgets[element],
-    //     index: 
-    //   });
-    //   this.num++;
-    // });
   }
   save() {
-    //let acc = [];
-    // this.items.forEach(elem => {
-    //   acc.push(elem.type.name)
-    //   acc.push(elem.index)
-    // })
     this.items.forEach(elem => {
-      elem.componentRef.instance.toSave();
+      try{
+        console.log(this.items)
+        elem.componentRef.instance.toSave();
+      }catch{
+
+      }
+      
       elem.componentRef = null;
     })
     let jsonStorage = JSON.stringify(this.items);
-    //localStorage.setItem('desktopWidgets', JSON.stringify(this.items));
-    //console.log(JSON.parse(localStorage.getItem('desktopWidgets')))
-    this.httpClientService.setDashboard('fabixd123@gmail.com', jsonStorage).subscribe((d) => { console.log(d) });
+    let mail;
+    this.auth.getCurrentUser().then(user => {
+      mail = user.getBasicProfile().getEmail();
+      console.log(mail)
+      this.httpClientService.setDashboard(mail, jsonStorage).subscribe((d) => { console.log(d) });
+    });
+    
     console.log("Storage save")
-    //console.log(jsonStorage);
+
   }
 
 

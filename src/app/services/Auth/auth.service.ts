@@ -16,7 +16,7 @@ export class AuthService {
   isSigned = new BehaviorSubject<boolean>(false);
   authInstance = null;
   googleInitialized: boolean = false;
-  user: gapi.auth2.GoogleUser;
+  user;
 
   constructor(
     private http: HttpClientService,
@@ -57,7 +57,7 @@ export class AuthService {
     })
   }
 
-  async signIn(): Promise<gapi.auth2.GoogleUser> {
+  async signIn(): Promise<any> {
     // Initialize gapi if not done yet
     if (!this.googleInitialized) {
       await this.googleInit();
@@ -67,9 +67,18 @@ export class AuthService {
     return new Promise(async () => {
       await this.authInstance.signIn().then(
         user => {
-          this.isSigned.next(true);
-          console.log(user);
-          this.user = user;
+          try {
+            let token = user.getAuthResponse().id_token;
+            this.http.tryLogin(token).subscribe(d => console.log(d))
+            this.isSigned.next(true);
+            console.log(user);
+            this.user = user;
+          } catch{
+
+          }
+
+
+
         },
         error => console.log(error));
     });
@@ -98,9 +107,9 @@ export class AuthService {
       this.isSigned.next(loginStatus)
       isLogged(loginStatus);
     })
-   
+
   }
-  async getCurrentUser(): Promise<gapi.auth2.GoogleUser> {
+  async getCurrentUser(): Promise<any> {
     if (!this.googleInitialized) {
       await this.googleInit();
     }

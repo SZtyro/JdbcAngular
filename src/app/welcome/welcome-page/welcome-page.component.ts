@@ -57,18 +57,6 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
     //setTimeout(() => this.isSignedIn$ = this.auth.isSignedIn(), 1000);
   }
 
-  tryLogin() {
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST',  "http://localhost:8080/token");
-    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // xhr.setRequestHeader('Authorization', JSON.parse(localStorage.getItem("AuthInstance")));
-    // xhr.onload = function () {
-    //   console.log('Signed in as: ' + xhr.responseText);
-    // };
-    // xhr.send();
-    this.http.tryLogin(JSON.parse(localStorage.getItem("AuthInstance"))).subscribe(d => console.log(d));
-  }
-
   token;
 
   scrollToElement($element): void {

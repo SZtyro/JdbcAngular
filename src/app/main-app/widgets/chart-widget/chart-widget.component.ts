@@ -200,6 +200,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
 
   widgetNumber: number = null;
   toSave() {
+    console.log('sejw charta')
     let saveData = {
       chartData: this.chartData,
       widgetNumber: this.widgetNumber,
@@ -209,13 +210,9 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       rows: this.rows,
       rawTable: this.rawTable
     }
-    //localStorage.setItem('ChartWidget' + this.widgetNumber, JSON.stringify(saveData));
-    //console.log('usuwam widget: ' + this.widgetNumber)
-    //this.shared.homeRef.items.splice(this.widgetNumber, 1);
-    //this.shared.homeRef.items.push({ typeName: 'ChartWidgetComponent', index: null, data: saveData })
+
     this.shared.homeRef.items[this.widgetNumber].data = saveData;
-    //console.log("zapisano: " + 'ChartWidget' + this.widgetNumber);
-    //console.log(this.shared.homeRef.items);
+
   }
 
   load(index) {
@@ -223,8 +220,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
     try {
       //let acc = this.shared.homeRef.items[index].data;
       let acc = this.widgetData;
-      //console.log('FFFFFFFFFFFFFFFFFFFFFFFFFF')
-      //console.log(acc)
+
       if (acc != null) {
         this.chartData = acc.chartData;
         this.widgetNumber = acc.widgetNumber,
@@ -233,8 +229,7 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
         this.cols = acc.cols;
         this.rows = acc.rows;
         this.rawTable = acc.rawTable;
-        //console.log("wczytano: ");
-        //console.log(acc);
+
         this.widgetData = acc;
       } else {
         let saveData = {
@@ -246,11 +241,11 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
           rows: this.rows,
           rawTable: this.rawTable
         }
-        //this.shared.homeRef.items[index].data = saveData;
+
         this.widgetData = saveData;
       }
     } catch (e) {
-      //console.log(e);
+
       let saveData = {
         chartData: this.chartData,
         widgetNumber: this.widgetNumber,
@@ -264,33 +259,12 @@ export class ChartWidgetComponent implements OnInit, GridsterItem, HomeWidget, A
       this.widgetData = saveData;
     }
 
-    //console.log('zaladowany llllllllllllllllllllll')
-    //console.log(this.shared.homeRef.items)
-    //console.log(this.shared.homeRef.items)
   }
 
   delete() {
     this.shared.homeRef.deleteWidget(this.widgetNumber);
   }
-  // delete(i) {
-  //   //this.loaderRef.remove(this.widgetNumber);
-  //   //this.shared.homeRef.items.splice(this.widgetNumber, 1);
-  //   this.subscription.unsubscribe();
-  //   this.shared.homeRef.items.splice(i,1);
-  //   //localStorage.removeItem('ChartWidget' + this.widgetNumber);
-  //   this.shared.homeRef.items.forEach((elem,index)=>{
-  //     elem.index = index;
-  //     elem.componentRef.instance["widgetNumber"] = index;
-  //     //ref.instance["widgetNumber"] = index
-  //     //elem.data.widgetNumber = index;
-  //     //console.log(index)
-  //   })
-  //   console.log("Usunieto: ChartWidget" + this.widgetNumber);
-  //   console.log(this.shared.homeRef.items);
 
-  //   //this.shared.homeRef.save();
-  //   //this.shared.homeRef.loadWidgets();
-  // }
 
 
   openDialog(): void {
