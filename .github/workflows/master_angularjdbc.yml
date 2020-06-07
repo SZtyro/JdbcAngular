@@ -32,4 +32,4 @@ jobs:
         app-name: 'angularjdbc'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_2a0aa79f039041f19e376184287f7633 }}
-        package: .
+        package: './dist/AngularJDBC'
