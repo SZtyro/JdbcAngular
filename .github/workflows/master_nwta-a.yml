@@ -31,4 +31,4 @@ jobs:
         app-name: 'nwta-a'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3a4c152772ce4eb0a415eeea90a0fd14 }}
-        package: '${{ github.workspace }}/dist/'
+        package: './dist/AngularJDBC'
