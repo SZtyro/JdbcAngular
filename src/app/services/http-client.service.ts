@@ -17,12 +17,13 @@ export class HttpClientService {
 
   // url = "http://192.168.1.205:8080";
   url = "https://nwta.azurewebsites.net";
+  urlAllowed = "https://angularjdbc2.azurewebsites.net/"
 
   getUploadedFiles() {
     return this.httpClient.get(this.url + "/getFiles")
   }
   loginUser(data) {
-    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.url } });
+    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.urlAllowed } });
   }
   getTable(tableName) {
     return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);
@@ -54,7 +55,7 @@ export class HttpClientService {
   }
 
   getDashboard(mail: String) {
-    return this.httpClient.post(this.url + "/loadDashboard", mail, { responseType: 'text' });
+    return this.httpClient.post(this.url + "/loadDashboard", mail, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.urlAllowed } });
   }
 
   tryLogin(token) {
@@ -63,15 +64,15 @@ export class HttpClientService {
         headers:
         {
           "Authorization": token,
-          'Access-Control-Allow-Origin': this.url
+          'Access-Control-Allow-Origin': this.urlAllowed
         }
       });
   }
   checkToken(token) {
-    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.url } });
+    return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.urlAllowed } });
   }
   aaa(token) {
-    return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.url } });
+    return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.urlAllowed } });
   }
 
 
