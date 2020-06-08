@@ -18,7 +18,7 @@ export class HttpClientService {
   // url = "http://192.168.1.205:8080";
   url = "https://nwta.azurewebsites.net";
   //url = 'http://localhost:8080'
-  urlAllowed = "https://angularjdbc2.azurewebsites.net/"
+  urlAllowed = "https://angularjdbc2.azurewebsites.net"
   //urlAllowed = "http://localhost:4200"
   getUploadedFiles() {
     return this.httpClient.get(this.url + "/getFiles")
