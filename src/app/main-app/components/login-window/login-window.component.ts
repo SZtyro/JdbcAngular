@@ -13,7 +13,7 @@ export class LoginWindowComponent implements OnInit {
   userName: String = "";
   password: String = "";
   url:String = "";
-  
+  dataBase:String = "";
 
 
   constructor(
@@ -26,20 +26,22 @@ export class LoginWindowComponent implements OnInit {
   ngOnInit() {
     this.url = JSON.parse(localStorage.getItem('url'));
     this.userName = JSON.parse(localStorage.getItem('userName'));
+    this.dataBase = JSON.parse(localStorage.getItem('dataBase'));
   }
 
   login(){
-   
-    this.httpClientService.loginUser([this.url,this.userName,this.password]).subscribe(
+
+    this.httpClientService.loginUser([this.url,this.dataBase,this.userName,this.password]).subscribe(
       data=> {
-        
+
         if(data === "acces"){
           localStorage.setItem('url', JSON.stringify(this.url));
           localStorage.setItem('userName', JSON.stringify(this.userName));
+          localStorage.setItem('dataBase', JSON.stringify(this.dataBase) )
           this.router.navigate(['/home'])
           this.shared.setdbConnnection();
         }
-        
+
       }
     );
   }

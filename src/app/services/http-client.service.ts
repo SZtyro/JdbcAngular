@@ -17,8 +17,9 @@ export class HttpClientService {
 
   // url = "http://192.168.1.205:8080";
   url = "https://nwta.azurewebsites.net";
+  //url = 'http://localhost:8080'
   urlAllowed = "https://angularjdbc2.azurewebsites.net/"
-
+  //urlAllowed = "http://localhost:4200"
   getUploadedFiles() {
     return this.httpClient.get(this.url + "/getFiles")
   }
@@ -28,8 +29,8 @@ export class HttpClientService {
   getTable(tableName) {
     return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);
   }
-  getTableNames() {
-    return this.httpClient.get<String[]>(this.url + '/getTableNames');
+  getTableNames(dataBase) {
+    return this.httpClient.post<String[]>(this.url + '/getTableNames', dataBase);
   }
   getForeignKeyColumns(table) {
     return this.httpClient.post<String>(this.url + '/getForeignKeyColumns', table);

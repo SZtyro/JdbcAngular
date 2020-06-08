@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit {
       }catch{
 
       }
-      
+
       elem.componentRef = null;
     })
     let jsonStorage = JSON.stringify(this.items);
@@ -168,14 +168,14 @@ export class HomeComponent implements OnInit {
       console.log(mail)
       this.httpClientService.setDashboard(mail, jsonStorage).subscribe((d) => { console.log(d) });
     });
-    
+
     console.log("Storage save")
 
   }
 
 
   ngOnInit() {
-    this.httpClientService.getTableNames().subscribe(
+    this.httpClientService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(
       data => {
 
         this.setTableNames(data);

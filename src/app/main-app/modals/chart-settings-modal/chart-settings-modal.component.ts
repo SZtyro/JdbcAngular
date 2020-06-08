@@ -16,7 +16,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   father: ChartWidgetComponent;
   shared: SharedService;
   constructor(
-    
+
     public dialogRef: MatDialogRef<ChartSettingsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
@@ -25,7 +25,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.drawChart(this.chartElem.nativeElement);
-    
+
   }
 
   onNoClick(): void {
@@ -82,7 +82,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
       this.father.chartData.chartWrapper.setChartType(this.father.chartData.chartType);
 
       this.father.chartData.chartWrapper.draw(ref);
-     
+
     }
 
   }
@@ -136,7 +136,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   }
 
   getTables() {
-    this.father.dataBaseService.getTableNames().subscribe(tableNames => { this.father.rawTableNames = tableNames });
+    this.father.dataBaseService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(tableNames => { this.father.rawTableNames = tableNames });
   }
 
   getRawTable() {
@@ -155,7 +155,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
     this.father.chartData.selectedTable = selectedTableName;
     this.getRawTable();
     this.getColumnTypes();
-    
+
   }
 
   addChartColumn(columnName, i) {

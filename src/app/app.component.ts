@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, AfterContentInit {
 
     console.log(this.router.url);
     console.log(window.location.href.split(window.location.host));
-    
+
   }
 
   signOut() {
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.auth.signOut();
   }
 
- 
+
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
@@ -87,7 +87,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ngAfterContentChecked(): void {
     //Called after every check of the component's or directive's content.
     //Add 'implements AfterContentChecked' to the class.
-    
+
   }
 
   async ngOnInit() {
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit, AfterContentInit {
         console.log('przenoszenie na glowna')
       }
     })
-    
+
     // console.log('subskrybuje')
     // this.isSignedIn$ = this.auth.isSignedIn();
     // this.isSignedIn$.subscribe((isSignedIn) => {
@@ -124,7 +124,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.shared.getdbConnnection().subscribe(data => {
       if (data) {
         //Fetching table names
-        this.httpClientService.getTableNames().subscribe(
+        this.httpClientService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(
           data => {
             this.setTableNames(data);
             console.log("Home Table names fetched! ", data);
