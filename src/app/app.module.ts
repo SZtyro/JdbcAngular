@@ -23,7 +23,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddModalComponent } from './data-base/add-modal/add-modal.component';
 import { MainAppModule } from './main-app/main-app.module';
 import { DataBaseModule } from './data-base/data-base.module';
-import { TableMenuComponent } from './data-base/table-menu/table-menu.component';
 import { LoginWindowComponent } from './main-app/components/login-window/login-window.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
@@ -35,7 +34,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { PhotoWidgetComponent } from './main-app/widgets/photo-widget/photo-widget.component';
 import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -55,14 +53,14 @@ import { AuthService } from './services/Auth/auth.service';
 //     id: GoogleLoginProvider.PROVIDER_ID,
 //     provider: new GoogleLoginProvider("36592518046-vna364b979556f9d5o8g2bav1vnms4pi.apps.googleusercontent.com")
 //   }
-  
+
 // ]);
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 export function provideConfig() {
-  
+
   //return config;
 }
 
@@ -74,7 +72,6 @@ export function provideConfig() {
     DeleteModalComponent,
     EditModalComponent,
     AddModalComponent,
-    TableMenuComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
     WidgetListModalComponent
@@ -120,11 +117,11 @@ export function provideConfig() {
     DragDropModule,
     WelcomeModule,
     HttpClientJsonpModule
-    
-    
+
+
   ],
   exports: [
-    
+
   ],
   entryComponents: [
     DeleteModalComponent,

@@ -32,9 +32,8 @@
 
 
           <!-- Database -->
-          <div *ngIf="dbConnection; else noData">
-            <button mat-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" [matMenuTriggerFor]="menu"
-              class="sideNavContent">
+          <a routerLink="databases">
+            <button mat-button matTooltip="{{'NAVBAR.DATABASE.CONNECTION' | translate}}" class="sideNavContent">
 
               <div style="color: whitesmoke; ">
 
@@ -46,9 +45,9 @@
               </div>
 
             </button>
-          </div>
+          </a>
 
-          <ng-template #noData>
+          <!-- <ng-template #noData>
             <a routerLink="login">
               <button mat-button matTooltip="{{'NAVBAR.DATABASE.NO_CONNECTION' | translate}}" color="warn"
                 class="sideNavContent">
@@ -64,7 +63,7 @@
 
               </button></a>
 
-          </ng-template>
+          </ng-template> -->
 
 
           <!-- Widgets -->
@@ -119,10 +118,7 @@
           <!-- <a href="https://github.com/SZtyro/JdbcAngular/issues"><button mat-button
               matTooltip="{{'NAVBAR.BUG_REPORT' | translate}}" class="sideNavContent"><i
                 class="fas fa-bug barIcon"></i></button></a>-->
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let item of tableNames" (click)="openTable(item)">{{item}}</button>
 
-          </mat-menu>
 
 
         </div>
@@ -192,7 +188,7 @@
         <div style="width: 100%;">
           <router-outlet></router-outlet>
         </div>
-        <!-- 
+        <!--
         zz
         <div style="height: 100%;width: 1%; float: right; ">
 

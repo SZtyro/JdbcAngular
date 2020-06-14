@@ -6,7 +6,6 @@ import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.co
 import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
 import { ScriptLoaderService } from 'angular-google-charts';
 import { HomeWidget } from '../../interfaces/homeWidget';
-import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
 import { SharedService } from '../../../services/Shared/shared.service';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -73,8 +72,7 @@ export class HomeComponent implements OnInit {
 
   appWidgets = {
     'GmailWidgetComponent': GmailWidgetComponent,
-    'ChartWidgetComponent': ChartWidgetComponent,
-    'PhotoWidgetComponent': PhotoWidgetComponent
+    'ChartWidgetComponent': ChartWidgetComponent
   }
 
 
@@ -138,7 +136,7 @@ export class HomeComponent implements OnInit {
     var userMail;
     this.auth.getCurrentUser().then(user => {
       userMail = user.getBasicProfile().getEmail();
-      this.httpClientService.getDashboard(userMail).subscribe((dashboard) => {
+      this.httpClientService.getDashboard().subscribe((dashboard) => {
         try {
           this.items = JSON.parse(dashboard);
         } catch{
@@ -166,7 +164,7 @@ export class HomeComponent implements OnInit {
     this.auth.getCurrentUser().then(user => {
       mail = user.getBasicProfile().getEmail();
       console.log(mail)
-      this.httpClientService.setDashboard(mail, jsonStorage).subscribe((d) => { console.log(d) });
+      this.httpClientService.setDashboard(jsonStorage).subscribe((d) => { console.log(d) });
     });
 
     console.log("Storage save")
@@ -175,21 +173,21 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.httpClientService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(
-      data => {
+    // this.httpClientService.getTableNames().subscribe(
+    //   data => {
 
-        this.setTableNames(data);
-        console.log("Table names fetched! ", data);
+    //     this.setTableNames(data);
+    //     console.log("Table names fetched! ", data);
 
 
-      },
+    //   },
 
-      error => {
+    //   error => {
 
-        console.log("Error", error);
+    //     console.log("Error", error);
 
-      }
-    )
+    //   }
+    // )
 
 
   }

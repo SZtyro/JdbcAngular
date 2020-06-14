@@ -4,7 +4,6 @@ import { HomeComponent } from '../../components/home/home.component';
 import { SharedService } from 'src/app/services/Shared/shared.service';
 import { GmailWidgetComponent } from '../../widgets/gmail-widget/gmail-widget.component';
 import { ChartWidgetComponent } from '../../widgets/chart-widget/chart-widget.component';
-import { PhotoWidgetComponent } from '../../widgets/photo-widget/photo-widget.component';
 import { item } from 'src/app/main-app/components/home/home.component';
 
 interface widgetData {
@@ -29,14 +28,13 @@ export class WidgetListModalComponent implements OnInit {
   widgets: widgetData[] = [
     { class: GmailWidgetComponent, icon: "mail_outline", description: "Manage your mailbox." },
     { class: ChartWidgetComponent, icon: "bar_chart", description: "Visualise data from connected databse." },
-    { class: PhotoWidgetComponent, icon: "folder_open", description: "Container for your data." },
     { icon: "wb_sunny", description: "All about weather." },
     { icon: "shopping_cart", description: "Manage your orders." },
     { icon: "fas fa-tasks", description: "Manage your tasks." }
   ];
 
 
-  ngOnInit() { 
+  ngOnInit() {
 
   }
 
@@ -44,16 +42,16 @@ export class WidgetListModalComponent implements OnInit {
   addWidget(widgetName:string) {
     if(this.shared.homeRef.items != null){
       let num = this.shared.homeRef.items.push({typeName: widgetName});
-      
-    } 
+
+    }
     else{
       this.shared.homeRef.items = []
       let num = this.shared.homeRef.items.push({typeName: widgetName});
-      
+
     }
-      
+
     this.shared.homeRef.save();
-    
+
   }
 
   onNoClick(): void {

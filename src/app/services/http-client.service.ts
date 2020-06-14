@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -16,55 +12,150 @@ export class HttpClientService {
   ) { }
 
   // url = "http://192.168.1.205:8080";
-  url = "https://nwta.azurewebsites.net";
-  //url = 'http://localhost:8080'
-  urlAllowed = "https://angularjdbc2.azurewebsites.net"
-  //urlAllowed = "http://localhost:4200"
-  getUploadedFiles() {
-    return this.httpClient.get(this.url + "/getFiles")
-  }
+  //url = "https://nwta.azurewebsites.net";
+  url = 'http://localhost:8080';
+  //urlAllowed = "https://angularjdbc2.azurewebsites.net"
+  urlAllowed = "http://localhost:4200";
+
   loginUser(data) {
-    return this.httpClient.post(this.url + '/databaseLogin', data, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.urlAllowed } });
+    return this.httpClient.post(this.url + '/databaseLogin', data,
+      {
+        responseType: 'text',
+        headers: {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
+  }
+  getConnectedBase() {
+    return this.httpClient.get(this.url + '/databases',
+      {
+        responseType: 'text',
+        headers: {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   getTable(tableName) {
-    return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName);
+    return this.httpClient.post<Map<String, Object>[]>(this.url + '/getTable', tableName,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
-  getTableNames(dataBase) {
-    return this.httpClient.post<String[]>(this.url + '/getTableNames', dataBase);
+  getTableNames() {
+    return this.httpClient.get<String[]>(this.url + '/getTableNames',
+      {
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   getForeignKeyColumns(table) {
-    return this.httpClient.post<String>(this.url + '/getForeignKeyColumns', table);
+    return this.httpClient.post<String>(this.url + '/getForeignKeyColumns', table,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   getIds(table) {
-    return this.httpClient.post<String>(this.url + '/getIdList', table);
+    return this.httpClient.post<String>(this.url + '/getIdList', table,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   getType(table) {
-    return this.httpClient.post<String>(this.url + '/getDataType', table);
+    return this.httpClient.post<String>(this.url + '/getDataType', table,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   getPrimaryKey(tableName) {
-    return this.httpClient.post<String>(this.url + '/getPrimaryKey', tableName);
+    return this.httpClient.post<String>(this.url + '/getPrimaryKey', tableName,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   postRow(elem: String) {
-    return this.httpClient.post<String>(this.url + "/execute", elem);
+    return this.httpClient.post<String>(this.url + "/execute", elem,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
   deleteRow(id: String[]) {
-    return this.httpClient.post(this.url + "/delete", id);
+    return this.httpClient.post(this.url + "/delete", id,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
 
-  setDashboard(mail: String, dashboard: String) {
-    return this.httpClient.post(this.url + "/saveDashboard", [mail, dashboard]);
+  setDashboard(dashboard: String) {
+    return this.httpClient.post(this.url + "/saveDashboard", dashboard,
+      {
+
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
 
-  getDashboard(mail: String) {
-    return this.httpClient.post(this.url + "/loadDashboard", mail, { responseType: 'text', headers: { 'Access-Control-Allow-Origin': this.urlAllowed } });
+  getDashboard() {
+    return this.httpClient.get(this.url + "/loadDashboard",
+      {
+        responseType: 'text',
+        headers:
+        {
+          "Authorization": sessionStorage.getItem('token'),
+          'Access-Control-Allow-Origin': this.urlAllowed
+        }
+      });
   }
 
-  tryLogin(token) {
+  tryLogin() {
+    console.log(sessionStorage.getItem('token'))
     return this.httpClient.get(this.url + "/loginUser",
       {
         headers:
         {
-          "Authorization": token,
+          "Authorization": sessionStorage.getItem('token'),
           'Access-Control-Allow-Origin': this.urlAllowed
         }
       });

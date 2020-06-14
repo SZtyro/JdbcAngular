@@ -136,7 +136,7 @@ export class ChartSettingsModalComponent implements OnInit, AfterViewInit {
   }
 
   getTables() {
-    this.father.dataBaseService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(tableNames => { this.father.rawTableNames = tableNames });
+    this.father.dataBaseService.getTableNames().subscribe(tableNames => { this.father.rawTableNames = tableNames });
   }
 
   getRawTable() {

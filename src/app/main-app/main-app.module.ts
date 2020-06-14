@@ -25,7 +25,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { FilesUploadDirective } from './directives/FilesUpload/files-upload.directive'
-import { PhotoWidgetComponent } from './widgets/photo-widget/photo-widget.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { WidgetListModalComponent } from './modals/widget-list-modal/widget-list-modal.component';
@@ -41,7 +40,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   entryComponents: [
     GmailWidgetComponent,
     ChartWidgetComponent,
-    PhotoWidgetComponent,
     WidgetListModalComponent
   ],
   declarations: [
@@ -52,7 +50,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     WidgetLoaderComponent,
     GmailSenderPipe,
     FilesUploadDirective,
-    PhotoWidgetComponent,
     WidgetDirective
   ],
   imports: [

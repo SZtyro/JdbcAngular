@@ -124,7 +124,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.shared.getdbConnnection().subscribe(data => {
       if (data) {
         //Fetching table names
-        this.httpClientService.getTableNames(JSON.parse(localStorage.getItem('dataBase'))).subscribe(
+        this.httpClientService.getTableNames().subscribe(
           data => {
             this.setTableNames(data);
             console.log("Home Table names fetched! ", data);

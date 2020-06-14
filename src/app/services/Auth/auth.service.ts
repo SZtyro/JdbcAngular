@@ -69,7 +69,9 @@ export class AuthService {
         user => {
           try {
             let token = user.getAuthResponse().id_token;
-            this.http.tryLogin(token).subscribe(d => console.log(d))
+            sessionStorage.setItem('token', token);
+            console.log(token)
+            this.http.tryLogin().subscribe(d => console.log(d))
             this.isSigned.next(true);
             console.log(user);
             this.user = user;
