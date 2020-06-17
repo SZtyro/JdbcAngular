@@ -75,7 +75,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
 
     //Pobieranie wartosci z linku
     //Fetching route parameter
@@ -83,10 +83,11 @@ export class TableComponent implements OnInit {
     this.tableName = params.get('tableName');
     this.httpClientService.getTable(this.tableName).subscribe(
       response => this.handleSuccessfulResponse(response))
+      //response => console.log(response))
     })
     //Pobieranie danych
     //Fetching data
-    
+
   }
 
   openDeleteDialog(id): void {
@@ -122,7 +123,7 @@ export class TableComponent implements OnInit {
     this.keys.forEach((key,index) => {
       this.newRowContainer[index] = element[key];
     });
-    
+
     const dialogRef = this.dialog.open(EditModalComponent, {
       //width: '450px',
       data: {
@@ -197,12 +198,12 @@ export class TableComponent implements OnInit {
   }
 
 
-  handleSuccessfulResponse(response) {
+  handleSuccessfulResponse(tableData) {
     console.log("Data fetched!: ");
-    console.log(response);
-    this.entity = response;
-    this.keys = Object.keys(response[0]);
-
+    console.log(tableData);
+    this.entity = tableData;
+    this.keys = Object.keys(tableData[0]);
+    console.log(this.keys)
     this.httpClientService.getType(this.tableName).subscribe(
 
       data => {
@@ -216,7 +217,7 @@ export class TableComponent implements OnInit {
 
     );
 
-    this.dataSource = new MatTableDataSource(response);
+    this.dataSource = new MatTableDataSource(tableData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -247,7 +248,7 @@ export class TableComponent implements OnInit {
     );
   }
 
-  //Pobieranie istniejacych kluczy 
+  //Pobieranie istniejacych kluczy
   //Fetching already exhisting keys
   getAvaiableRows(table) {
     this.foreignKeyElems = [];
