@@ -10,7 +10,9 @@ import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 import { ActivatedRoute } from '@angular/router';
-
+import jsPDF from 'jspdf';
+import 'jspdf-autotable'
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -80,14 +82,34 @@ export class TableComponent implements OnInit {
     //Pobieranie wartosci z linku
     //Fetching route parameter
     this.route.paramMap.subscribe(params => {
-    this.tableName = params.get('tableName');
-    this.httpClientService.getTable(this.tableName).subscribe(
-      response => this.handleSuccessfulResponse(response))
+      this.tableName = params.get('tableName');
+      this.httpClientService.getTable(this.tableName).subscribe(
+        response => this.handleSuccessfulResponse(response))
       //response => console.log(response))
     })
     //Pobieranie danych
     //Fetching data
 
+  }
+
+  downloadPDF() {
+    var doc = new jsPDF()
+
+    let tab = [];
+    for (let x = 0; x < this.entity.length; x++) {
+      let row = [];
+      for (let y = 0; y < this.keys.length; y++) {
+        row.push(this.entity[x][this.keys[y]])
+      }
+      tab.push(row);
+    }
+
+    doc.autoTable({
+      headStyles: { fillColor: [34, 34, 34] },
+      head: [this.keys],
+      body: tab
+    })
+    doc.save(this.tableName + formatDate(new Date(), 'yyyy/MM/dd', 'en') + '.pdf')
   }
 
   openDeleteDialog(id): void {
@@ -120,7 +142,7 @@ export class TableComponent implements OnInit {
 
   openEditDialog(element, ind) {
 
-    this.keys.forEach((key,index) => {
+    this.keys.forEach((key, index) => {
       this.newRowContainer[index] = element[key];
     });
 
@@ -145,9 +167,9 @@ export class TableComponent implements OnInit {
   }
 
   saveToContainer(index, elem) {
-    if (this.type[index].toUpperCase() == "NUMBER" || this.type[index].toUpperCase() == "INT"  )
+    if (this.type[index].toUpperCase() == "NUMBER" || this.type[index].toUpperCase() == "INT")
       this.newRowContainer[index] = elem;
-    else if (this.type[index].toUpperCase() == "VARCHAR2" || this.type[index].toUpperCase() =="VARCHAR" )
+    else if (this.type[index].toUpperCase() == "VARCHAR2" || this.type[index].toUpperCase() == "VARCHAR")
       this.newRowContainer[index] = "'" + elem + "'";
     else if (this.type[index] == "DATE")
       this.newRowContainer[index] = "'" + elem.split("T")[0] + "'";
