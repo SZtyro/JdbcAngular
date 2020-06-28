@@ -1,1 +1,1 @@
-web: ng s
+web: npm run start:prod
