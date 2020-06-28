@@ -12,10 +12,10 @@ export class HttpClientService {
   ) { }
 
   // url = "http://192.168.1.205:8080";
-  //url = "https://nwta.azurewebsites.net";
-  url = 'http://localhost:8080';
-  //urlAllowed = "https://angularjdbc2.azurewebsites.net"
-  urlAllowed = "http://localhost:4200";
+  url = "https://nwtaback.herokuapp.com/";
+  //url = 'http://localhost:8080';
+  urlAllowed = "https://nwtafront.herokuapp.com/"
+  //urlAllowed = "http://localhost:4200";
 
   loginUser(data) {
     return this.httpClient.post(this.url + '/databaseLogin', data,
