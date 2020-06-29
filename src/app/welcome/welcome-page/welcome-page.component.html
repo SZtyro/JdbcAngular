@@ -20,18 +20,18 @@
           <button mat-menu-item *ngFor="let lang of translate.getLangs()"
             (click)="translate.use(lang)">{{lang | uppercase}}</button>
         </mat-menu>
-        
-        <div *ngIf="isSignedIn ;else signInBlock" >
-          <a routerLink="home" style="color: inherit;"><button mat-button >Home</button></a>
+
+        <div *ngIf="isSignedIn ;else signInBlock">
+          <a routerLink="home" style="color: inherit;"><button mat-button>Home</button></a>
           <button mat-button (click)="auth.signOut()">Log out</button>
           <img src="{{userPhoto}}" style="border-radius: 4px;max-height: 36px">
         </div>
         <ng-template #signInBlock>
           <button mat-raised-button style=" background-color: #EA4335;"
-          (click)="auth.signIn()">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button>
+            (click)="auth.signIn()">{{'WELCOME_PAGE.GOOGLE_LOGIN'| translate}}</button>
         </ng-template>
-        
-        
+
+
 
       </div>
 
@@ -134,44 +134,21 @@
   </p>
 </div>
 <div #pricing class="textBlock">
-  <h1>Pricing</h1>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit at orci et finibus. Nulla facilisi.
-    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum nec laoreet leo,
-    ut commodo augue. Cras nec justo nec ligula auctor semper. Mauris venenatis dui eget libero sagittis, quis faucibus
-    lectus bibendum. Vestibulum mattis sodales felis, ac consectetur quam lacinia id. Phasellus pellentesque lorem vitae
-    libero iaculis, id egestas quam convallis. Integer at augue id ante bibendum condimentum lobortis at dui. Nulla eget
-    lectus ut felis consectetur pharetra. Nam laoreet vitae diam quis bibendum.
-
-    Aenean gravida sagittis nibh quis finibus. Proin sapien nunc, accumsan eget nisi in, interdum dictum sem. Vestibulum
-    dapibus ligula nec faucibus tempus. Maecenas et ligula elit. Sed interdum gravida nulla, quis gravida purus volutpat
-    vel. Aenean gravida ultrices ante, et semper libero vulputate non. Suspendisse posuere dapibus tortor eget accumsan.
-    Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed hendrerit commodo finibus.
-
-    In hac habitasse platea dictumst. Mauris eu nisi quam. Maecenas vitae dolor libero. Aliquam erat volutpat. Donec
-    efficitur nunc a ex euismod pellentesque. Vivamus tincidunt lorem mauris, ut consequat turpis sagittis sed.
-    Pellentesque vehicula porttitor euismod. Fusce nec libero vel massa tincidunt tristique. Vivamus sed imperdiet
-    sapien.
-
-    Etiam tempor vitae metus non auctor. Vivamus consequat aliquam lorem ut tincidunt. Aliquam erat volutpat. Donec
-    ultrices arcu magna, vel gravida ligula tristique non. Ut bibendum sed diam vitae gravida. Donec at ipsum quis
-    turpis porttitor ornare a sed quam. Praesent mattis, enim vel vestibulum euismod, magna purus euismod elit, at
-    pretium nunc orci ac mi. Quisque nec rutrum leo. Vivamus interdum cursus blandit. Etiam eu suscipit erat. Duis
-    congue ante ac ultrices iaculis. Mauris faucibus ipsum nec rhoncus suscipit.
-
-    Quisque vel cursus risus. Donec eleifend tincidunt lectus, non rutrum ante porttitor in. Sed mattis, metus vitae
-    fringilla iaculis, risus dui interdum libero, et gravida arcu felis et eros. Suspendisse tristique porta dolor sit
-    amet mollis. Praesent vitae bibendum metus. Fusce porta laoreet sem. Quisque rhoncus at lectus at sollicitudin.
-    Aliquam fringilla nec turpis a euismod. Pellentesque feugiat posuere ex, sit amet aliquet nisi porta ut. Maecenas
-    dapibus, velit in bibendum malesuada, justo dolor fermentum dolor, et finibus ligula risus et ligula. Sed ligula
-    metus, gravida sit amet sapien suscipit, rutrum fringilla lacus. Pellentesque pellentesque tristique ex, ut dapibus
-    eros bibendum at. Maecenas ut eros a dolor hendrerit luctus ut vel dui. Ut ipsum arcu, fermentum ac mi in, dictum
-    volutpat erat. Nam tincidunt magna mauris, at venenatis ex suscipit sed. Sed ultricies aliquam ante, et pharetra
-    diam dignissim a.
-  </p>
+  <h1 style="font-weight: 700;">Pricing</h1>
+  <div style="display: flex; justify-content: space-around;">
+    <div class="accountType" style="background-color:	#A77044;">
+      Bronze
+    </div>
+    <div class="accountType" style="background-color:	#D7D7D7;">
+      Silver
+    </div>
+    <div class="accountType" style="background-color: #D6AF36">
+      Gold
+    </div>
+  </div>
 </div>
 <div #aboutUs class="textBlock">
-  <h1>About us</h1>
+  <h1 style="font-weight: 700;">About us</h1>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit at orci et finibus. Nulla facilisi.
     Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum nec laoreet leo,
@@ -207,7 +184,7 @@
     diam dignissim a.
   </p>
 </div>
-<!-- 
+<!--
 <button id="googleBtn">Google</button>
 <button (click)="auth.signIn()">login</button>
 <button (click)="aaa()">Zwykly get zwracajacy aaa</button>
