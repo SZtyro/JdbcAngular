@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.use(express.static('./dist/AngularJDBC'));
-
+app.use(cors());
 app.get('/*', function (req, res) {
   res.sendFile('index.html', { root: 'dist/AngularJDBC' }
   );
