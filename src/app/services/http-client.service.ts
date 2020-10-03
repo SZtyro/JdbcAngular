@@ -11,16 +11,15 @@ export class HttpClientService {
 
   ) { }
 
-  // url = "http://192.168.1.205:8080";
-  url = "https://nwtaback.herokuapp.com";
-  //url = 'http://localhost:8080';
-  urlAllowed = "https://nwtafront.herokuapp.com"
-  //urlAllowed = "http://localhost:4200";
+
+  //url = "https://nwtaback.herokuapp.com";
+  url = 'https://localhost:8080';
+  //urlAllowed = "https://nwtafront.herokuapp.com"
+  urlAllowed = "https://localhost:4200";
 
   loginUser(data) {
     return this.httpClient.post(this.url + '/databaseLogin', data,
       {
-        responseType: 'text',
         headers: {
           "Authorization": sessionStorage.getItem('token'),
           'Access-Control-Allow-Origin': this.urlAllowed
@@ -28,9 +27,8 @@ export class HttpClientService {
       });
   }
   getConnectedBase() {
-    return this.httpClient.get(this.url + '/databases',
+    return this.httpClient.get(this.url + '/currentDatabase',
       {
-        responseType: 'text',
         headers: {
           "Authorization": sessionStorage.getItem('token'),
           'Access-Control-Allow-Origin': this.urlAllowed

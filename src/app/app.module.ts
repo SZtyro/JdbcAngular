@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './data-base/table/table.component';
-import { HttpClientModule, HttpClient,HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,17 +30,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { GridsterModule } from 'angular-gridster2';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ChartSettingsModalComponent } from './main-app/modals/chart-settings-modal/chart-settings-modal.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/widget-list-modal.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { AuthService } from './services/Auth/auth.service';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -116,7 +116,8 @@ export function provideConfig() {
     MatCheckboxModule,
     DragDropModule,
     WelcomeModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+    MatProgressSpinnerModule
 
 
   ],

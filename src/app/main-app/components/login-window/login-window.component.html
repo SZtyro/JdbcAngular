@@ -1,92 +1,50 @@
-<!-- <mat-card color="primary">
-  <div class=" col-4" style="margin: auto; ">
-    <h2>Let's find your database!</h2>
-    <mat-form-field style="width: 100%;">
-      <input matInput placeholder="URL" [(ngModel)]="url">
+
+<h5 style="margin: 30px;">Connected database: {{dataBase}}</h5>
+<div class="container-fluid m-0">
+
+  <div>
+
+    <mat-form-field class="col-12">
+      <input matInput placeholder="Host" [(ngModel)]="url">
     </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
+    <mat-form-field class="col-12 col-md-4">
       <input matInput placeholder="Port" [(ngModel)]="port">
     </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
+    <mat-form-field class="col-12 col-md-8">
       <input matInput placeholder="Database" [(ngModel)]="dataBase">
     </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
+    <mat-form-field class="col-12 col-md-6">
       <input matInput placeholder="User" [(ngModel)]="userName">
     </mat-form-field>
 
 
-    <mat-form-field style="width: 100%;">
+    <mat-form-field class="col-12 col-md-6">
       <input matInput placeholder="Password" [(ngModel)]="password" [type]="'password'">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <button [disabled]="baseConnecting" mat-raised-button style="background-color: rgb(34, 34, 34); color: white; border-radius: 2px;margin-left: 15px;"
+      (click)="login()">
+        Connect
+    </button>
 
-  </div>
-</mat-card> -->
-<h5 style="margin: 30px;">Connected databases:</h5>
-<div style="display: flex;flex-direction: row;margin: 30px;">
-
-  <div (mouseover)="setEditing(true)" (mouseleave)="setEditing(false)" class="database"
-    [@loginDetails]="editingDetails ? 'open':'closed' ">
-    <div style="display: flex;">
-      <button style="padding: 10px; width: 100%; border: none;outline: none; background-color: white;"
-        (click)="fetchTables()">
-        <h1>{{databaseNames[0]}}</h1>
-      </button>
-
-
-      <button [@openClose]="editing ? 'open' : 'closed'" class="editButton" (click)="setEditingDetails()">
-        <span class="material-icons" style="margin: auto;">
-          create
-        </span>
-      </button>
-    </div>
-
-
-    <div *ngIf="editingDetails" style="padding: 10px; overflow: auto; margin-top: 30px;">
-      <mat-form-field style="width: 100%;">
-        <input matInput placeholder="URL" [(ngModel)]="url">
-      </mat-form-field>
-
-      <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Port" [(ngModel)]="port">
-      </mat-form-field>
-
-      <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Database" [(ngModel)]="dataBase">
-      </mat-form-field>
-
-      <mat-form-field style="width: 100%;">
-        <input matInput placeholder="User" [(ngModel)]="userName">
-      </mat-form-field>
-
-
-      <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Password" [(ngModel)]="password" [type]="'password'">
-      </mat-form-field>
-
-      <button mat-raised-button style="background-color: rgb(34, 34, 34); color: white; border-radius: 2px;"
-        (click)="login()">Connect</button>
-    </div>
 
   </div>
 
-  <div class="database" style="background-color: rgb(33, 173, 75); border: none; width: 120px; max-height: 120px;">
-    <span class="material-icons" style="color: white; font-size: 80px;margin: auto;">
-      add
-    </span>
-  </div>
 </div>
 
 
-<div class="container row" style="margin: 0;width: 100%;max-width: none;">
-  <div *ngFor="let item of datbaseTables" class="col-lg-2" style="padding: 5px;">
-    <button class="tableButton" (click)="openTable(item)">
-      {{item}}
-    </button>
-
+<div class="container-fluid row m-0 mt-5">
+  <div *ngIf="tablesLoading; else tablesLoaded">
+    <mat-spinner></mat-spinner>
   </div>
+  <ng-template #tablesLoaded>
+    <div *ngFor="let item of databaseTables" class="col-12 col-sm-6 col-md-4 col-lg-2" style="padding-bottom: 10px;">
+      <button class="tableButton" (click)="openTable(item)">
+        {{item}}
+      </button>
+    </div>
+  </ng-template>
 </div>
