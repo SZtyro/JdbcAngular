@@ -149,7 +149,7 @@ export class HttpClientService {
   }
 
   tryLogin() {
-    console.log(sessionStorage.getItem('token'))
+
     return this.httpClient.get(this.url + "/loginUser",
       {
         headers:
@@ -162,8 +162,9 @@ export class HttpClientService {
   checkToken(token) {
     return this.httpClient.get(this.url + "/token", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.urlAllowed } });
   }
-  aaa(token) {
-    return this.httpClient.get(this.url + "/aaa", { responseType: "text", headers: { "Authorization": token, 'Access-Control-Allow-Origin': this.urlAllowed } });
+
+  getRandom() {
+    return this.httpClient.get(this.url + "/randomNumber");
   }
 
 

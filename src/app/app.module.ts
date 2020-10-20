@@ -41,7 +41,8 @@ import { WidgetListModalComponent } from './main-app/modals/widget-list-modal/wi
 import { WelcomeModule } from './welcome/welcome.module';
 import { AuthService } from './services/Auth/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { ChartComponentComponent } from './chart-component/chart-component.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -74,7 +75,8 @@ export function provideConfig() {
     AddModalComponent,
     LoginWindowComponent,
     ChartSettingsModalComponent,
-    WidgetListModalComponent
+    WidgetListModalComponent,
+    ChartComponentComponent
 
   ],
   imports: [
@@ -117,7 +119,8 @@ export function provideConfig() {
     DragDropModule,
     WelcomeModule,
     HttpClientJsonpModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    GoogleChartsModule
 
 
   ],

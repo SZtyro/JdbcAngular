@@ -23,14 +23,21 @@ export class AuthService {
     private router: Router,
     private shared: SharedService
   ) {
-    this.googleInit();
+    this.googleInit().then(() => {
+
+      console.log('Pobranie użytkownika')
+      this.user = this.authInstance.currentUser.get();
+      console.log(this.user)
+
+      // if (!this.user['Ca']) {
+      //   this.signIn();
+      // }
+    })
 
   }
 
-  async ngOnInit() {
-    if (await this.checkIfUserLogged()) {
-      this.user = this.authInstance.currentUser.get();
-    }
+  ngOnInit() {
+
   }
 
 
@@ -58,31 +65,42 @@ export class AuthService {
   }
 
   async signIn(): Promise<any> {
-    // Initialize gapi if not done yet
-    if (!this.googleInitialized) {
-      await this.googleInit();
-    }
 
     // Resolve or reject signin Promise
-    return new Promise(async () => {
+    return new Promise(async (resolve, reject) => {
       await this.authInstance.signIn().then(
         user => {
-          try {
-            let token = user.getAuthResponse().id_token;
-            sessionStorage.setItem('token', token);
-            console.log(token)
-            this.http.tryLogin().subscribe(d => console.log(d))
+
+          //Pobranie tokena Google
+          let token = user.getAuthResponse().id_token;
+          sessionStorage.setItem('token', token);
+          console.log(token)
+
+          //Proba kontaktu z backendem
+          this.http.tryLogin().subscribe(d => {
+            console.log('Odpowiedz serwera na zalogowanie')
+            console.log(d)
+
             this.isSigned.next(true);
+            console.log('Uzytkownik');
             console.log(user);
             this.user = user;
-          } catch{
 
-          }
+            this.router.navigate(['/home'])
+            resolve();
+          }, err => {
 
+            console.log(err);
+            reject(err);
+
+          })
 
 
         },
-        error => console.log(error));
+        error => {
+          console.log(error);
+          reject(error);
+        });
     });
   }
 

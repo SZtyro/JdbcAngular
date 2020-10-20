@@ -1,3 +1,4 @@
+import { ChartComponentComponent } from './chart-component/chart-component.component';
 
 import { CurrentDatabaseResolverService } from './services/guards/resolvers/current-database-resolver.service';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { WelcomePageComponent } from './welcome/welcome-page/welcome-page.compon
 const routes: Routes = [
   { path: 'table/:tableName', component: TableComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'chart', component: ChartComponentComponent },
   { path: 'databases', component: LoginWindowComponent, resolve:{
     database: CurrentDatabaseResolverService
   } },
